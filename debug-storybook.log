@@ -1,0 +1,1 @@
+Leftover log from an earlier scaffold attempt that hit a sandboxed-network error during `storybook init`. Storybook itself was configured manually afterward (see .storybook/) and builds successfully. Safe to delete this file.

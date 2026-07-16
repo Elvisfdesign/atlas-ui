@@ -1,0 +1,78 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TopNavStories from './TopNav.stories';
+
+<Meta of={TopNavStories} />
+
+# Top Navigation
+
+The app shell's top bar. Source: Atlas Product — the Review Queue topbar
+(128px content row + a 1px bottom divider, 32px horizontal padding,
+global search on the left, notifications and the user menu on the
+right).
+
+## Overview
+
+A structural shell only. Every piece Atlas Product places inside it —
+the search field, the notification trigger, the user avatar — is already
+its own component (Search Input, Icon Button, Avatar). `TopNav` lays
+them out; it doesn't reimplement any of them.
+
+## Live Preview
+
+<Canvas of={TopNavStories.Default} />
+
+## Usage
+
+Compose `TopNav` with a `SearchInput` on the left and whatever page-level
+actions (notifications, user menu) belong on the right, using ordinary
+flex children — `TopNav` doesn't take a fixed set of slot props, since
+what belongs in the topbar varies by page.
+
+## Variants
+
+One visual treatment — `TopNav` doesn't have a `variant` prop.
+
+## Sizes
+
+One size (128px content height + 1px divider), matching Atlas Product
+exactly.
+
+## States
+
+Stateless — `TopNav` is a layout container. Its children (Search Input,
+Icon Button, Avatar) carry their own states.
+
+## Accessibility
+
+Renders as a `<header>` — the page's banner landmark, standard for a
+top-level application bar. Its children remain independently keyboard
+operable through their own implementations.
+
+## React Props
+
+<Controls of={TopNavStories.Default} />
+
+## Examples
+
+```tsx
+import { TopNav } from '@/components/navigation/TopNav';
+import { SearchInput } from '@/components/forms/SearchInput';
+import { IconButton } from '@/components/actions/IconButton';
+import { Avatar } from '@/components/data-display/Avatar';
+import { Bell } from 'lucide-react';
+
+<TopNav>
+  <SearchInput aria-label="Search" shortcut="⌘K" className="w-80" />
+  <div className="flex items-center gap-3">
+    <IconButton icon={<Bell />} aria-label="Notifications" />
+    <Avatar name="Elvis Meraz" color="inverse" />
+  </div>
+</TopNav>
+```
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/navigation-sidebar--docs">Sidebar</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-search-input--docs">Search Input</a>
+</div>

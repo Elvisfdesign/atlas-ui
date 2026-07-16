@@ -1,0 +1,76 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as PaginationStories from './Pagination.stories';
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+Moves between pages of a long list. Source: Atlas Product — the Review
+Queue table's pager ("Showing 1 to 10 of 12 results" + prev/page-number/
+next controls, 28px controls).
+
+## Overview
+
+Previous/Next are composed from Icon Button (its small size is 28px,
+matching the pager controls exactly) rather than reimplemented.
+
+## Live Preview
+
+<Canvas of={PaginationStories.Default} />
+
+## Usage
+
+Pass `itemRange` to show the "Showing X to Y of Z results" summary —
+omit it if the count isn't meaningful for your data. Atlas Product's
+tables today have few enough pages that every page number is shown; this
+component doesn't yet truncate with an ellipsis for very long page runs,
+since that case hasn't come up in Product.
+
+## Variants
+
+<Canvas>
+  <Story of={PaginationStories.FirstPage} />
+  <Story of={PaginationStories.LastPage} />
+</Canvas>
+
+## Sizes
+
+One size (28px controls), matching Atlas Product exactly.
+
+## States
+
+Previous is disabled on the first page; Next is disabled on the last
+page — both via the native `disabled` attribute, not just visually.
+
+## Accessibility
+
+- Renders as `<nav aria-label="Pagination">`.
+- The current page number has `aria-current="page"`.
+- Previous/Next reuse Icon Button, so they inherit its required
+  `aria-label` and native disabled-button behavior.
+
+## React Props
+
+<Controls of={PaginationStories.Default} />
+
+<ArgTypes of={PaginationStories} />
+
+## Examples
+
+```tsx
+import { Pagination } from '@/components/navigation/Pagination';
+
+<Pagination
+  page={page}
+  pageCount={2}
+  onPageChange={setPage}
+  itemRange={{ from: 1, to: 10, total: 12 }}
+/>
+```
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/actions-icon-button--docs">Icon Button</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
+</div>

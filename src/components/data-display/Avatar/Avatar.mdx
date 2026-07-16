@@ -1,0 +1,103 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as AvatarStories from './Avatar.stories';
+
+<Meta of={AvatarStories} />
+
+# Avatar
+
+A circular identity marker — a person's photo or initials. **Not yet a
+componentized Figma node** (see the Atlas UI System's React Readiness
+matrix) — built directly from the two real patterns Atlas Product uses:
+the current-user chip in the app topbar, and assignee-list chips in tables.
+
+## Overview
+
+A photo when one exists, deterministic initials when it doesn't — Avatar
+never renders a broken image or an empty circle.
+
+## Live Preview
+
+<Canvas of={AvatarStories.Default} />
+
+## Usage
+
+Use `color="inverse"` for the signed-in user's own avatar in app chrome
+(topbar, account menu) — that's the monochrome treatment Product uses
+specifically for "you." For everyone else (assignees, collaborators,
+mentions), leave `color` unset: it's derived deterministically from the
+person's name, so the same person always renders the same color across the
+app without you having to track color assignment yourself.
+
+Pass `src` for a real photo; Avatar falls back to initials automatically if
+the image fails to load, so you never need to handle that case at the
+call site.
+
+## Variants
+
+<Canvas of={AvatarStories.CurrentUser} />
+<Canvas of={AvatarStories.AssigneeList} />
+
+## Sizes
+
+<Canvas of={AvatarStories.Small} />
+
+**medium (34px)** matches Product's topbar user chip; **small (24px)**
+matches the assignee-list chip size. Both are measured, not estimated,
+from real Product screens.
+
+## States
+
+<Canvas of={AvatarStories.PhotoWithFallback} />
+
+Avatar has one behavioral "state" worth documenting: a broken `src` falls
+back to initials automatically, rather than showing a broken-image icon.
+
+## Accessibility
+
+- Rendered with `role="img"` and `aria-label` set to the full name, so
+  screen readers announce the person's name — not "SC" or a filename.
+- The initials text and the photo `<img>` are both `aria-hidden`, so the
+  name is announced exactly once, from the wrapping element's label.
+
+## React Props
+
+<Controls of={AvatarStories.Default} />
+
+<ArgTypes of={AvatarStories} />
+
+## Examples
+
+```tsx
+import { Avatar } from '@/components/data-display/Avatar';
+
+// Current signed-in user, app chrome
+<Avatar name="Elvis Fernandes" color="inverse" />
+
+// Assignee list — color is derived automatically per name
+<div className="flex -space-x-2">
+  <Avatar size="small" name="Sophia Carter" />
+  <Avatar size="small" name="James Okafor" />
+</div>
+
+// With a photo, safe fallback built in
+<Avatar name="Sophia Carter" src={user.photoUrl} />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Pass the person's full name even when showing a photo — it's the accessible label, not just fallback text.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use `color="inverse"` for anyone other than the signed-in user — it's reserved for "you" in app chrome.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
+</div>

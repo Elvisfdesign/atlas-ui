@@ -1,0 +1,110 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+<div className="atlas-doc-hero">
+  <span className="atlas-doc-hero__eyebrow">Atlas Design System</span>
+  <h1 className="atlas-doc-hero__title">Atlas UI</h1>
+  <p className="atlas-doc-hero__subtitle">
+    Production-ready React component library built from the Atlas Design System.
+  </p>
+</div>
+
+Atlas UI is the official React implementation of Atlas — not a prototype, not a
+one-off set of components, but the library meant to power Atlas Dashboard,
+Atlas Admin, Atlas AI, and whatever comes after them. Every token, variant,
+and state here is transcribed from the Atlas Figma files, not reinvented. If
+it looks different from Atlas, that's a bug in this library, not a design
+decision made here.
+
+<div className="atlas-doc-links">
+  <a className="atlas-doc-link" href="?path=/docs/foundations-colors--docs">
+    <span className="atlas-doc-link__title">Foundations →</span>
+    <span className="atlas-doc-link__desc">Color, type, spacing, radius, elevation, and motion tokens.</span>
+  </a>
+  <a className="atlas-doc-link" href="?path=/docs/actions-button--docs">
+    <span className="atlas-doc-link__title">Components →</span>
+    <span className="atlas-doc-link__desc">Button, Badge, Avatar, Tooltip, KPI Card, and what's next.</span>
+  </a>
+</div>
+
+## Principles
+
+Five things this library optimizes for, in order:
+
+**Fidelity to Atlas.** This library does not have its own design opinions.
+Every color, space, radius, and type size resolves to an Atlas token. Where
+Atlas Product and the Atlas UI System disagree slightly, the shipped Product
+screens win — they're the ground truth.
+
+**Restraint.** Atlas succeeds because of what it leaves out — no gradients,
+no decorative shadows, no variants without a real product need. This
+documentation site follows the same rule: it exists to make the system
+legible, not to look impressive on its own.
+
+**Accessibility as default, not add-on.** Keyboard support, visible focus
+states, and correct ARIA semantics are part of a component's definition, not
+a follow-up task. Radix primitives are used wherever hand-rolling
+accessibility correctly would mean re-solving a problem that's already
+solved (dialogs, tooltips, menus).
+
+**Composition over configuration.** Components expose a small, predictable
+prop surface and compose together, rather than growing a prop for every
+possible situation.
+
+**Two themes, one component.** Every component reads color through semantic
+tokens, so Light and Dark are the same component rendering from different
+CSS variables — never a duplicated implementation.
+
+## Stack
+
+React · TypeScript · Vite · Tailwind CSS v4 · Storybook · Vitest ·
+React Testing Library · Lucide React · Radix Primitives (for Tooltip, and
+future Modal/Drawer/Dialog-family components).
+
+## How Atlas UI is organized
+
+<div className="atlas-doc-table">
+  <div className="atlas-doc-table__row atlas-doc-table__row--head">
+    <span>Category</span>
+    <span>What lives here</span>
+  </div>
+  <div className="atlas-doc-table__row">
+    <span>Foundations</span>
+    <span>Tokens, not components — color, typography, spacing, radius, elevation, motion.</span>
+  </div>
+  <div className="atlas-doc-table__row">
+    <span>Actions</span>
+    <span>Button, Icon Button, Inline Action — things a person clicks to do something.</span>
+  </div>
+  <div className="atlas-doc-table__row">
+    <span>Forms</span>
+    <span>Input, Textarea, Select, Checkbox, Radio, Switch.</span>
+  </div>
+  <div className="atlas-doc-table__row">
+    <span>Navigation</span>
+    <span>Sidebar, Tabs, Breadcrumb, Pagination — how a person moves through the product.</span>
+  </div>
+  <div className="atlas-doc-table__row">
+    <span>Data Display</span>
+    <span>Avatar, Badge, KPI Card, Table — how information is shown.</span>
+  </div>
+  <div className="atlas-doc-table__row">
+    <span>Feedback</span>
+    <span>Alert, Toast, Empty State — how the system talks back.</span>
+  </div>
+  <div className="atlas-doc-table__row">
+    <span>Overlays</span>
+    <span>Tooltip, Modal, Drawer — content above the page.</span>
+  </div>
+  <div className="atlas-doc-table__row">
+    <span>Patterns / Templates / Playground</span>
+    <span>Composed, multi-component examples and full page shells, once enough primitives exist to build them honestly.</span>
+  </div>
+</div>
+
+Six components are implemented today: **Button**, **Icon Button**, **Badge**,
+**Avatar**, **Tooltip**, and **KPI Card**. Every other entry in the sidebar
+is labeled with its real status — currently under implementation, or
+planned for an upcoming milestone — so the navigation shows Atlas UI's
+full intended shape without claiming anything exists before it does.

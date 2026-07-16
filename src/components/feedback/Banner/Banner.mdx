@@ -1,0 +1,91 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as BannerStories from './Banner.stories';
+
+<Meta of={BannerStories} />
+
+# Banner
+
+A full-width, tone-tinted notice bar for a page or section. The
+full-width counterpart to Inline Alert, sharing the same tone→color/icon
+mapping.
+
+## Overview
+
+An icon, a message, and optional action and dismiss controls, spanning
+the full width of its container.
+
+## Live Preview
+
+<Canvas of={BannerStories.Info} />
+
+## Usage
+
+Place a Banner at the top of a page or a major section for a notice that
+applies broadly (maintenance windows, billing issues, account-wide
+notices) — use Inline Alert instead for something scoped to one form or
+card.
+
+## Variants
+
+<Canvas of={BannerStories.Danger} />
+
+## Sizes
+
+One size — Banner always spans its container's full width.
+
+## States
+
+<Canvas of={BannerStories.WithAction} />
+<Canvas of={BannerStories.Dismissible} />
+
+Pass `action` for a response control (e.g. "Upgrade"), and `onDismiss`
+to show a close button — both are optional and independent of each
+other.
+
+## Accessibility
+
+- Same role logic as Inline Alert: `warning`/`danger` use
+  `role="alert"`, `info`/`success` use `role="status"`.
+- The dismiss control is a real, labeled `IconButton` ("Dismiss"), not a
+  bare icon with a click handler.
+
+## React Props
+
+<Controls of={BannerStories.Info} />
+
+<ArgTypes of={BannerStories} />
+
+## Examples
+
+```tsx
+import { Banner } from '@/components/feedback/Banner';
+import { Button } from '@/components/actions/Button';
+
+<Banner
+  tone="warning"
+  action={<Button size="small" variant="secondary">Upgrade</Button>}
+  onDismiss={() => setDismissed(true)}
+>
+  Your trial ends in 3 days.
+</Banner>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Reserve Banner for notices that genuinely apply to the whole page — overusing it for minor messages trains people to ignore it.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Stack more than one Banner at a time — resolve or dismiss the current one before showing another.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-inline-alert--docs">Inline Alert</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-toast--docs">Toast</a>
+</div>

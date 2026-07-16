@@ -1,0 +1,85 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ApprovalPanelStories from './ApprovalPanel.stories';
+
+<Meta of={ApprovalPanelStories} />
+
+# Approval Panel
+
+Source: Atlas Product — Document Review's `action-footer`: a summary
+line ("7 of 7 fields extracted · 96% avg. confidence") beside Reject /
+Request Changes / Approve & Continue actions.
+
+## Overview
+
+The bottom action bar for human-in-the-loop approval — a summary of
+what was extracted, plus the three actions a reviewer can take.
+Composes Button for all three actions.
+
+## Live Preview
+
+<Canvas of={ApprovalPanelStories.Default} />
+
+## Usage
+
+Reject and Request Changes are optional — omit `onReject` /
+`onRequestChanges` to show only the primary Approve action, for flows
+that don't offer those paths.
+
+## Variants
+
+Tone and layout are fixed to match the grounded Product pattern; the
+only variation is which actions are present.
+
+## Sizes
+
+One size — a full-width footer bar.
+
+## States
+
+<Canvas of={ApprovalPanelStories.Loading} />
+
+## Accessibility
+
+- All three actions are real `<button>` elements via Button, reachable
+  and activatable by keyboard.
+- `loading` disables every action and shows a busy state on the primary
+  button, preventing a double-submit.
+
+## React Props
+
+<Controls of={ApprovalPanelStories.Default} />
+
+<ArgTypes of={ApprovalPanelStories} />
+
+## Examples
+
+```tsx
+import { ApprovalPanel } from '@/components/ai/ApprovalPanel';
+
+<ApprovalPanel
+  summary="7 of 7 fields extracted · 96% avg. confidence"
+  onReject={() => rejectDocument()}
+  onRequestChanges={() => requestChanges()}
+  onApprove={() => approveDocument()}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Anchor Approval Panel to the bottom of the document or record it's approving.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use it for a destructive confirmation outside document review — Overlays' Confirmation Dialog is the grounded pattern there.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-confidence-meter--docs">Confidence Meter</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-confirmation-dialog--docs">Confirmation Dialog</a>
+</div>

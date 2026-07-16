@@ -1,0 +1,73 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as RadioStories from './Radio.stories';
+
+<Meta of={RadioStories} />
+
+# Radio
+
+One choice from a small, always-visible set of options.
+
+## Overview
+
+Not yet its own componentized node in the Atlas UI System (see the React
+Readiness matrix) — built as a circular sibling of Checkbox, reusing the
+same border/accent/focus treatment so the two read as one family of
+selection control. `Radio` reads its shared `name` and selected value
+from a wrapping `RadioGroup`.
+
+## Live Preview
+
+<Canvas of={RadioStories.Group} />
+
+## Usage
+
+Use Radio (in a `RadioGroup`) when there are 2–5 mutually exclusive
+options and showing them all at once helps the person decide. For a
+longer list, or when screen space is tight, use Select instead.
+
+## Variants
+
+One visual treatment — Radio doesn't have a `variant` prop.
+
+## Sizes
+
+One size (17px), matching Checkbox exactly.
+
+## States
+
+<Canvas of={RadioStories.Disabled} />
+
+## Accessibility
+
+- `RadioGroup` renders `role="radiogroup"` with an `aria-label`, so
+  assistive tech announces the set as one group, not unrelated controls.
+- Arrow keys move focus (and selection) between options, and Tab moves
+  into/out of the whole group — standard native radio-group keyboard
+  behavior, since each `Radio` is a real `<input type="radio">` sharing
+  one `name`.
+- Each option's label is a real `<label htmlFor>`.
+
+## React Props
+
+<Controls of={RadioStories.Group} />
+
+<ArgTypes of={RadioStories} />
+
+## Examples
+
+```tsx
+import { Radio, RadioGroup } from '@/components/forms/Radio';
+
+<RadioGroup label="Assignment" value={assignment} onValueChange={setAssignment}>
+  <Radio value="me" label="Assign to me" />
+  <Radio value="team" label="Assign to my team" />
+  <Radio value="unassigned" label="Leave unassigned" />
+</RadioGroup>
+```
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-checkbox--docs">Checkbox</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-select--docs">Select</a>
+</div>

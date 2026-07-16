@@ -1,0 +1,101 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as TooltipStories from './Tooltip.stories';
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+A short, transient label describing an element, shown on hover or
+keyboard focus. Source: Atlas UI System, Overlays → Overlay / Tooltip.
+Built on [Radix's Tooltip primitive](https://www.radix-ui.com/primitives/docs/components/tooltip)
+rather than hand-rolled, so hover-intent timing, `Escape`-to-dismiss, and
+`aria-describedby` wiring are solved once, correctly, instead of
+per-component.
+
+## Overview
+
+A short label that appears on hover or keyboard focus, built on Radix
+rather than hand-rolled, so timing, dismissal, and ARIA wiring are solved
+once instead of per-component.
+
+## Live Preview
+
+<Canvas of={TooltipStories.Default} />
+
+## Usage
+
+Use a Tooltip to add supplementary information to an already-usable
+control — extra context on an icon button, a confidence score, a
+truncated value. Never put information in a Tooltip that's required to
+use the control; anything essential needs to be visible without a hover,
+since tooltips don't work on touch devices and are easy to miss.
+
+## Variants
+
+<Canvas of={TooltipStories.Sides} />
+
+`side` controls which edge the tooltip opens from — Radix automatically
+flips it if the preferred side would clip against the viewport.
+
+## Sizes
+
+One size — Tooltip's dimensions are content-driven (hug width, fixed
+padding), not something you configure.
+
+## States
+
+<Canvas of={TooltipStories.OnButton} />
+
+Tooltip has two states worth knowing about: closed (default) and open,
+triggered by hover after `delayDuration` (80ms by default, matching
+Atlas's `duration-instant` token) or immediately on keyboard focus.
+
+## Accessibility
+
+- Appears on keyboard focus, not just mouse hover — a keyboard-only user
+  gets the same information a mouse user does.
+- Dismisses on `Escape`.
+- The trigger element gets `aria-describedby` pointing at the tooltip
+  content automatically; screen readers announce the tooltip text as part
+  of the trigger's description, not as a separate, easy-to-miss element.
+- Because `Trigger` uses Radix's `asChild`, the tooltip attaches its
+  behavior to whatever you pass as `children` (a Button, an Icon Button, a
+  plain span) without wrapping it in an extra DOM node.
+
+## React Props
+
+<Controls of={TooltipStories.Default} />
+
+<ArgTypes of={TooltipStories} />
+
+## Examples
+
+```tsx
+import { Tooltip } from '@/components/overlays/Tooltip';
+import { IconButton } from '@/components/actions/IconButton';
+import { Info } from 'lucide-react';
+
+<Tooltip content="98% confidence · verified">
+  <IconButton icon={<Info />} aria-label="Confidence details" />
+</Tooltip>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use Tooltip for supplementary context on an already-usable control — extra detail, not required information.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Put anything essential in a Tooltip — it doesn't work on touch devices and is easy to miss.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/actions-icon-button--docs">Icon Button</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/actions-button--docs">Button</a>
+</div>

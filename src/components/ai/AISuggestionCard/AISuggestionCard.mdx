@@ -1,0 +1,88 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as AISuggestionCardStories from './AISuggestionCard.stories';
+
+<Meta of={AISuggestionCardStories} />
+
+# AI Suggestion Card
+
+Source: Atlas Product — Document Review's `suggest-card`: an ai-tinted
+card with a description, a suggested value, a confidence line, and
+Accept/Reject actions.
+
+## Overview
+
+A standalone, actionable suggestion from the AI — distinct from
+Extracted Field Row (which shows a value the AI already extracted) in
+that this proposes something the user hasn't confirmed yet, with an
+explicit accept/reject decision point.
+
+## Live Preview
+
+<Canvas of={AISuggestionCardStories.Default} />
+
+## Usage
+
+Use AI Suggestion Card for a single, specific proposal (a detected
+value, a suggested merge, a flagged pattern) that needs an explicit
+yes/no from the user — not for passive display of already-extracted
+data.
+
+## Variants
+
+<Canvas of={AISuggestionCardStories.LowConfidence} />
+
+## Sizes
+
+One size, sized for a ~280px sidebar column, matching the grounded
+Product layout.
+
+## States
+
+Static aside from its Accept/Reject buttons — no loading or disabled
+state is grounded in the source frame.
+
+## Accessibility
+
+- Accept and Reject are real `<button>` elements via Button, reachable
+  and activatable by keyboard.
+- Confidence is conveyed as plain text, not color alone.
+
+## React Props
+
+<Controls of={AISuggestionCardStories.Default} />
+
+<ArgTypes of={AISuggestionCardStories} />
+
+## Examples
+
+```tsx
+import { AISuggestionCard } from '@/components/ai/AISuggestionCard';
+
+<AISuggestionCard
+  description="Payment terms detected in document"
+  suggestedValue="Net 30 days"
+  confidence={97}
+  onAccept={() => applyPaymentTerms('Net 30')}
+  onReject={() => dismissSuggestion()}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Remove or replace the card once a decision is made — it represents an open question, not a permanent record.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use it for values the AI already extracted with high confidence and no open decision — Extracted Field Row is the grounded pattern there.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-extracted-field-row--docs">Extracted Field Row</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-human-review-banner--docs">Human Review Banner</a>
+</div>

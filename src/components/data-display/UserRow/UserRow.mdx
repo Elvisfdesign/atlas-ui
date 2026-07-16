@@ -1,0 +1,87 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as UserRowStories from './UserRow.stories';
+
+<Meta of={UserRowStories} />
+
+# User Row
+
+A person's avatar, name, and an optional secondary line. Source: Atlas
+Product — the Review Queue table's assignee cell.
+
+## Overview
+
+Composes the `Avatar` primitive directly (24px `small` by default,
+matching the assignee chip) rather than reimplementing photo/initials/
+fallback logic, paired with the person's name and an optional meta line.
+
+## Live Preview
+
+<Canvas of={UserRowStories.Default} />
+
+## Usage
+
+Use in a table cell or list wherever a row needs to identify a specific
+person — an assignee, a reviewer, an author. Pass `avatarSrc` for a
+photo; it falls back to initials automatically (inherited from Avatar)
+if the image fails to load.
+
+## Variants
+
+<Canvas of={UserRowStories.List} />
+
+## Sizes
+
+<Canvas of={UserRowStories.Medium} />
+
+`small` (default, 24px avatar) matches the Review Queue assignee cell;
+`medium` (34px avatar) reads better in a more spacious context.
+
+## States
+
+<Canvas of={UserRowStories.WithMeta} />
+
+User Row is a static display component — it has no interactive states of
+its own. Long names truncate with an ellipsis.
+
+## Accessibility
+
+- The underlying `Avatar` sets `role="img"` with an accessible name
+  equal to the person's name, so the visual chip and the visible name
+  text are consistent for screen reader users, not redundant or
+  conflicting.
+- Name and meta render as plain text in reading order.
+
+## React Props
+
+<Controls of={UserRowStories.Default} />
+
+<ArgTypes of={UserRowStories} />
+
+## Examples
+
+```tsx
+import { UserRow } from '@/components/data-display/UserRow';
+
+<UserRow name="Sophia Carter" meta="Assigned 2 hours ago" />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use the meta line for context specific to the row (assignment time, role) rather than repeating the name.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Reimplement the avatar photo/initials/fallback logic — compose the Avatar primitive, as User Row itself does.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-avatar--docs">Avatar</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-file-row--docs">File Row</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
+</div>

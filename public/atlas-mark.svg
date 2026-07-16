@@ -1,0 +1,6 @@
+<svg width="120" height="28" viewBox="0 0 120 28" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Atlas UI">
+  <rect x="0" y="6" width="16" height="16" rx="4" fill="#0a0a0b"/>
+  <path d="M8 10.5L11.5 17.5H4.5L8 10.5Z" fill="#4f46e5"/>
+  <text x="24" y="19" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0a0a0b">Atlas</text>
+  <text x="66" y="19" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="400" fill="#56565b">UI</text>
+</svg>

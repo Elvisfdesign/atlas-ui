@@ -1,0 +1,93 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as UserMenuStories from './UserMenu.stories';
+
+<Meta of={UserMenuStories} />
+
+# User Menu
+
+The account menu behind Atlas's avatar chip. Source: Atlas Product's
+sidebar profile card and topbar avatar chip (both a 32–34px Avatar +
+name + role), present on every screen. Composes Avatar and Dropdown
+Menu rather than reimplementing either.
+
+## Overview
+
+A trigger button (an `Avatar`) that opens a Dropdown Menu showing the
+person's name and meta line, followed by whatever menu items you pass
+as children.
+
+## Live Preview
+
+<Canvas of={UserMenuStories.Default} />
+
+## Usage
+
+Pass `name` and an optional `meta` (role, email, or both), and list
+`DropdownMenuItem`/`DropdownMenuSeparator` children exactly as you would
+for a plain Dropdown Menu — User Menu only adds the name/meta header
+above them.
+
+## Variants
+
+<Canvas of={UserMenuStories.InverseAvatar} />
+
+`avatarColor="inverse"` matches the monochrome treatment Atlas uses for
+the current signed-in user in the app's topbar chrome.
+
+## Sizes
+
+One size — the trigger uses Avatar's `small` size to match the sidebar
+and topbar chips it's grounded in.
+
+## States
+
+Hover/keyboard-highlighted and destructive item states are inherited
+from Dropdown Menu, shown in the "Log out" item above.
+
+## Accessibility
+
+- The trigger has an explicit `aria-label` ("Account menu for {name}"),
+  so it's identifiable even though its only visible content is an
+  avatar image/initials.
+- Everything else — menu roles, keyboard navigation, focus return — is
+  inherited from Dropdown Menu.
+
+## React Props
+
+<ArgTypes of={UserMenuStories} />
+
+## Examples
+
+```tsx
+import { HelpCircle, LogOut, Settings, User } from 'lucide-react';
+import { DropdownMenuItem, DropdownMenuSeparator } from '@/components/overlays/DropdownMenu';
+import { UserMenu } from '@/components/overlays/UserMenu';
+
+<UserMenu name="Elvis Meraz" meta="Admin">
+  <DropdownMenuItem icon={<User size={14} />}>Profile</DropdownMenuItem>
+  <DropdownMenuItem icon={<Settings size={14} />}>Settings</DropdownMenuItem>
+  <DropdownMenuItem icon={<HelpCircle size={14} />}>Help & support</DropdownMenuItem>
+  <DropdownMenuSeparator />
+  <DropdownMenuItem icon={<LogOut size={14} />} destructive>Log out</DropdownMenuItem>
+</UserMenu>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Put "Log out" last, separated from other items, and style it destructive — it's a high-consequence action.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Omit the aria-label override — an avatar-only trigger has no other accessible name to fall back on.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-dropdown-menu--docs">Dropdown Menu</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-avatar--docs">Avatar</a>
+</div>

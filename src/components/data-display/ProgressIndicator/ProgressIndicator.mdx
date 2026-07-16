@@ -1,0 +1,97 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ProgressIndicatorStories from './ProgressIndicator.stories';
+
+<Meta of={ProgressIndicatorStories} />
+
+# Progress Indicator
+
+A neutral, general-purpose progress bar. Source: Atlas Product's Review
+Queue confidence bar (36×5px, rounded-full track, proportionally filled),
+generalized here as the base primitive that Confidence Indicator
+composes and adds confidence-specific coloring and a percentage label on
+top of.
+
+## Overview
+
+A single filled track representing a 0–100 value, with a required
+accessible label since the bar alone conveys no text.
+
+## Live Preview
+
+<Canvas of={ProgressIndicatorStories.Default} />
+
+## Usage
+
+Use Progress Indicator directly for general progress (an upload, a
+multi-step process). For document/extraction confidence specifically,
+use `ConfidenceIndicator` instead — it composes this component and adds
+the percentage text and threshold-based tone that confidence display
+requires.
+
+## Variants
+
+<Canvas of={ProgressIndicatorStories.Tones} />
+
+`tone` selects the fill color — `accent` (default) for general progress,
+`success`/`warning`/`danger` for status-linked progress.
+
+## Sizes
+
+<Canvas of={ProgressIndicatorStories.Small} />
+
+`sm` (5px track) matches the Review Queue confidence bar; `md` (8px,
+default) reads better as a larger, standalone progress bar.
+
+## States
+
+<Canvas of={ProgressIndicatorStories.Empty} />
+
+<Canvas of={ProgressIndicatorStories.Full} />
+
+Values are clamped to the 0–100 range, so an out-of-range value (e.g. a
+miscalculated percentage) can't render a bar wider than its track or a
+negative-width fill.
+
+## Accessibility
+
+- Renders `role="progressbar"` with `aria-valuenow`/`aria-valuemin`/
+  `aria-valuemax`, so assistive technology can announce the current
+  value.
+- `label` is a required prop, not optional — the bar has no visible text
+  of its own, so it depends entirely on the accessible name to be
+  meaningful to screen reader users.
+
+## React Props
+
+<Controls of={ProgressIndicatorStories.Default} />
+
+<ArgTypes of={ProgressIndicatorStories} />
+
+## Examples
+
+```tsx
+import { ProgressIndicator } from '@/components/data-display/ProgressIndicator';
+
+<ProgressIndicator value={64} label="Upload progress" />
+<ProgressIndicator value={40} tone="danger" label="Storage used" size="sm" />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Always pass a specific, meaningful label — "Upload progress", not "Progress" — since it's the only accessible description of what the bar represents.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Progress Indicator directly for document/extraction confidence — use Confidence Indicator, which pairs the bar with the percentage text confidence display requires.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-confidence-indicator--docs">Confidence Indicator</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
+</div>

@@ -1,0 +1,114 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ModalStories from './Modal.stories';
+
+<Meta of={ModalStories} />
+
+# Modal
+
+A centered, modal overlay dialog. Source: no single dedicated Product
+frame — a modal is a transient overlay state, not a static mockup —
+built on Radix's Dialog primitive, which owns focus trapping, focus
+return to the trigger, Escape-to-close, and background scroll locking.
+
+## Overview
+
+`Modal` (root), `ModalTrigger`, `ModalContent` (with a built-in close
+button), and `ModalTitle`/`ModalDescription`/`ModalHeader`/`ModalBody`/
+`ModalFooter` slot components.
+
+## Live Preview
+
+<Canvas of={ModalStories.Default} />
+
+## Usage
+
+Compose `ModalHeader` (title + description), `ModalBody` (the form or
+content), and `ModalFooter` (action buttons, right-aligned) inside
+`ModalContent`. For the specific confirm/cancel pattern, use
+`ConfirmationDialog` instead of assembling Modal by hand — it's the same
+component, pre-composed.
+
+## Variants
+
+<Canvas of={ModalStories.Closed} />
+
+`showCloseButton={false}` on `ModalContent` hides the built-in close
+control for a modal that must be resolved through its footer actions
+only.
+
+## Sizes
+
+One size (max-width 448px / `max-w-md`) — Atlas doesn't have a
+documented larger Modal variant; use Drawer for content that needs more
+room.
+
+## States
+
+Open/closed is the only state — shown via the trigger interaction in
+the Live Preview.
+
+## Accessibility
+
+- Radix traps focus inside the dialog while open, returns it to the
+  trigger on close, and closes on Escape.
+- `ModalTitle` is required for every Modal — it becomes the dialog's
+  accessible name automatically via `aria-labelledby`.
+- The overlay is `aria-hidden` to background content and blocks
+  interaction with it.
+
+## React Props
+
+<ArgTypes of={ModalStories} />
+
+## Examples
+
+```tsx
+import { Button } from '@/components/actions/Button';
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalDescription,
+  ModalFooter,
+  ModalHeader,
+  ModalTitle,
+  ModalTrigger,
+} from '@/components/overlays/Modal';
+
+<Modal>
+  <ModalTrigger asChild>
+    <Button variant="secondary">Rename</Button>
+  </ModalTrigger>
+  <ModalContent>
+    <ModalHeader>
+      <ModalTitle>Rename workflow</ModalTitle>
+      <ModalDescription>Choose a new name for this workflow.</ModalDescription>
+    </ModalHeader>
+    <ModalBody>{/* form fields */}</ModalBody>
+    <ModalFooter>
+      <Button variant="secondary" size="small">Cancel</Button>
+      <Button variant="primary" size="small">Save</Button>
+    </ModalFooter>
+  </ModalContent>
+</Modal>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Always include a ModalTitle — it's required for the dialog's accessible name, not just visual clarity.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Open a Modal from inside another Modal — stack a Confirmation Dialog on top only when confirming an action the first Modal already committed to.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-confirmation-dialog--docs">Confirmation Dialog</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-drawer--docs">Drawer</a>
+</div>

@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { radius } from '@/tokens/radius';
+
+<Meta title="Foundations/Radius" />
+
+# Radius
+
+Seven steps, from square corners to a full pill.
+
+## Overview
+
+Most of the system lives in three of them — `md` for interactive
+elements, `lg` for containers, `full` for pills and circles. The rest
+exist for the smaller number of cases that need something sharper or
+rounder.
+
+## Live Preview
+
+<div className="atlas-radius-grid">
+  {Object.entries(radius).map(([key, value]) => (
+    <div key={key} className="atlas-radius-swatch">
+      <div className="atlas-radius-swatch__shape" style={{ borderRadius: value }} />
+      <div className="atlas-radius-swatch__meta">
+        <span className="atlas-radius-swatch__name">{key}</span>
+        <span className="atlas-radius-swatch__value">{value}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Where each is used
+
+- **none** — table cells, dense list rows.
+- **xs (4px)** — small inline chips.
+- **sm (6px)** — Small-size Button and Icon Button.
+- **md (8px)** — Medium-size Button and Icon Button; the most common
+  interactive-element radius in Atlas.
+- **lg (12px)** — cards (KPI Card, panels), the unit of "this is a
+  container."
+- **xl (16px)** — large surfaces, modals.
+- **full (999px)** — Badge, Avatar — anything that should read as a pill
+  or a circle regardless of its content's width.
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/actions-button--docs">Button</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-kpi-card--docs">KPI Card</a>
+</div>

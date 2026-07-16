@@ -1,0 +1,85 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as AILabelStories from './AILabel.stories';
+
+<Meta of={AILabelStories} />
+
+# AI Label
+
+Source: Atlas Product — the AI Assistant panel's "BETA" chip (Document
+Review). A rectangular micro-tag for flagging an AI-powered feature or
+its maturity, distinct from Badge's pill-shaped status tones.
+
+## Overview
+
+A small uppercase tag, sized for sitting beside a heading or a piece of
+AI-generated content.
+
+## Live Preview
+
+<Canvas of={AILabelStories.Default} />
+
+## Usage
+
+Use the default `neutral` tone to flag a feature as beta, new, or
+experimental — matching the grounded BETA chip exactly. Use `accent` to
+mark a specific piece of content as AI-generated, using the same
+ai-bg/ai-border/ai-accent palette as AI Suggestion Card.
+
+## Variants
+
+<Canvas of={AILabelStories.Accent} />
+
+## Sizes
+
+One size — a compact tag meant to sit inline with text, not stand alone.
+
+## States
+
+Static; AI Label has no interactive states.
+
+## Accessibility
+
+- Purely visual. If the tag conveys information not otherwise available
+  (e.g. "this value was AI-generated"), make sure surrounding text or an
+  `aria-label` on the containing element conveys the same thing to
+  assistive tech.
+
+## React Props
+
+<Controls of={AILabelStories.Default} />
+
+<ArgTypes of={AILabelStories} />
+
+## Examples
+
+```tsx
+import { AILabel } from '@/components/ai/AILabel';
+
+<h3>
+  AI Assistant <AILabel>BETA</AILabel>
+</h3>
+
+<p>
+  Vendor Name <AILabel tone="accent">AI Generated</AILabel>
+</p>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Keep the label text short — one or two words reads cleanly at this size.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use AI Label as a substitute for Badge's status tones — it's for feature/content flagging, not data state.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-badge--docs">Badge</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-ai-suggestion-card--docs">AI Suggestion Card</a>
+</div>

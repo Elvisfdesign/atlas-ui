@@ -1,0 +1,73 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as BreadcrumbStories from './Breadcrumb.stories';
+
+<Meta of={BreadcrumbStories} />
+
+# Breadcrumb
+
+Shows where the current page sits in Atlas's navigation hierarchy.
+Source: Atlas Product — the Review Queue page's "Home / Review Queue"
+crumb (12.5px text, `/` separator, current page not a link).
+
+## Overview
+
+`Breadcrumb` inserts the `/` separator between items automatically —
+callers just list `BreadcrumbItem`s in order, they never place a
+separator by hand.
+
+## Live Preview
+
+<Canvas of={BreadcrumbStories.Default} />
+
+## Usage
+
+Give every item except the last one an `href`. Mark the last item
+`current` — it renders as plain text, not a link, since a page never
+needs to link to itself.
+
+## Variants
+
+<Canvas of={BreadcrumbStories.ThreeLevels} />
+
+Breadcrumb scales to any number of levels — three here, for a document
+open inside the Review Queue.
+
+## Sizes
+
+One size (12.5px, Atlas's `body-small` type style).
+
+## States
+
+Stateless beyond each item's own link hover state.
+
+## Accessibility
+
+- Renders as `<nav aria-label="Breadcrumb">` with an ordered list (`<ol>`)
+  of items — the standard breadcrumb landmark pattern.
+- The current item has `aria-current="page"` and isn't a link.
+- The `/` separators are `aria-hidden` — they're visual punctuation, not
+  content a screen reader needs to announce.
+
+## React Props
+
+<Controls of={BreadcrumbStories.Default} />
+
+<ArgTypes of={BreadcrumbStories} />
+
+## Examples
+
+```tsx
+import { Breadcrumb, BreadcrumbItem } from '@/components/navigation/Breadcrumb';
+
+<Breadcrumb>
+  <BreadcrumbItem href="/">Home</BreadcrumbItem>
+  <BreadcrumbItem href="/review-queue">Review Queue</BreadcrumbItem>
+  <BreadcrumbItem current>Invoice_9821.pdf</BreadcrumbItem>
+</Breadcrumb>
+```
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/navigation-sidebar--docs">Sidebar</a>
+</div>

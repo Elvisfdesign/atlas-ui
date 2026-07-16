@@ -1,0 +1,153 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as TableStories from './Table.stories';
+
+<Meta of={TableStories} />
+
+# Table
+
+The Atlas data table — header, rows, selection, sorting, and the
+loading/empty states around them. Source: Atlas Product's Review Queue
+table (45px header / 54px comfortable rows, sortable Document and
+Confidence columns, checkbox selection, a bulk action bar once rows are
+selected).
+
+## Overview
+
+Table is a set of composable primitives — `Table`, `TableHeader`,
+`TableBody`, `TableRow`, `TableHeaderCell`, `TableCell` — rather than one
+component with a `data`/`columns` prop, so any row content (text, a
+`FileRow`, a `UserRow`, a `ConfidenceIndicator`, a `Badge`) can be placed
+directly in a cell. The semantic `table-*` tokens established for this
+component (`table-header-background`, `table-row-hover`,
+`table-row-selected`, `table-row-focus`, and related border/text tokens)
+exist specifically so the header surface and the first row never
+visually merge, without relying on a heavy border.
+
+## Live Preview
+
+<Canvas of={TableStories.Default} />
+
+## Usage
+
+Compose a `Table` from `TableHeader`/`TableBody` and `TableRow`/
+`TableHeaderCell`/`TableCell`, matching plain HTML `<table>` structure.
+Add a leading `TableCheckboxCell` (as `th`/`td`) for row selection, and
+wrap the table with a `TableBulkActionBar` that renders once
+`selectedCount > 0`. Pass `sortDirection`/`onSort` to a `TableHeaderCell`
+to make a column sortable.
+
+## Variants
+
+<Canvas of={TableStories.Dense} />
+
+`density="dense"` tightens cell padding for data-heavy views; the default
+`comfortable` density matches the Review Queue table's 54px rows.
+
+## Sizes
+
+Table has no separate size variant — width is determined by its
+container, and it scrolls horizontally (`overflow-x-auto`) rather than
+compressing columns below a usable width.
+
+## States
+
+<Canvas of={TableStories.Empty} />
+
+<Canvas of={TableStories.Loading} />
+
+`TableEmptyState` and `TableLoadingRows` both render as full-width table
+rows, so they sit inside `TableBody` alongside real data rows and share
+the same column grid.
+
+## Accessibility
+
+- Renders real `<table>`/`<thead>`/`<tbody>`/`<tr>`/`<th>`/`<td>`
+  elements, so screen readers get native table semantics (row/column
+  counts, header association) for free.
+- Sortable headers set `aria-sort` (`ascending`/`descending`/`none`) on
+  the `<th>`, and the sort control itself is a real `<button>` — no
+  functionality lives in a click handler on a non-interactive element.
+- `TableCheckboxCell` composes the Forms `Checkbox`, so each selection
+  control requires (and enforces via its `aria-label` prop) an accessible
+  name — "Select row", "Select all rows", etc.
+- Selected and focused rows are never conveyed by color alone: a selected
+  row keeps its checkbox checked, and a focused row's outline uses
+  `focus-within`, so keyboard focus on any interactive cell content is
+  visible at the row level.
+- `TableBulkActionBar` uses `role="toolbar"` with an accessible name
+  stating the current count ("3 selected"), and disappears from the
+  accessibility tree entirely (returns `null`) when nothing is selected.
+- `TableLoadingRows` marks its placeholder rows `aria-hidden="true"`,
+  since they carry no real data for assistive technology to announce.
+
+## React Props
+
+### Table
+
+<Controls of={TableStories.Default} />
+
+### Full API
+
+<ArgTypes of={TableStories} />
+
+## Examples
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHeaderCell,
+  TableCell,
+  TableCheckboxCell,
+  TableBulkActionBar,
+} from '@/components/data-display/Table';
+
+<>
+  <TableBulkActionBar count={selected.length}>
+    <Button size="small" variant="primary">Approve selected</Button>
+  </TableBulkActionBar>
+  <Table>
+    <TableHeader>
+      <tr>
+        <TableCheckboxCell as="th" aria-label="Select all rows" checked={allSelected} onChange={toggleAll} />
+        <TableHeaderCell sortDirection={sort} onSort={toggleSort}>Document</TableHeaderCell>
+        <TableHeaderCell>Confidence</TableHeaderCell>
+      </tr>
+    </TableHeader>
+    <TableBody>
+      {rows.map((row) => (
+        <TableRow key={row.id} selected={selected.includes(row.id)}>
+          <TableCheckboxCell aria-label={`Select ${row.file}`} checked={selected.includes(row.id)} onChange={() => toggle(row.id)} />
+          <TableCell><FileRow fileName={row.file} /></TableCell>
+          <TableCell><ConfidenceIndicator value={row.confidence} /></TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Compose row content from existing primitives — FileRow, UserRow, ConfidenceIndicator, Badge — rather than writing custom cell markup per table.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Add a heavy border between the header and the first row to separate them — the table-header-* and table-row-* tokens already establish that hierarchy without one.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-confidence-indicator--docs">Confidence Indicator</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-file-row--docs">File Row</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-user-row--docs">User Row</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-badge--docs">Badge</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/navigation-pagination--docs">Pagination</a>
+</div>

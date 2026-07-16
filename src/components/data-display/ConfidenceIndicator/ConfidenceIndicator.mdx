@@ -1,0 +1,92 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ConfidenceIndicatorStories from './ConfidenceIndicator.stories';
+
+<Meta of={ConfidenceIndicatorStories} />
+
+# Confidence Indicator
+
+The percentage-plus-bar pairing Atlas uses everywhere an AI-extracted or
+processed value needs a stated confidence. Source: Atlas Product's
+Review Queue table's confidence column and the Document Review "Extracted
+Fields" rows.
+
+## Overview
+
+A rounded percentage (`96%`) beside a compact bar, composed from the
+generic `ProgressIndicator` primitive. The bar's tone shifts by
+threshold — ≥90% success, 70–89% warning, below 70% danger — so confidence is
+never conveyed by the number alone or the color alone; both are always
+present together.
+
+## Live Preview
+
+<Canvas of={ConfidenceIndicatorStories.High} />
+
+## Usage
+
+Use anywhere a single AI confidence value needs to be shown inline — a
+table cell, an extracted field row, a suggestion card. Confidence
+Indicator only handles a single 0–100 value with a fixed tone mapping;
+it isn't configurable per-instance, since consistent thresholds across
+the product are what make the tone meaningful.
+
+## Variants
+
+<Canvas of={ConfidenceIndicatorStories.Medium} />
+<Canvas of={ConfidenceIndicatorStories.Low} />
+
+## Sizes
+
+<Canvas of={ConfidenceIndicatorStories.AllThresholds} />
+
+`size` (`sm` default, `md`) is passed through to the underlying
+Progress Indicator bar; the percentage text size is fixed.
+
+## States
+
+Confidence Indicator has no interactive states — it's a read-only
+display of a computed value, not a control.
+
+## Accessibility
+
+- The percentage is always rendered as visible text, so the confidence
+  level is available to screen readers and doesn't depend on
+  interpreting a bar's fill width or color.
+- The underlying bar exposes `role="progressbar"` with an accessible
+  name stating the percentage ("92% confidence"), so the value is
+  announced even if the visible text were somehow unavailable.
+
+## React Props
+
+<Controls of={ConfidenceIndicatorStories.High} />
+
+<ArgTypes of={ConfidenceIndicatorStories} />
+
+## Examples
+
+```tsx
+import { ConfidenceIndicator } from '@/components/data-display/ConfidenceIndicator';
+
+<ConfidenceIndicator value={96} />
+<ConfidenceIndicator value={82} size="sm" />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Let the component's built-in thresholds decide the tone — consistent thresholds across every table and field row are what make the color meaningful.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Hide the percentage text and show only the bar — confidence must always be stated as a number, not implied by a fill level alone.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-progress-indicator--docs">Progress Indicator</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
+</div>

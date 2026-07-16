@@ -1,0 +1,90 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as NotificationPanelStories from './NotificationPanel.stories';
+
+<Meta of={NotificationPanelStories} />
+
+# Notification Panel
+
+The bell-icon panel present in Atlas Product's topbar on every screen —
+a 36px chip with a small corner dot indicating unread notifications.
+Composes Popover for the floating panel rather than a custom
+implementation.
+
+## Overview
+
+A bell trigger (with an optional unread dot) that opens a scrollable
+list of notifications, each with a title, optional description, and a
+relative time.
+
+## Live Preview
+
+<Canvas of={NotificationPanelStories.Default} />
+
+## Usage
+
+Pass `items` and set `hasUnread` when any of them are new — this drives
+both the trigger's corner dot and its accessible name. Unread items
+(`read: false`) get a tinted background so they're scannable at a
+glance without relying on the corner dot alone.
+
+## Variants
+
+<Canvas of={NotificationPanelStories.Unread} />
+
+## Sizes
+
+One size (320px panel width, capped at 320px scrollable height for the
+list).
+
+## States
+
+<Canvas of={NotificationPanelStories.Empty} />
+
+## Accessibility
+
+- The trigger's accessible name changes between "Notifications" and
+  "Notifications (unread)" depending on `hasUnread` — the unread state
+  is never conveyed by the corner dot alone.
+- Each notification is a real `<button>`, so it's reachable and
+  activatable by keyboard, not a `<div>` with a click handler.
+
+## React Props
+
+<Controls of={NotificationPanelStories.Default} />
+
+<ArgTypes of={NotificationPanelStories} />
+
+## Examples
+
+```tsx
+import { NotificationPanel } from '@/components/overlays/NotificationPanel';
+
+<NotificationPanel
+  hasUnread
+  items={[
+    { id: '1', title: 'Workflow published', description: 'Invoice Approval is now live.', time: '2m ago', read: false },
+    { id: '2', title: 'Weekly digest ready', time: 'Yesterday', read: true },
+  ]}
+  onItemClick={(id) => markRead(id)}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Mark items read as the user views them, so the unread dot and tinted rows stay accurate over time.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Rely on the corner dot alone to signal unread state — it's paired with the trigger's accessible name and each row's tinted background for exactly this reason.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-popover--docs">Popover</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-user-menu--docs">User Menu</a>
+</div>

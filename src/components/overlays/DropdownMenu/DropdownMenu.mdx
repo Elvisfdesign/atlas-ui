@@ -1,0 +1,110 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as DropdownMenuStories from './DropdownMenu.stories';
+
+<Meta of={DropdownMenuStories} />
+
+# Dropdown Menu
+
+The floating panel Atlas's overflow ("more options") affordances open
+into. Source: no single dedicated Product frame — this is the panel
+behind existing overflow triggers like KPI Card's `showMenu` and any
+`MoreHorizontal` Icon Button. Built on Radix's Dropdown Menu primitive,
+which owns keyboard navigation (arrow keys, type-ahead), Escape-to-
+close, and focus return to the trigger.
+
+## Overview
+
+`DropdownMenu` (the root), `DropdownMenuTrigger`, `DropdownMenuContent`,
+and `DropdownMenuItem`/`DropdownMenuSeparator`/`DropdownMenuLabel` —
+composable primitives matching plain HTML menu structure, sharing their
+panel styling with Context Menu, User Menu, and Command Menu.
+
+## Live Preview
+
+<Canvas of={DropdownMenuStories.Default} />
+
+## Usage
+
+Wrap any trigger element in `DropdownMenuTrigger asChild` (an `IconButton`
+with a `MoreHorizontal` icon is the most common case), and list
+`DropdownMenuItem`s inside `DropdownMenuContent`. Pass `icon` and
+`shortcut` props on an item for a leading icon and trailing keyboard
+hint; pass `destructive` to color an item (like "Delete") with the
+danger tone.
+
+## Variants
+
+<Canvas of={DropdownMenuStories.WithLabelAndDisabledItem} />
+
+`DropdownMenuLabel` adds a small uppercase section heading above a
+group of items; pass `disabled` on any item to make it inert without
+removing it from the list.
+
+## Sizes
+
+One size — the menu's width is determined by its content (with a
+180px minimum), not a fixed scale.
+
+## States
+
+Hover/keyboard-highlighted, disabled, and destructive states are shown
+in the Live Preview and Variants above.
+
+## Accessibility
+
+- Radix wires full `menu`/`menuitem` ARIA roles, roving-tabindex arrow-
+  key navigation, type-ahead, and Escape-to-close automatically.
+- Focus returns to the trigger element when the menu closes, so keyboard
+  users never lose their place.
+- A disabled item is excluded from keyboard navigation and marked
+  `data-disabled`, not just visually dimmed.
+
+## React Props
+
+<ArgTypes of={DropdownMenuStories} />
+
+## Examples
+
+```tsx
+import { Pencil, Trash2 } from 'lucide-react';
+import { IconButton } from '@/components/actions/IconButton';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/overlays/DropdownMenu';
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <IconButton icon={<MoreHorizontal />} aria-label="More options" />
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem icon={<Pencil size={14} />}>Rename</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem icon={<Trash2 size={14} />} destructive>Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Always render the trigger with `asChild` around a real interactive element (a button) — never a bare `div` with a click handler.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Dropdown Menu for a right-click interaction — use Context Menu, which shares the same panel styling but triggers correctly.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-context-menu--docs">Context Menu</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-user-menu--docs">User Menu</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-command-menu--docs">Command Menu</a>
+</div>

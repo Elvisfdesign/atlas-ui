@@ -1,0 +1,78 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as SelectStories from './Select.stories';
+
+<Meta of={SelectStories} />
+
+# Select
+
+A single choice from a fixed list of options.
+
+## Overview
+
+Not yet its own componentized node in the Atlas UI System (see the React
+Readiness matrix) — implemented as a native `<select>` styled with
+Input's confirmed chrome, rather than a custom listbox. A native element
+keeps keyboard, typeahead, and screen-reader behavior correct for free; a
+fully custom Atlas-styled listbox (matching a future Dropdown Menu
+treatment) is the right upgrade path once that overlay pattern exists.
+
+## Live Preview
+
+<Canvas of={SelectStories.Default} />
+
+## Usage
+
+Use Select when there are a handful of mutually exclusive options and the
+person is expected to know what they're picking (a document type, a
+status). For a small, always-visible set of options, Radio may read
+better since every choice is visible without opening anything.
+
+## Variants
+
+One visual treatment — Select doesn't have a `variant` prop.
+
+## Sizes
+
+One size (36px), matching Input's medium size.
+
+## States
+
+<Canvas>
+  <Story of={SelectStories.WithError} />
+  <Story of={SelectStories.Disabled} />
+</Canvas>
+
+## Accessibility
+
+- The label is a real `<label htmlFor>`, associated the same way as
+  Input.
+- `error` sets `aria-invalid` and associates the error message via
+  `aria-describedby`, announced with `role="alert"`.
+- Being a native `<select>`, keyboard behavior (arrow keys, typeahead,
+  Escape) and screen-reader announcements are handled entirely by the
+  browser/OS — nothing here needs to reimplement them.
+
+## React Props
+
+<Controls of={SelectStories.Default} />
+
+<ArgTypes of={SelectStories} />
+
+## Examples
+
+```tsx
+import { Select } from '@/components/forms/Select';
+
+<Select label="Document type" error={errors.documentType}>
+  <option value="invoice">Invoice</option>
+  <option value="contract">Contract</option>
+  <option value="receipt">Receipt</option>
+</Select>
+```
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-input--docs">Input</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-radio--docs">Radio</a>
+</div>

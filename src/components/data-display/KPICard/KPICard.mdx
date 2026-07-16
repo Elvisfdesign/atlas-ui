@@ -1,0 +1,115 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as KPICardStories from './KPICard.stories';
+
+<Meta of={KPICardStories} />
+
+# KPI Card
+
+A single headline metric with a trend indicator, used across dashboard
+summaries. Source: Atlas UI System, Data Display → Data / KPI Card
+(Trend: Positive/Negative).
+
+## Overview
+
+A single headline number, its trend, and a stated comparison period — the
+building block of every Atlas Product dashboard summary row.
+
+## Live Preview
+
+<Canvas of={KPICardStories.Positive} />
+
+## Usage
+
+One KPI Card per metric — label, value, and a trend comparison against a
+stated period ("vs last 7 days"). Always include the comparison subtext;
+a bare number with an up/down arrow and no stated baseline isn't
+meaningful. Lay multiple cards out in a row (see the `Row` story) rather
+than stacking them, matching how Atlas Product's dashboards use them.
+
+## Variants
+
+<Canvas of={KPICardStories.Negative} />
+
+`trend` drives both the arrow direction and the color (success green for
+positive, danger red for negative) — there's no way to show a positive
+number in red or vice versa, since that would work against the color's
+meaning elsewhere in Atlas.
+
+## Sizes
+
+One size (260×130px). Atlas Product doesn't show KPI Card at another size.
+
+## States
+
+<Canvas of={KPICardStories.WithMenu} />
+
+`showMenu` reveals an overflow ("more options") affordance in the
+top-right corner — off by default, since not every KPI Card needs one.
+
+<Canvas of={KPICardStories.Row} />
+
+## Accessibility
+
+- Structured as plain text content (label, value, trend, subtext) in
+  reading order — nothing depends on positioning or color alone to convey
+  meaning; the trend direction is stated in the number itself (`+12.5%`
+  vs `-4.3%`), not just implied by an icon.
+- The overflow button (`showMenu`) has an accessible name derived from the
+  card's own label ("More options for TOTAL WORKFLOWS"), so multiple KPI
+  Cards on one page remain distinguishable to screen reader users.
+
+## React Props
+
+<Controls of={KPICardStories.Positive} />
+
+<ArgTypes of={KPICardStories} />
+
+## Examples
+
+```tsx
+import { KPICard } from '@/components/data-display/KPICard';
+
+<div className="flex gap-4">
+  <KPICard
+    label="TOTAL WORKFLOWS"
+    value={128}
+    trend="positive"
+    trendValue="+12.5%"
+    subtext="vs last 7 days"
+  />
+  <KPICard
+    label="DOCUMENTS PROCESSED"
+    value={342}
+    trend="negative"
+    trendValue="-4.3%"
+    subtext="vs last 7 days"
+    showMenu
+    onMenuClick={() => openCardMenu('documents')}
+  />
+</div>
+```
+
+Note: the Figma component's metric text renders at 26px, while the named
+`Numeric Metric` type-scale token in Foundations documents 28px — a small,
+pre-existing drift between the token and its most visible usage. KPI Card
+matches the shipped component (26px), not the token, since the component
+is the literal, shipped artifact.
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Always include the comparison subtext ("vs last 7 days") — a bare trend arrow with no stated baseline isn't meaningful.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Stack KPI Cards vertically — lay them out in a row, matching how Atlas Product's dashboards use them.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
+</div>

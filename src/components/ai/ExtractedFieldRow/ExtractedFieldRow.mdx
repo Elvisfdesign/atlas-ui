@@ -1,0 +1,79 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ExtractedFieldRowStories from './ExtractedFieldRow.stories';
+
+<Meta of={ExtractedFieldRowStories} />
+
+# Extracted Field Row
+
+Source: Atlas Product — Document Review's Extracted Fields card
+(`field-row`): a label + value stack on the left, a Confidence Badge on
+the right.
+
+## Overview
+
+The single-row primitive Document Review's Extracted Fields card
+repeats for every extracted value. Composes Confidence Badge rather
+than reimplementing the percentage-and-chip treatment.
+
+## Live Preview
+
+<Canvas of={ExtractedFieldRowStories.Default} />
+
+## Usage
+
+Stack multiple rows in a card, separated by a divider, to build the
+full Extracted Fields list.
+
+## Variants
+
+<Canvas of={ExtractedFieldRowStories.FieldList} />
+
+## Sizes
+
+One size, sized for a ~300px-wide fields sidebar.
+
+## States
+
+Static; row-level interactivity (editing a value) is left to the
+consuming screen.
+
+## Accessibility
+
+- Label and value are plain text, readable by assistive tech in
+  document order.
+- Confidence Badge carries its own `aria-label` with the full
+  confidence sentence.
+
+## React Props
+
+<Controls of={ExtractedFieldRowStories.Default} />
+
+<ArgTypes of={ExtractedFieldRowStories} />
+
+## Examples
+
+```tsx
+import { ExtractedFieldRow } from '@/components/ai/ExtractedFieldRow';
+
+<ExtractedFieldRow label="Vendor Name" value="Acme Corporation" confidence={98} />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Sort or highlight low-confidence rows so a reviewer can triage them first.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Truncate the value without a way to see the full text — long values should still be inspectable.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-confidence-badge--docs">Confidence Badge</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-detail-list--docs">Detail List</a>
+</div>

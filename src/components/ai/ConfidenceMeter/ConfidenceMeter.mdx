@@ -1,0 +1,82 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ConfidenceMeterStories from './ConfidenceMeter.stories';
+
+<Meta of={ConfidenceMeterStories} />
+
+# Confidence Meter
+
+Not a direct 1:1 Figma frame — synthesized from a real recurring need:
+Document Review's Approval Panel footer surfaces an aggregate figure
+("96% avg. confidence") as plain text with no visualization. Confidence
+Meter gives that aggregate a standalone, larger-scale visual home.
+
+## Overview
+
+A large percentage number, a caption, and a wide Progress Indicator bar
+— the same confidence → tone thresholds as Confidence Badge and Data
+Display's Confidence Indicator, sized for a document- or workflow-level
+summary rather than an inline table cell or list row.
+
+## Live Preview
+
+<Canvas of={ConfidenceMeterStories.Default} />
+
+## Usage
+
+Use Confidence Meter where a confidence figure deserves its own visual
+weight — atop a document's field list, or in a workflow summary — rather
+than sitting inline beside a single value (Confidence Badge) or a table
+row (Confidence Indicator).
+
+## Variants
+
+<Canvas of={ConfidenceMeterStories.Warning} />
+<Canvas of={ConfidenceMeterStories.Danger} />
+
+## Sizes
+
+One size — a full-width bar meant to anchor a card or section header.
+
+## States
+
+Static; Confidence Meter has no interactive states.
+
+## Accessibility
+
+- The bar carries `role="progressbar"` with `aria-valuenow`/`aria-valuemin`/`aria-valuemax`, composed from Data Display's Progress Indicator.
+- Confidence is conveyed by the number, the label, and the tone color together — never color alone (WCAG 1.4.1).
+
+## React Props
+
+<Controls of={ConfidenceMeterStories.Default} />
+
+<ArgTypes of={ConfidenceMeterStories} />
+
+## Examples
+
+```tsx
+import { ConfidenceMeter } from '@/components/ai/ConfidenceMeter';
+
+<ConfidenceMeter value={96} label="Overall confidence" />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use Confidence Meter for an aggregate/document-level figure, not a single field's confidence.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use it inline next to a single extracted value — reach for Confidence Badge there instead.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-confidence-indicator--docs">Confidence Indicator</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-confidence-badge--docs">Confidence Badge</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-approval-panel--docs">Approval Panel</a>
+</div>

@@ -1,0 +1,85 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as PromptHistoryItemStories from './PromptHistoryItem.stories';
+
+<Meta of={PromptHistoryItemStories} />
+
+# Prompt History Item
+
+Not a direct 1:1 Figma frame — Document Review's doc-tabs include a
+"History" tab, but its expanded content wasn't part of the captured
+screen state. Synthesized from Atlas's established list-item recipe
+(File Row / Notification Panel's item button) applied to a past
+prompt-and-response pair.
+
+## Overview
+
+A single row in a prompt history list — the prompt, an optional
+response snippet, and a relative time, as a clickable button.
+
+## Live Preview
+
+<Canvas of={PromptHistoryItemStories.Default} />
+
+## Usage
+
+Stack multiple items, separated by a divider, to build a full history
+list (e.g. behind Document Review's "History" tab).
+
+## Variants
+
+<Canvas of={PromptHistoryItemStories.List} />
+
+## Sizes
+
+One size — a full-width list row.
+
+## States
+
+Default and hover; a real `<button>`, so keyboard focus and activation
+work natively.
+
+## Accessibility
+
+- Renders as a real `<button>`, reachable and activatable by keyboard —
+  same pattern as Notification Panel's item rows.
+- The response snippet clamps to two lines visually but remains fully
+  readable to assistive tech (no `aria-hidden` truncation).
+
+## React Props
+
+<Controls of={PromptHistoryItemStories.Default} />
+
+<ArgTypes of={PromptHistoryItemStories} />
+
+## Examples
+
+```tsx
+import { PromptHistoryItem } from '@/components/ai/PromptHistoryItem';
+
+<PromptHistoryItem
+  prompt="Summarize this document"
+  response="This invoice from Acme Corporation totals $12,450.00, due June 18, 2025."
+  time="2m ago"
+  onClick={() => reopenConversation('1')}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Order items most-recent-first, matching every other time-ordered list in Atlas (Activity Feed, Notification Panel).</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use this for the live, in-progress conversation — that's Assistant Panel's message list.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-assistant-panel--docs">Assistant Panel</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-activity-feed--docs">Activity Feed</a>
+</div>

@@ -1,0 +1,1 @@
+Unused — leftover Storybook example stories from the initial `storybook init` attempt (never wired up; Storybook's main.ts only globs src/components/**/*.stories.tsx). Safe to delete this whole folder.

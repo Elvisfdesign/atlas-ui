@@ -1,0 +1,89 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as SkeletonStories from './Skeleton.stories';
+
+<Meta of={SkeletonStories} />
+
+# Skeleton
+
+The shimmer placeholder primitive. Source: the pulse treatment already
+used ad hoc inside Table's `TableLoadingRows` and the chart components'
+`loading` states — extracted here as its own reusable building block, so
+any future loading placeholder composes it instead of writing another
+`animate-pulse` div by hand.
+
+## Overview
+
+A pulsing block shaped like the content it stands in for — text, a
+circle (for an avatar), or a rectangle (for anything else).
+
+## Live Preview
+
+<Canvas of={SkeletonStories.Rect} />
+
+## Usage
+
+Compose several Skeletons together to mimic the shape of the real
+content that's loading (a name + meta line, an avatar + two text lines).
+Prefer Skeleton over Loading State when the destination layout is
+already known — it reduces layout shift once real content arrives.
+
+## Variants
+
+<Canvas of={SkeletonStories.Text} />
+<Canvas of={SkeletonStories.Circle} />
+
+## Sizes
+
+`width`/`height` are set directly — Skeleton has no fixed size scale,
+since it needs to match whatever it's standing in for.
+
+## States
+
+<Canvas of={SkeletonStories.Composition} />
+
+## Accessibility
+
+- Always rendered `aria-hidden="true"` — a Skeleton has no content of
+  its own to announce; pair it with a `role="status"`/`aria-live`
+  container (or Loading State) at the level above it if you need loading
+  to be announced.
+
+## React Props
+
+<Controls of={SkeletonStories.Rect} />
+
+<ArgTypes of={SkeletonStories} />
+
+## Examples
+
+```tsx
+import { Skeleton } from '@/components/feedback/Skeleton';
+
+<div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+  <Skeleton variant="circle" width={36} height={36} />
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+    <Skeleton variant="text" width={140} />
+    <Skeleton variant="text" width={100} />
+  </div>
+</div>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Shape Skeleton compositions to closely match the real content's layout, so the loading-to-loaded transition doesn't visibly jump.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Wrap a Skeleton composition in its own role="status" per instance — announce loading once, at the container level, not once per placeholder shape.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-loading-state--docs">Loading State</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
+</div>

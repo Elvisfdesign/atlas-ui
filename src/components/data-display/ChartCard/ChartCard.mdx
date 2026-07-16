@@ -1,0 +1,98 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ChartCardStories from './ChartCard.stories';
+
+<Meta of={ChartCardStories} />
+
+# Chart Card
+
+The card shell every Atlas chart lives in. Source: Atlas Product's
+Analytics screen — the "Processing Over Time" and "Document Types" card
+containers (20px padding, 14.5px semibold title, an optional header-right
+slot for a legend or a "View all" link).
+
+## Overview
+
+A title and an optional header-right action, above whatever content is
+passed as children — a `LineChart`, a `DonutChart`, an `ActivityFeed`
+column list, or any other card body.
+
+## Live Preview
+
+<Canvas of={ChartCardStories.Default} />
+
+## Usage
+
+Wrap `LineChart` or `DonutChart` in a `ChartCard` to get the title and
+consistent card chrome; pass a `ChartLegend` as `action` for chart
+legends, or a plain link/button for a "View all" affordance.
+`ActivityFeed` already composes `ChartCard` internally, so it doesn't
+need to be wrapped again.
+
+## Variants
+
+<Canvas of={ChartCardStories.WithLegend} />
+
+`ChartLegend` renders a dot + label per series, using the shared
+`CHART_SERIES_COLORS` palette so a chart's legend and its actual series
+colors can never drift apart.
+
+## Sizes
+
+<Canvas of={ChartCardStories.WithViewAllLink} />
+
+Chart Card has no size variant — it fills its container's width, and its
+height is determined by its content.
+
+## States
+
+Chart Card is a static container — states (loading, empty) belong to the
+chart or list rendered inside it, not to the card itself.
+
+## Accessibility
+
+- Renders the title as a real heading (`<h3>`), so charts are
+  discoverable in a page's heading outline.
+- The header-right action, when interactive, should be a real
+  `<button>` or `<a>` (as in the "View all" example) rather than a
+  non-interactive element with a click handler.
+
+## React Props
+
+<Controls of={ChartCardStories.Default} />
+
+<ArgTypes of={ChartCardStories} />
+
+## Examples
+
+```tsx
+import { ChartCard, ChartLegend } from '@/components/data-display/ChartCard';
+import { LineChart } from '@/components/data-display/LineChart';
+
+<ChartCard
+  title="Processing Over Time"
+  action={<ChartLegend items={[{ label: 'Processed', color: 'accent' }, { label: 'Failed', color: 'danger' }]} />}
+>
+  <LineChart data={data} xKey="date" series={[{ key: 'processed', label: 'Processed', color: 'accent' }, { key: 'failed', label: 'Failed', color: 'danger' }]} />
+</ChartCard>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use ChartLegend's color keys (not raw hex) so a chart's legend and its rendered series always share the same governed palette.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Wrap Activity Feed in another Chart Card — it already composes one internally.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-line-chart--docs">Line Chart</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-donut-chart--docs">Donut Chart</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-activity-feed--docs">Activity Feed</a>
+</div>

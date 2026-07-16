@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+@import './tokens.css';
+@import './theme.css';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@layer base {
+  * {
+    border-color: var(--color-border-default);
+  }
+
+  body {
+    background-color: var(--color-background-canvas);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+  }
+
+  /* Visible focus state, everywhere, no exceptions. */
+  :focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Radix Tooltip/Popover/DropdownMenu content enter/exit animation, keyed
+     off Radix's own `data-state` attribute. Kept hand-written and tiny on
+     purpose rather than pulling in a whole animation plugin for one effect. */
+  [data-radix-popper-content-wrapper] [data-state='delayed-open'],
+  [data-radix-popper-content-wrapper] [data-state='instant-open'] {
+    animation: atlas-content-in var(--duration-fast) var(--easing-easeOut);
+  }
+  [data-radix-popper-content-wrapper] [data-state='closed'] {
+    animation: atlas-content-out var(--duration-instant) var(--easing-linear);
+  }
+
+  @keyframes atlas-content-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes atlas-content-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}

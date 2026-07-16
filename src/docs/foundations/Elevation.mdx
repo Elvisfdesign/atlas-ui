@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { elevation } from '@/tokens/elevation';
+
+<Meta title="Foundations/Elevation" />
+
+# Elevation
+
+Atlas uses shadow sparingly — most surfaces are flat, distinguished by a
+hairline border and a subtle background-surface change, not a shadow. Only
+things that visually float above the page get one.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', marginTop: '24px' }}>
+  {Object.entries(elevation).map(([key, value]) => (
+    <div key={key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+      <div
+        style={{
+          width: '140px',
+          height: '90px',
+          borderRadius: '12px',
+          backgroundColor: 'var(--color-background-surface)',
+          border: key === 'none' ? '1px solid var(--color-border-default)' : 'none',
+          boxShadow: value === 'none' ? undefined : value,
+        }}
+      />
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ fontFamily: 'Inter', fontSize: 12, fontWeight: 500, color: 'var(--color-text-primary)' }}>{key}</div>
+        <div style={{ fontFamily: 'monospace', fontSize: 10.5, color: 'var(--color-text-tertiary)', maxWidth: '160px' }}>{value}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+## Where each is used
+
+- **none** — cards, panels, table rows. The default for almost everything.
+- **low** — dropdowns, menus.
+- **medium** — popovers, tooltips.
+- **high** — modals, dialogs.
+
+There's a fifth concept, **overlay**, that isn't a shadow at all — it's the
+dark scrim shown behind a modal or drawer (`overlay-scrim`, a semantic
+color token, not part of this elevation scale).

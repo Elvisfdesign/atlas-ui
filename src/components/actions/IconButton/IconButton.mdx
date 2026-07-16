@@ -1,0 +1,92 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as IconButtonStories from './IconButton.stories';
+
+<Meta of={IconButtonStories} />
+
+# Icon Button
+
+A single, chromeless button for icon-only actions — notifications, search,
+close, overflow menus. Source: Atlas UI System, Actions → Action / Icon
+Button (Size × State).
+
+## Overview
+
+One visual treatment, two sizes, and a required `aria-label` — Icon Button
+is deliberately the smaller, simpler sibling of Button, for places where an
+icon alone is enough to say what a control does.
+
+## Live Preview
+
+<Canvas of={IconButtonStories.Default} />
+
+## Usage
+
+Reach for Icon Button when the action is unambiguous from its icon alone
+in context — a close (✕) in a modal header, a bell for notifications in a
+topbar. If there's any chance the icon alone is ambiguous, use a regular
+Button with a visible label instead; don't rely on a tooltip to explain an
+Icon Button that shouldn't need one.
+
+## Variants
+
+There is one visual treatment — chromeless, tinted on hover/press — that
+covers every documented Figma state. Icon Button doesn't have a
+`variant` prop; if a future use case genuinely needs a bordered or filled
+icon button, that's a new variant to add deliberately, not a reason to
+overload this one.
+
+## Sizes
+
+<Canvas of={IconButtonStories.Small} />
+
+Medium (36px) is the default; Small (28px) matches dense contexts like a
+table's row-action column.
+
+## States
+
+<Canvas of={IconButtonStories.Disabled} />
+
+## Accessibility
+
+- **`aria-label` is a required prop, not optional** — TypeScript enforces
+  it. An icon-only button with no accessible name is a common, serious
+  accessibility failure; this component makes it impossible to ship one.
+- The icon itself is always rendered with `aria-hidden="true"`, wrapped in
+  its own `<span>`, so screen readers announce only the button's
+  `aria-label`.
+- Fully keyboard operable as a native `<button>`.
+
+## React Props
+
+<Controls of={IconButtonStories.Default} />
+
+<ArgTypes of={IconButtonStories} />
+
+## Examples
+
+```tsx
+import { IconButton } from '@/components/actions/IconButton';
+import { Bell } from 'lucide-react';
+
+<IconButton icon={<Bell />} aria-label="Notifications" onClick={openNotifications} />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Write an <code>aria-label</code> that names the action ("Close", "Notifications"), not the icon ("X icon").</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Reach for Icon Button when the icon alone could be ambiguous — use a labeled Button instead.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/actions-button--docs">Button</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-tooltip--docs">Tooltip</a>
+</div>

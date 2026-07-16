@@ -1,0 +1,102 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as LineChartStories from './LineChart.stories';
+
+<Meta of={LineChartStories} />
+
+# Line Chart
+
+An area/line chart for a value over time. Source: Atlas Product's
+Analytics "Processing Over Time" chart — a K-formatted y-axis, a dated
+x-axis, and one filled area per series (Processed/Failed).
+
+## Overview
+
+A thin wrapper around `recharts`' `AreaChart`, styled to Atlas's
+typography and token colors — not a custom-built charting engine. Each
+series references the shared `CHART_SERIES_COLORS` palette, so its color
+always matches its `ChartLegend` entry.
+
+## Live Preview
+
+<Canvas of={LineChartStories.Default} />
+
+## Usage
+
+Wrap `LineChart` in a `ChartCard` with a `ChartLegend` as the header
+action, matching the Analytics pattern. Pass `data` as an array of plain
+objects; `xKey` selects the x-axis field, and each `series` entry maps a
+data key to a label and a palette color. Never hardcode product data
+inside the component — it's a reusable, data-agnostic container.
+
+## Variants
+
+Line Chart has one visual treatment (filled area + line) — Atlas Product
+doesn't show a bare-line (no fill) variant.
+
+## Sizes
+
+`height` (default 240px) controls the chart's height; width always fills
+its container responsively.
+
+## States
+
+<Canvas of={LineChartStories.Loading} />
+<Canvas of={LineChartStories.Empty} />
+
+## Accessibility
+
+- The loading state renders `role="status"` with an accessible label
+  ("Loading chart"), so a loading chart is announced rather than
+  silently blank.
+- The empty state renders as visible, readable text rather than an
+  empty chart area, so there's always something for a screen reader (and
+  a sighted user) to read when there's no data.
+- Chart Card's title (an `<h3>`) provides the accessible context for
+  what the chart represents; Line Chart itself doesn't duplicate it.
+
+## React Props
+
+<Controls of={LineChartStories.Default} />
+
+<ArgTypes of={LineChartStories} />
+
+## Examples
+
+```tsx
+import { ChartCard, ChartLegend } from '@/components/data-display/ChartCard';
+import { LineChart } from '@/components/data-display/LineChart';
+
+<ChartCard
+  title="Processing Over Time"
+  action={<ChartLegend items={[{ label: 'Processed', color: 'accent' }, { label: 'Failed', color: 'danger' }]} />}
+>
+  <LineChart
+    data={[{ date: 'May 12', processed: 21500, failed: 900 }]}
+    xKey="date"
+    series={[
+      { key: 'processed', label: 'Processed', color: 'accent' },
+      { key: 'failed', label: 'Failed', color: 'danger' },
+    ]}
+  />
+</ChartCard>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Keep the series' `color` keys in sync with the ChartLegend passed to the surrounding Chart Card.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Pass raw hex colors — use the CHART_SERIES_COLORS keys so the chart stays correct in both Light and Dark automatically.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-chart-card--docs">Chart Card</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-donut-chart--docs">Donut Chart</a>
+</div>

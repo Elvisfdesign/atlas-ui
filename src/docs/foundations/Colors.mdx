@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { primitiveColors, semanticColors } from '@/tokens/colors';
+
+<Meta title="Foundations/Colors" />
+
+# Colors
+
+Atlas has two color layers. **Primitives** are raw values — nobody outside
+`src/tokens/colors.ts` should ever reference one directly. **Semantic
+tokens** are purpose-based names (`text-primary`, `border-focus`,
+`status-danger-text`) that alias a primitive per theme. Every component in
+this library binds to semantic tokens only — that's what makes Light and
+Dark the same component, not two.
+
+The values below are read directly from `src/tokens/colors.ts` — this page
+can't drift from what components actually use, because it's the same
+source file.
+
+## Semantic tokens
+
+<div className="atlas-token-grid">
+  {Object.entries(semanticColors).map(([name, { light }]) => (
+    <div key={name} className="atlas-token-swatch">
+      <div className="atlas-token-swatch__color" style={{ backgroundColor: light }} />
+      <div className="atlas-token-swatch__meta">
+        <span className="atlas-token-swatch__name">{name}</span>
+        <span className="atlas-token-swatch__value">{light}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
+Toggle the **Theme** control in the toolbar above to see the Dark values —
+every swatch on this page is the live CSS variable, so it repaints exactly
+like a real component would.
+
+## Primitives
+
+Never bind a component to one of these directly — they exist so semantic
+tokens have something to alias.
+
+{Object.entries(primitiveColors).map(([family, shades]) => (
+  <div key={family} style={{ marginBottom: '24px' }}>
+    <p style={{ fontFamily: 'Inter', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.3px', margin: '0 0 8px' }}>
+      {family}
+    </p>
+    <div className="atlas-token-grid">
+      {Object.entries(shades).map(([shade, value]) => (
+        <div key={shade} className="atlas-token-swatch">
+          <div className="atlas-token-swatch__color" style={{ backgroundColor: value }} />
+          <div className="atlas-token-swatch__meta">
+            <span className="atlas-token-swatch__name">{family}/{shade}</span>
+            <span className="atlas-token-swatch__value">{value}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+))}
+
+## Usage
+
+Reach for a semantic token by what it *means*, not what it looks like:
+`interactive-danger` for a destructive action's fill, not `red-500`. If a
+component needs a color that doesn't exist yet, that's a sign a new
+semantic token is missing — check with the Atlas Figma files before adding
+one; don't reach for a primitive as a shortcut.

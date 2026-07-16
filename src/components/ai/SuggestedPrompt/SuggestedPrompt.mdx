@@ -1,0 +1,79 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as SuggestedPromptStories from './SuggestedPrompt.stories';
+
+<Meta of={SuggestedPromptStories} />
+
+# Suggested Prompt
+
+Source: Atlas Product — the AI Assistant panel's `prompt-chip` rows
+(Document Review): full-width, left-aligned suggestion buttons.
+
+## Overview
+
+A single clickable suggestion — clicking it sends its text as the
+user's prompt. Assistant Panel renders a list of these above its
+composer.
+
+## Live Preview
+
+<Canvas of={SuggestedPromptStories.Default} />
+
+## Usage
+
+Pass the suggestion text as `children` and handle `onClick` to send it
+as a prompt — Assistant Panel does this automatically via its
+`suggestedPrompts` prop.
+
+## Variants
+
+<Canvas of={SuggestedPromptStories.List} />
+
+## Sizes
+
+One size — full-width within its container.
+
+## States
+
+Default, hover, and keyboard focus (via `focus-visible`) — a real
+`<button>`, so all native interaction states apply.
+
+## Accessibility
+
+- Renders as a real `<button>`, reachable and activatable by keyboard.
+- The visible text is the accessible name — no separate label needed.
+
+## React Props
+
+<Controls of={SuggestedPromptStories.Default} />
+
+<ArgTypes of={SuggestedPromptStories} />
+
+## Examples
+
+```tsx
+import { SuggestedPrompt } from '@/components/ai/SuggestedPrompt';
+
+<SuggestedPrompt onClick={() => sendPrompt('Summarize this document')}>
+  Summarize this document
+</SuggestedPrompt>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Keep suggestions short and specific to the current document or context.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Show more than four or five at once — Assistant Panel's grounded pattern uses four.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-assistant-panel--docs">Assistant Panel</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-prompt-input--docs">Prompt Input</a>
+</div>

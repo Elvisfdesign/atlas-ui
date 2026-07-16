@@ -1,0 +1,96 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as DonutChartStories from './DonutChart.stories';
+
+<Meta of={DonutChartStories} />
+
+# Donut Chart
+
+A categorical breakdown with a centered total. Source: Atlas Product's
+Analytics "Document Types" chart — a donut with a centered total number
+and label, and a legend column (dot, label, percentage) beside it.
+
+## Overview
+
+Built on `recharts`' `PieChart`, styled to match Atlas's card and legend
+typography. Percentages are computed from the raw `value`s passed in
+`slices` rather than requiring the caller to pre-calculate them.
+
+## Live Preview
+
+<Canvas of={DonutChartStories.Default} />
+
+## Usage
+
+Pass `slices` (each with a `label`, a raw `value`, and a
+`CHART_SERIES_COLORS` key) and a `total` string to show in the donut's
+center. Wrap in a `ChartCard` for the title, matching the Analytics
+pattern. Order `slices` largest-to-smallest, matching how Document Types
+lists Invoices → Contracts → Receipts → Purchase Orders → Others.
+
+## Variants
+
+Donut Chart has one visual treatment — no alternate ring thickness or
+labeling style in Atlas Product.
+
+## Sizes
+
+`size` (default 180px) controls the donut's diameter; the legend column
+grows to fill the remaining width.
+
+## States
+
+<Canvas of={DonutChartStories.Loading} />
+<Canvas of={DonutChartStories.Empty} />
+
+## Accessibility
+
+- The centered total and its label render as real text nodes (not baked
+  into an image), so they're readable by assistive technology.
+- Each legend row pairs a color dot with a text label and a percentage —
+  category identity never depends on the donut's color alone.
+
+## React Props
+
+<Controls of={DonutChartStories.Default} />
+
+<ArgTypes of={DonutChartStories} />
+
+## Examples
+
+```tsx
+import { ChartCard } from '@/components/data-display/ChartCard';
+import { DonutChart } from '@/components/data-display/DonutChart';
+
+<ChartCard title="Document Types">
+  <DonutChart
+    total="24,853"
+    slices={[
+      { label: 'Invoices', value: 43, color: 'accent' },
+      { label: 'Contracts', value: 28, color: 'processing' },
+      { label: 'Receipts', value: 14, color: 'warning' },
+      { label: 'Purchase Orders', value: 10, color: 'info' },
+      { label: 'Others', value: 5, color: 'neutral' },
+    ]}
+  />
+</ChartCard>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Pass raw values (counts or percentages) and let Donut Chart compute the displayed percentage — don't pre-round it yourself.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use more than 5 slices — beyond that, group smaller categories into "Others", matching how Document Types itself does.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-chart-card--docs">Chart Card</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-line-chart--docs">Line Chart</a>
+</div>

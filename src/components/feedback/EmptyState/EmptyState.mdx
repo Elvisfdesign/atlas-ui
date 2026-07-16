@@ -1,0 +1,93 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as EmptyStateStories from './EmptyState.stories';
+
+<Meta of={EmptyStateStories} />
+
+# Empty State
+
+A centered icon-chip + title + description block for "nothing here yet."
+Source: the same shape as Table's `TableEmptyState`, generalized into a
+standalone, block-level component for use outside a table.
+
+## Overview
+
+An icon in a circular chip, a title, an optional description, and an
+optional action — centered in its container. `tone` (`neutral` default,
+`success`, `danger`) lets the same shape double as a Success or Error
+state, rather than shipping three near-identical components for what is
+visually one pattern.
+
+## Live Preview
+
+<Canvas of={EmptyStateStories.Empty} />
+
+## Usage
+
+Use for an empty table, list, or search result (`tone="neutral"`, the
+default). Use `tone="success"` for a completed/all-clear message, and
+`tone="danger"` for a load/processing failure — override `icon` if the
+default per-tone icon (Inbox/Check/AlertCircle) doesn't fit.
+
+## Variants
+
+<Canvas of={EmptyStateStories.Success} />
+<Canvas of={EmptyStateStories.Error_} />
+
+## Sizes
+
+One size — Empty State fills its container's width and centers its
+content within it.
+
+## States
+
+<Canvas of={EmptyStateStories.WithAction} />
+
+`action` is optional — pass a Button when there's a clear next step
+("Create workflow", "Try again"), omit it for a purely informational
+empty state.
+
+## Accessibility
+
+- The icon chip is decorative (`aria-hidden="true"`) — the title and
+  description carry all the meaning.
+- Description text is capped at a readable width (`max-w-xs`) so it
+  doesn't stretch into an unreadable single line in a wide container.
+
+## React Props
+
+<Controls of={EmptyStateStories.Empty} />
+
+<ArgTypes of={EmptyStateStories} />
+
+## Examples
+
+```tsx
+import { EmptyState } from '@/components/feedback/EmptyState';
+import { Button } from '@/components/actions/Button';
+
+<EmptyState
+  title="No workflows yet"
+  description="Create your first workflow to start automating document review."
+  action={<Button size="small">Create workflow</Button>}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use the tone prop instead of reaching for a separate Success/Error component — the shape is intentionally the same one.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Empty State inside a table row — use Table's own TableEmptyState, which renders as a proper table row/cell.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-loading-state--docs">Loading State</a>
+</div>

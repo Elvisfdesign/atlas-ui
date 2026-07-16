@@ -1,0 +1,88 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as HumanReviewBannerStories from './HumanReviewBanner.stories';
+
+<Meta of={HumanReviewBannerStories} />
+
+# Human Review Banner
+
+Not a direct 1:1 Figma frame — synthesized from a real, recurring signal:
+both Review Queue and Document Review mark documents with a "Review"
+status whenever the AI's extraction needs a human to confirm it. Human
+Review Banner gives that event a page-level, explanatory surface.
+
+## Overview
+
+An ai-tinted banner — icon, message, and an optional action — for
+surfacing that the AI has flagged something specific for a human to
+confirm, distinct from a generic warning banner.
+
+## Live Preview
+
+<Canvas of={HumanReviewBannerStories.Default} />
+
+## Usage
+
+Use Human Review Banner when the message is specifically attributed to
+the AI's own assessment ("I'm not confident here"), not a generic system
+warning — for those, use Feedback's Banner with a `warning` tone
+instead.
+
+## Variants
+
+<Canvas of={HumanReviewBannerStories.WithAction} />
+
+## Sizes
+
+One size — a full-width banner meant to sit at the top of a document or
+section.
+
+## States
+
+Static; Human Review Banner has no interactive states beyond its
+optional action button.
+
+## Accessibility
+
+- `role="status"` announces the banner to assistive tech without
+  interrupting, since it's informational rather than a page-blocking
+  error.
+- The icon is decorative (`aria-hidden`) — the message text alone
+  carries the meaning.
+
+## React Props
+
+<Controls of={HumanReviewBannerStories.Default} />
+
+<ArgTypes of={HumanReviewBannerStories} />
+
+## Examples
+
+```tsx
+import { HumanReviewBanner } from '@/components/ai/HumanReviewBanner';
+
+<HumanReviewBanner
+  message="The AI wasn't confident enough in 2 fields — a human should confirm them before approving."
+  actionLabel="Review fields"
+  onAction={() => scrollToLowConfidenceFields()}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Pair the banner with the specific fields or values it's referring to, when possible.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use this for generic system warnings unrelated to the AI's own confidence — reach for Feedback's Banner instead.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-banner--docs">Banner</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-approval-panel--docs">Approval Panel</a>
+</div>

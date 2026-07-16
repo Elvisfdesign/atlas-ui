@@ -1,0 +1,92 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as PopoverStories from './Popover.stories';
+
+<Meta of={PopoverStories} />
+
+# Popover
+
+A lightweight, non-modal floating panel anchored to a trigger. Source:
+Atlas Product's Analytics page header — the "May 12 – May 18, 2025"
+date-range button and the "Filters" button are exactly this pattern.
+Built on Radix's Popover primitive — no focus trap (unlike Modal/
+Drawer), since it isn't a modal interruption; dismissed by an outside
+click or Escape.
+
+## Overview
+
+`Popover` (root), `PopoverTrigger`, `PopoverAnchor` (for anchoring to a
+different element than the trigger), and `PopoverContent`.
+
+## Live Preview
+
+<Canvas of={PopoverStories.Default} />
+
+## Usage
+
+Use Popover for a small, self-contained control anchored to a button —
+a date-range picker, a filter panel, a quick-edit form. For anything
+that needs to trap focus and interrupt the page (a form the user must
+resolve), use Modal or Drawer instead.
+
+## Variants
+
+<Canvas of={PopoverStories.FilterPanel} />
+
+## Sizes
+
+No fixed size — set a width via `className` on `PopoverContent` to fit
+the content (both examples above use a fixed width, matching the
+Analytics date-range/filter buttons).
+
+## States
+
+Open/closed is the only state, shown via the trigger interaction in the
+Live Preview.
+
+## Accessibility
+
+- Dismissed by clicking outside, pressing Escape, or (optionally)
+  re-clicking the trigger — all handled by Radix.
+- Unlike Modal, does not trap focus — appropriate for a lightweight,
+  non-blocking control.
+
+## React Props
+
+<ArgTypes of={PopoverStories} />
+
+## Examples
+
+```tsx
+import { Calendar } from 'lucide-react';
+import { Button } from '@/components/actions/Button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/overlays/Popover';
+
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="ghost" size="small" icon={<Calendar size={15} />}>
+      May 12 – May 18, 2025
+    </Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-64">{/* date range picker */}</PopoverContent>
+</Popover>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use Popover for lightweight, dismissible controls anchored to a trigger — it doesn't interrupt the rest of the page.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Put a form the user must complete or explicitly cancel inside a Popover — use Modal, which traps focus and can't be dismissed by an accidental outside click.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-notification-panel--docs">Notification Panel</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-modal--docs">Modal</a>
+</div>

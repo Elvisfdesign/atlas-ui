@@ -1,0 +1,100 @@
+/**
+ * Tailwind v4 theme mapping. This file maps Atlas semantic CSS variables
+ * (defined in tokens.css, one set per theme) onto Tailwind's `@theme`
+ * layer, so utilities like `bg-surface`, `text-secondary`, `rounded-md`,
+ * or `shadow-elevation-high` resolve to Atlas tokens — never a raw hex
+ * value or an arbitrary Tailwind default.
+ */
+@theme {
+  --color-canvas: var(--color-background-canvas);
+  --color-surface: var(--color-background-surface);
+  --color-surface-subtle: var(--color-background-surface-subtle);
+  --color-surface-elevated: var(--color-background-surface-elevated);
+  --color-inverse: var(--color-background-inverse);
+
+  --color-primary: var(--color-text-primary);
+  --color-secondary: var(--color-text-secondary);
+  --color-tertiary: var(--color-text-tertiary);
+  --color-disabled: var(--color-text-disabled);
+  --color-hover-surface: var(--color-disabled-background);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-on-avatar: var(--color-text-on-avatar);
+
+  --color-border-subtle: var(--color-border-subtle);
+  --color-border-default: var(--color-border-default);
+  --color-border-strong: var(--color-border-strong);
+  --color-border-focus: var(--color-border-focus);
+  --color-border-error: var(--color-border-error);
+
+  --color-interactive-primary: var(--color-interactive-primary);
+  --color-interactive-primary-hover: var(--color-interactive-primary-hover);
+  --color-interactive-primary-pressed: var(--color-interactive-primary-pressed);
+  --color-interactive-accent: var(--color-interactive-accent);
+  --color-interactive-accent-hover: var(--color-interactive-accent-hover);
+  --color-interactive-danger: var(--color-interactive-danger);
+  --color-interactive-selected: var(--color-interactive-selected);
+
+  --color-success-bg: var(--color-status-success-background);
+  --color-success-text: var(--color-status-success-text);
+  --color-warning-bg: var(--color-status-warning-background);
+  --color-warning-text: var(--color-status-warning-text);
+  --color-danger-bg: var(--color-status-danger-background);
+  --color-danger-text: var(--color-status-danger-text);
+  --color-info-bg: var(--color-status-info-background);
+  --color-info-text: var(--color-status-info-text);
+  --color-processing-text: var(--color-status-processing-text);
+
+  --color-ai-bg: var(--color-ai-background);
+  --color-ai-border: var(--color-ai-border);
+  --color-ai-accent: var(--color-ai-accent);
+
+  --color-overlay-scrim: var(--color-overlay-scrim);
+
+  --color-avatar-1: var(--color-avatar-bg-1);
+  --color-avatar-2: var(--color-avatar-bg-2);
+  --color-avatar-3: var(--color-avatar-bg-3);
+
+  --color-table-header-bg: var(--color-table-header-background);
+  --color-table-header-text: var(--color-table-header-text);
+  --color-table-header-divider: var(--color-table-header-divider);
+  --color-table-header-sort-icon: var(--color-table-header-sort-icon);
+  --color-table-row-bg: var(--color-table-row-background);
+  --color-table-row-hover: var(--color-table-row-hover);
+  --color-table-row-selected: var(--color-table-row-selected);
+  --color-table-row-focus: var(--color-table-row-focus);
+  --color-table-row-border: var(--color-table-row-border);
+  --color-table-bulk-bg: var(--color-table-bulk-action-background);
+  --color-table-bulk-text: var(--color-table-bulk-action-text);
+
+  --font-family-sans: var(--font-family-sans);
+
+  --radius-none: var(--radius-none);
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+
+  --shadow-elevation-low: var(--elevation-low);
+  --shadow-elevation-medium: var(--elevation-medium);
+  --shadow-elevation-high: var(--elevation-high);
+
+  --ease-out-atlas: var(--easing-easeOut);
+  --ease-in-out-atlas: var(--easing-easeInOut);
+
+  --transition-duration-instant: var(--duration-instant);
+  --transition-duration-fast: var(--duration-fast);
+  --transition-duration-normal: var(--duration-normal);
+  --transition-duration-slow: var(--duration-slow);
+}
+
+@theme {
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1100;
+  --z-index-overlay: 1200;
+  --z-index-modal: 1300;
+  --z-index-popover: 1400;
+  --z-index-tooltip: 1500;
+  --z-index-toast: 1600;
+}

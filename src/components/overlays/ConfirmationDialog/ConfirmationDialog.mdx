@@ -1,0 +1,101 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ConfirmationDialogStories from './ConfirmationDialog.stories';
+
+<Meta of={ConfirmationDialogStories} />
+
+# Confirmation Dialog
+
+The confirm/cancel pattern, pre-composed from Modal. Not a separate
+visual component — a specific, controlled way of assembling
+`ModalHeader`/`ModalTitle`/`ModalDescription`/`ModalFooter` so a
+destructive or consequential action can never accidentally drift from
+Modal's chrome.
+
+## Overview
+
+A title, an optional description, and Cancel/Confirm buttons —
+`destructive` styles the confirm button for actions like deleting a
+workflow.
+
+## Live Preview
+
+<Canvas of={ConfirmationDialogStories.Destructive} />
+
+## Usage
+
+Fully controlled — pass `open`/`onOpenChange` from the calling
+component's own state, along with `onConfirm`. Reach for Confirmation
+Dialog specifically for a yes/no decision; for anything with real form
+fields, compose Modal's slots directly instead.
+
+## Variants
+
+<Canvas of={ConfirmationDialogStories.NonDestructive} />
+
+`destructive` (default `false`) switches the confirm button between
+`primary` and `destructive` Button variants — nothing else changes.
+
+## Sizes
+
+One size, inherited from Modal.
+
+## States
+
+<Canvas of={ConfirmationDialogStories.Loading} />
+
+`loading` disables both buttons, hides the close button, and swaps the
+confirm label to "Please wait…" — use it while an async `onConfirm` is
+in flight so the dialog can't be dismissed or double-submitted.
+
+## Accessibility
+
+- Inherits Modal's focus trapping, focus return, and Escape-to-close.
+- Both buttons are disabled together during `loading`, so there's no way
+  to trigger a second confirm or cancel mid-request.
+
+## React Props
+
+<Controls of={ConfirmationDialogStories.Destructive} />
+
+<ArgTypes of={ConfirmationDialogStories} />
+
+## Examples
+
+```tsx
+import { useState } from 'react';
+import { ConfirmationDialog } from '@/components/overlays/ConfirmationDialog';
+
+const [open, setOpen] = useState(false);
+
+<ConfirmationDialog
+  open={open}
+  onOpenChange={setOpen}
+  title="Delete this workflow?"
+  description="This can't be undone. All run history will be lost."
+  destructive
+  confirmLabel="Delete workflow"
+  onConfirm={async () => {
+    await deleteWorkflow();
+    setOpen(false);
+  }}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Set `loading` while the confirm action is in flight, so the dialog can't be dismissed mid-request.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Confirmation Dialog for a form with real input fields — compose Modal's slots directly for that instead.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-modal--docs">Modal</a>
+</div>

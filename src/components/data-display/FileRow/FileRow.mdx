@@ -1,0 +1,85 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as FileRowStories from './FileRow.stories';
+
+<Meta of={FileRowStories} />
+
+# File Row
+
+A file's icon chip, name, and optional secondary line. Source: Atlas
+Product — the Review Queue table's document cell and the Analytics
+"Recent Activity" list's document cell.
+
+## Overview
+
+A 28px icon chip on a subtle surface, the file name, and an optional
+secondary line (size, page count, or any other metadata) beneath it.
+
+## Live Preview
+
+<Canvas of={FileRowStories.Default} />
+
+## Usage
+
+Use inside a table cell, an activity feed row, or anywhere a document
+needs to be identified by name with an icon. Pass a type-specific Lucide
+icon via the `icon` prop to distinguish file types at a glance; it
+defaults to a generic file icon when omitted.
+
+## Variants
+
+<Canvas of={FileRowStories.CustomIcon} />
+<Canvas of={FileRowStories.List} />
+
+## Sizes
+
+One size. File Row doesn't have a size variant in Atlas Product.
+
+## States
+
+<Canvas of={FileRowStories.WithMeta} />
+
+File Row is a static display component — it has no interactive or
+disabled states of its own. Long file names truncate with an ellipsis
+rather than wrapping or overflowing their container.
+
+## Accessibility
+
+- The icon chip is `aria-hidden="true"`, since it's decorative — the
+  file name text is the only information a screen reader needs.
+- Both the name and meta line render as plain text in reading order, so
+  no information depends on icon shape or color alone.
+
+## React Props
+
+<Controls of={FileRowStories.Default} />
+
+<ArgTypes of={FileRowStories} />
+
+## Examples
+
+```tsx
+import { FileText } from 'lucide-react';
+import { FileRow } from '@/components/data-display/FileRow';
+
+<FileRow fileName="Invoice_2024_1847.pdf" icon={<FileText size={14} />} meta="2.4 MB · 4 pages" />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Pass a type-specific icon (a spreadsheet icon for .xlsx, an image icon for scans) so a list of files is scannable at a glance.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Rely on the meta line for information the file name itself should carry — keep the file name as the actual, complete filename.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-user-row--docs">User Row</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
+</div>

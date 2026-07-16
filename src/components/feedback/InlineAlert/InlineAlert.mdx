@@ -1,0 +1,93 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as InlineAlertStories from './InlineAlert.stories';
+
+<Meta of={InlineAlertStories} />
+
+# Inline Alert
+
+A tone-tinted message block for a form, card, or page section. Source:
+Atlas's existing status tone system (`info`/`success`/`warning`/`danger`
+background+text pairs, already used by Badge) applied to a larger,
+icon-led message block — the inline counterpart to Banner, which spans
+full page width instead.
+
+## Overview
+
+An icon, an optional bold title, and a description, on a tinted
+background matching the chosen tone.
+
+## Live Preview
+
+<Canvas of={InlineAlertStories.Info} />
+
+## Usage
+
+Use Inline Alert for a message scoped to one section of a page — a form,
+a card, a panel — not a page-wide notice (use Banner for that). `title`
+is optional; omit it for a single short sentence that doesn't need a
+separate lead-in.
+
+## Variants
+
+<Canvas of={InlineAlertStories.Success} />
+<Canvas of={InlineAlertStories.Warning} />
+<Canvas of={InlineAlertStories.Danger} />
+
+## Sizes
+
+One size — Inline Alert fills its container's width; height is
+determined by its content.
+
+## States
+
+<Canvas of={InlineAlertStories.WithoutTitle} />
+
+Inline Alert is a static display component — it has no interactive
+states of its own.
+
+## Accessibility
+
+- `warning` and `danger` tones render `role="alert"` (assertive,
+  interrupts) — `info` and `success` render `role="status"` (polite,
+  announced without interrupting). Not every alert deserves the same
+  urgency.
+- The icon is decorative (`aria-hidden="true"`) — tone is always
+  communicated by the visible title/description text as well, never by
+  color or icon shape alone.
+
+## React Props
+
+<Controls of={InlineAlertStories.Info} />
+
+<ArgTypes of={InlineAlertStories} />
+
+## Examples
+
+```tsx
+import { InlineAlert } from '@/components/feedback/InlineAlert';
+
+<InlineAlert tone="warning" title="Review recommended">
+  Confidence on 3 fields is below the usual threshold.
+</InlineAlert>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use Inline Alert inside a specific form, card, or panel — reach for Banner when the message applies to the whole page.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use the danger tone for anything less than a real failure — reserve it so it keeps its urgency.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-banner--docs">Banner</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-toast--docs">Toast</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
+</div>

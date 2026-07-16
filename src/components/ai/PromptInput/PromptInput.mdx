@@ -1,0 +1,77 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as PromptInputStories from './PromptInput.stories';
+
+<Meta of={PromptInputStories} />
+
+# Prompt Input
+
+Source: Atlas Product — the AI Assistant panel's `ai-input` (Document
+Review): a single-line field with a trailing circular send button.
+
+## Overview
+
+The composer at the bottom of Assistant Panel — a text field and a
+send button, submitting on Enter or a click.
+
+## Live Preview
+
+<Canvas of={PromptInputStories.Default} />
+
+## Usage
+
+Prompt Input is uncontrolled by default — read the submitted value from
+`onSubmit` rather than tracking `value` yourself, unless you need to
+control it (e.g. to clear the field after sending).
+
+## Variants
+
+Layout and styling are fixed to match the grounded Product pattern.
+
+## Sizes
+
+One size — a full-width single-line composer.
+
+## States
+
+<Canvas of={PromptInputStories.Disabled} />
+
+## Accessibility
+
+- The field is a real `<input>`; the send button has an explicit
+  `aria-label="Send"` since it carries only an icon.
+- Submitting via Enter and via the send button both fire the same
+  `onSubmit` handler (a native `<form>` under the hood).
+
+## React Props
+
+<Controls of={PromptInputStories.Default} />
+
+<ArgTypes of={PromptInputStories} />
+
+## Examples
+
+```tsx
+import { PromptInput } from '@/components/ai/PromptInput';
+
+<PromptInput onSubmit={(value) => sendPrompt(value)} />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Pair Prompt Input with Suggested Prompt chips above it, matching the grounded Assistant Panel layout.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Prompt Input for multi-line composition — it's a single-line field, same as the grounded Product pattern.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-assistant-panel--docs">Assistant Panel</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-suggested-prompt--docs">Suggested Prompt</a>
+</div>

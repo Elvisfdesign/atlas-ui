@@ -1,0 +1,100 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as DrawerStories from './Drawer.stories';
+
+<Meta of={DrawerStories} />
+
+# Drawer
+
+An edge-anchored modal panel. Built on the same Radix Dialog primitive
+as Modal — full focus trapping and Escape-to-close — but anchored to a
+screen edge instead of centered, for content that needs more room than
+Modal's 448px (a document's full detail view, a multi-field editor).
+
+## Overview
+
+`Drawer` (root), `DrawerTrigger`, `DrawerContent` (with a `side` prop),
+and `DrawerTitle`/`DrawerDescription`/`DrawerHeader`/`DrawerBody`/
+`DrawerFooter` slot components — the same shape as Modal's.
+
+## Live Preview
+
+<Canvas of={DrawerStories.Right} />
+
+## Usage
+
+Use Drawer instead of Modal when the content is naturally a detail view
+or a longer form — `DrawerBody` scrolls independently of the header/
+footer, so a tall Drawer never breaks its own layout.
+
+## Variants
+
+<Canvas of={DrawerStories.Left} />
+
+`side="right"` (default) or `side="left"` — pick based on where the
+triggering context sits (e.g. a table row's detail view opens from the
+right).
+
+## Sizes
+
+One size (max-width 384px / `max-w-sm`), full viewport height.
+
+## States
+
+Open/closed is the only state, shown via the trigger interaction in the
+Live Preview.
+
+## Accessibility
+
+- Same accessibility guarantees as Modal: focus trap, focus return,
+  Escape-to-close, background scroll lock.
+- `DrawerTitle` becomes the dialog's accessible name automatically.
+
+## React Props
+
+<ArgTypes of={DrawerStories} />
+
+## Examples
+
+```tsx
+import { Button } from '@/components/actions/Button';
+import {
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/overlays/Drawer';
+
+<Drawer>
+  <DrawerTrigger asChild>
+    <Button variant="secondary">View details</Button>
+  </DrawerTrigger>
+  <DrawerContent side="right">
+    <DrawerHeader>
+      <DrawerTitle>Invoice_9821.pdf</DrawerTitle>
+    </DrawerHeader>
+    <DrawerBody>{/* detail content */}</DrawerBody>
+  </DrawerContent>
+</Drawer>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Reach for Drawer over Modal when the content is naturally longer than fits in a centered dialog.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Drawer for a quick yes/no decision — that's Confirmation Dialog's job, and a full-height panel is unnecessary for it.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-modal--docs">Modal</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-detail-list--docs">Detail List</a>
+</div>

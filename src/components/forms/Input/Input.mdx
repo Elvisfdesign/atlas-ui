@@ -1,0 +1,104 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as InputStories from './Input.stories';
+
+<Meta of={InputStories} />
+
+# Input
+
+The default single-line text field in Atlas. Source: Atlas UI System,
+Forms → Form / Text Input (a 6-state variant set: default, hover, focus,
+filled, disabled, error).
+
+## Overview
+
+Input covers every plain text-entry need — names, IDs, single-line
+values. It isn't a `state` prop with six options: hover and focus come
+from the browser for free, and `filled` is just what the field looks like
+once it has a value. Only `error` and `disabled` are things a caller sets.
+
+## Live Preview
+
+<Canvas of={InputStories.Default} />
+
+## Usage
+
+Always pass a `label` rather than relying on `placeholder` alone —
+placeholder text disappears the moment someone starts typing, so it can't
+carry the field's identity by itself. Use `helperText` for guidance that
+should always be visible, and `error` only once a real validation problem
+exists.
+
+## Variants
+
+<Canvas of={InputStories.WithLeadingIcon} />
+
+A leading icon is the one supported visual variant — for a unit, a
+currency symbol, or context like a mail icon on an email field. It's
+`aria-hidden`, same as everywhere else in Atlas.
+
+## Sizes
+
+<Canvas of={InputStories.Small} />
+
+**medium** (36px, the default) matches Button's medium height, so an Input
+and a Button sit flush in the same row. **small** (29px) is for dense
+layouts — filter bars, inline table editing.
+
+## States
+
+<Canvas>
+  <Story of={InputStories.WithHelperText} />
+  <Story of={InputStories.WithError} />
+  <Story of={InputStories.Disabled} />
+</Canvas>
+
+## Accessibility
+
+- The label is a real `<label htmlFor>`, not a placeholder or a floating
+  span — clicking it focuses the input, and screen readers always
+  announce it.
+- `error` sets `aria-invalid` and points `aria-describedby` at the error
+  text, which renders with `role="alert"` so it's announced as soon as it
+  appears.
+- Focus is always visible: a 2px accent ring, matching every other Atlas
+  interactive element.
+
+## React Props
+
+<Controls of={InputStories.Default} />
+
+<ArgTypes of={InputStories} />
+
+## Examples
+
+```tsx
+import { Input } from '@/components/forms/Input';
+
+<Input
+  label="Workspace name"
+  placeholder="Enter workspace name"
+  error={errors.workspaceName}
+  required
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Show `error` only after a real validation failure — don't mark a field invalid before the person has had a chance to fill it in.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use `placeholder` as a substitute for `label` — it disappears on input and isn't reliably announced by screen readers.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-search-input--docs">Search Input</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-textarea--docs">Textarea</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-select--docs">Select</a>
+</div>

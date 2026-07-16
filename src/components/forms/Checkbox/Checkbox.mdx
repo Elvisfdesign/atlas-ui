@@ -1,0 +1,94 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as CheckboxStories from './Checkbox.stories';
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+An on/off selection, usually as part of a group. Source: Atlas Product —
+the Review Queue table's row-selection checkbox (17×17px, checked state
+fills with the accent color and shows a white check).
+
+## Overview
+
+Built on a real native `<input type="checkbox">` (visually restyled)
+rather than a custom button-based widget, so checked/indeterminate state,
+labeling, and keyboard behavior all come from the browser.
+
+## Live Preview
+
+<Canvas of={CheckboxStories.Default} />
+
+## Usage
+
+Use Checkbox for row selection in tables (its confirmed Product use), for
+independent on/off options in a form, and for a "select all" control
+paired with `indeterminate` when only some rows are selected. For a
+setting that takes effect immediately rather than being part of a form
+submission, use Switch instead.
+
+## Variants
+
+One visual treatment — Checkbox doesn't have a `variant` prop.
+
+## Sizes
+
+One size (17px), matching the Review Queue table checkbox exactly.
+
+## States
+
+<Canvas>
+  <Story of={CheckboxStories.Checked} />
+  <Story of={CheckboxStories.Indeterminate} />
+  <Story of={CheckboxStories.Disabled} />
+  <Story of={CheckboxStories.DisabledChecked} />
+</Canvas>
+
+## Accessibility
+
+- The label is a real `<label htmlFor>` — clicking anywhere on the label
+  text toggles the checkbox, not just the box itself.
+- `indeterminate` is set via the DOM property (not an HTML attribute,
+  since none exists) so screen readers announce "partially checked"
+  correctly.
+- Fully keyboard operable: Tab to focus, Space to toggle, exactly like a
+  native checkbox, because it is one.
+
+## React Props
+
+<Controls of={CheckboxStories.Default} />
+
+<ArgTypes of={CheckboxStories} />
+
+## Examples
+
+```tsx
+import { Checkbox } from '@/components/forms/Checkbox';
+
+<Checkbox
+  label="Select all (3 of 12)"
+  indeterminate={someSelected && !allSelected}
+  checked={allSelected}
+  onChange={(e) => toggleAll(e.target.checked)}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use `indeterminate` for a "select all" checkbox when some, but not all, rows are selected.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Checkbox for a setting that takes effect immediately — that's what Switch communicates.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-radio--docs">Radio</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-switch--docs">Switch</a>
+</div>

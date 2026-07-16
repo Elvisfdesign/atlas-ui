@@ -1,0 +1,98 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ActivityFeedStories from './ActivityFeed.stories';
+
+<Meta of={ActivityFeedStories} />
+
+# Activity Feed
+
+A recent-activity list of processed documents. Source: Atlas Product's
+Analytics "Recent Activity" card — a header with a "View all" link,
+column headers (DOCUMENT/TYPE/STATUS/TIME), and rows composing a
+document icon + name, a type label, a status Badge, and a relative time.
+
+## Overview
+
+Composes `ChartCard` for its title/action header, `FileRow` for the
+document cell, and `Badge` for status — rather than reimplementing any
+of their layout.
+
+## Live Preview
+
+<Canvas of={ActivityFeedStories.Default} />
+
+## Usage
+
+Pass `items` (each with a `fileName`, `type`, `status`, and `time`).
+`statusTone` defaults from the status text itself ("Completed" →
+success, "Failed" → danger, "Review" → warning, "Processing" →
+processing) — override it only for a status outside that set.
+
+## Variants
+
+<Canvas of={ActivityFeedStories.WithViewAll} />
+
+Pass `onViewAll` to show the "View all" link in the header, matching the
+Analytics card exactly; omit it for a feed with no link to a fuller
+list.
+
+## Sizes
+
+One size — the feed fills its container's width; row height and column
+widths (Type/Status/Time are fixed-width, Document flexes) are fixed to
+match the Analytics pattern.
+
+## States
+
+<Canvas of={ActivityFeedStories.Empty} />
+
+## Accessibility
+
+- The "View all" affordance renders as a real `<button>` with visible
+  focus styling, not a styled `<span>` with a click handler.
+- Status is always a Badge with visible text — never conveyed by row
+  color alone.
+- Column headers use the same uppercase/tracked treatment as Table's
+  header cells, for a consistent "this is a header row" signal across
+  Atlas even outside a literal `<table>`.
+
+## React Props
+
+<Controls of={ActivityFeedStories.Default} />
+
+<ArgTypes of={ActivityFeedStories} />
+
+## Examples
+
+```tsx
+import { ActivityFeed } from '@/components/data-display/ActivityFeed';
+
+<ActivityFeed
+  onViewAll={() => navigate('/activity')}
+  items={[
+    { id: '1', fileName: 'Invoice_9821.pdf', type: 'Invoice', status: 'Completed', time: '2m ago' },
+    { id: '2', fileName: 'Receipt_1298.jpg', type: 'Receipt', status: 'Failed', time: '2h ago' },
+  ]}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Let the default status→tone mapping handle common statuses, so color stays consistent with Badge's usage everywhere else.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Activity Feed for a sortable/selectable dataset — reach for Table, which supports sorting and row selection.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-chart-card--docs">Chart Card</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-file-row--docs">File Row</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-badge--docs">Badge</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
+</div>

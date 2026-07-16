@@ -1,0 +1,92 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as DetailListStories from './DetailList.stories';
+
+<Meta of={DetailListStories} />
+
+# Detail List
+
+A plain label/value row list. Source: the label-above-value text stack
+used in every Document Review "Extracted Fields" row (12px tertiary
+label, 13px primary value), decomposed here into its own primitive
+without the confidence percentage and AI icon chip — those belong
+specifically to the (AI) Extracted Field Row, which composes this same
+text-stack pattern and adds a Confidence Indicator on top.
+
+## Overview
+
+A vertical list of label/value pairs, each separated by a hairline
+divider, rendered as a semantic `<dl>`/`<dt>`/`<dd>` structure.
+
+## Live Preview
+
+<Canvas of={DetailListStories.Default} />
+
+## Usage
+
+Use for any plain metadata display — document properties, account
+details, a settings summary — anywhere a value doesn't need a paired
+confidence score. If a value does need one, use the (AI) Extracted
+Field Row instead, not this component with a confidence badge bolted on
+separately.
+
+## Variants
+
+<Canvas of={DetailListStories.SingleItem} />
+
+`value` accepts any `ReactNode`, so a value can be plain text, a Badge,
+or any other inline content — not just a string.
+
+## Sizes
+
+One size — Detail List fills its container's width; row height is
+determined by its content.
+
+## States
+
+Detail List is a static display component — it has no interactive or
+loading states of its own.
+
+## Accessibility
+
+- Renders as a real `<dl>`/`<dt>`/`<dd>` list, giving assistive
+  technology explicit label/value semantics rather than plain, unrelated
+  text nodes.
+
+## React Props
+
+<Controls of={DetailListStories.Default} />
+
+<ArgTypes of={DetailListStories} />
+
+## Examples
+
+```tsx
+import { DetailList } from '@/components/data-display/DetailList';
+
+<DetailList
+  items={[
+    { label: 'Vendor Name', value: 'Acme Corporation' },
+    { label: 'Invoice Number', value: 'INV-9821' },
+    { label: 'Total Amount', value: '$12,450.00' },
+  ]}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use Detail List for plain metadata that doesn't need a confidence score — keep it visually distinct from the AI-paired field rows.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Add a confidence percentage to a Detail List row — that combination is exactly what the Extracted Field Row (AI) component is for.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-confidence-indicator--docs">Confidence Indicator</a>
+</div>

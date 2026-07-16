@@ -1,0 +1,97 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as WorkflowCardStories from './WorkflowCard.stories';
+
+<Meta of={WorkflowCardStories} />
+
+# Workflow Card
+
+A single automated workflow's summary card. Source: Atlas Product's
+Workflow Builder pipeline cards — a title and status Badge, a one-line
+description, and a metrics row (a volume count and a success percentage
+separated by "·").
+
+## Overview
+
+Composes the existing `Badge` for status rather than reimplementing a
+status pill, and renders as a `<button>` when `onClick` is provided or a
+plain `<div>` otherwise — the same card used for a static summary list
+or a clickable workflow-selection grid.
+
+## Live Preview
+
+<Canvas of={WorkflowCardStories.Active} />
+
+## Usage
+
+Provide `title`, `description`, and `status`; `status` drives a
+reasonable default Badge tone ("Active" → success, "Draft" → draft,
+"Scheduled" → info, "Archived" → neutral), overridable via
+`statusTone`. Include `volume`/`successRate` for workflows with
+activity to report — omit both for a workflow that hasn't run yet.
+
+## Variants
+
+<Canvas of={WorkflowCardStories.Draft} />
+<Canvas of={WorkflowCardStories.Scheduled} />
+<Canvas of={WorkflowCardStories.Archived} />
+
+## Sizes
+
+One size (280px in this preview, but the card fills its container width
+— lay multiple cards out in a responsive grid).
+
+## States
+
+<Canvas of={WorkflowCardStories.Clickable} />
+
+Passing `onClick` renders the card as a real `<button>` with a hover
+border change, for use in a selectable workflow grid; omitting it
+renders a plain, non-interactive `<div>` for a read-only summary list.
+
+## Accessibility
+
+- Renders as a semantic `<button>` (not a `<div>` with a click handler)
+  whenever it's interactive, so it's reachable and activatable by
+  keyboard automatically.
+- Status is always shown as Badge text, never color alone.
+
+## React Props
+
+<Controls of={WorkflowCardStories.Active} />
+
+<ArgTypes of={WorkflowCardStories} />
+
+## Examples
+
+```tsx
+import { WorkflowCard } from '@/components/data-display/WorkflowCard';
+
+<WorkflowCard
+  title="Invoice Approval"
+  description="Routes vendor invoices over $5,000 to finance for manual sign-off."
+  status="Active"
+  volume="1,245"
+  successRate="98.2%"
+  onClick={() => openWorkflow('invoice-approval')}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Omit volume and successRate together for a workflow with no activity yet, rather than showing placeholder zeros.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Override statusTone just to make a status "look" more positive — the default tone mapping exists so status colors stay meaningful across the product.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-badge--docs">Badge</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-kpi-card--docs">KPI Card</a>
+</div>

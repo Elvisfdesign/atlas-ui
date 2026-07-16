@@ -1,0 +1,75 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as TextareaStories from './Textarea.stories';
+
+<Meta of={TextareaStories} />
+
+# Textarea
+
+The multi-line sibling of Input.
+
+## Overview
+
+Not yet its own componentized node in the Atlas UI System (see the React
+Readiness matrix) — built as a direct extension of Input's confirmed
+chrome (border, radius, type scale, focus ring, error/disabled treatment)
+rather than a new visual language, since Atlas Product doesn't show a
+distinct textarea style of its own.
+
+## Live Preview
+
+<Canvas of={TextareaStories.Default} />
+
+## Usage
+
+Use Textarea for free-form, multi-line content — notes, descriptions,
+review comments. For anything that's really a single line (a name, an
+ID), use Input instead; don't reach for Textarea just for extra visual
+weight.
+
+## Variants
+
+One visual treatment — Textarea doesn't have a `variant` prop.
+
+## Sizes
+
+Height comes from the `rows` prop (native `<textarea>` behavior) rather
+than a `size` variant; the field resizes vertically by default.
+
+## States
+
+<Canvas>
+  <Story of={TextareaStories.WithError} />
+  <Story of={TextareaStories.Disabled} />
+</Canvas>
+
+## Accessibility
+
+- The label is a real `<label htmlFor>`, associated the same way as Input.
+- `error` sets `aria-invalid` and associates the error message via
+  `aria-describedby`, announced with `role="alert"`.
+- Resize handles remain keyboard-operable through the browser's native
+  textarea resize behavior — nothing here disables it.
+
+## React Props
+
+<Controls of={TextareaStories.Default} />
+
+<ArgTypes of={TextareaStories} />
+
+## Examples
+
+```tsx
+import { Textarea } from '@/components/forms/Textarea';
+
+<Textarea
+  label="Notes"
+  placeholder="Add any context for the reviewer..."
+  rows={4}
+/>
+```
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-input--docs">Input</a>
+</div>

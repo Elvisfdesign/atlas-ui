@@ -1,0 +1,83 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as StatusIndicatorStories from './StatusIndicator.stories';
+
+<Meta of={StatusIndicatorStories} />
+
+# Status Indicator
+
+A dot + label pairing for a live/connection status. Distinct from Badge,
+which is for categorical or process-state pills (Completed, Draft,
+Review) rather than a live online/offline-style signal.
+
+## Overview
+
+A small colored dot beside a text label — status is always stated in
+words, never left to the dot's color alone.
+
+## Live Preview
+
+<Canvas of={StatusIndicatorStories.Online} />
+
+## Usage
+
+Use for a person's presence (online/away/offline) or a connection's live
+health (connected/disconnected) — anywhere the underlying idea is "is
+this thing currently active." For a document or workflow's process
+state, use Badge instead.
+
+## Variants
+
+<Canvas of={StatusIndicatorStories.Away} />
+<Canvas of={StatusIndicatorStories.Offline} />
+<Canvas of={StatusIndicatorStories.Disconnected} />
+
+## Sizes
+
+<Canvas of={StatusIndicatorStories.List} />
+
+`sm`/`md` scale both the dot and the label text together.
+
+## States
+
+Status Indicator is a static display component — it has no interactive
+states of its own.
+
+## Accessibility
+
+- The dot is `aria-hidden="true"` — the adjacent label text is the sole
+  source of the status's meaning, so it reads correctly to screen reader
+  users regardless of color perception.
+
+## React Props
+
+<Controls of={StatusIndicatorStories.Online} />
+
+<ArgTypes of={StatusIndicatorStories} />
+
+## Examples
+
+```tsx
+import { StatusIndicator } from '@/components/feedback/StatusIndicator';
+
+<StatusIndicator label="Online" tone="success" />
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use Status Indicator for presence/connection health — use Badge for a document or workflow's categorical state.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Render the dot without a label — a colored dot alone isn't accessible or reliably legible.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-user-row--docs">User Row</a>
+</div>

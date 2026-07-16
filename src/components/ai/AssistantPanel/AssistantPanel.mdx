@@ -1,0 +1,102 @@
+import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as AssistantPanelStories from './AssistantPanel.stories';
+
+<Meta of={AssistantPanelStories} />
+
+# Assistant Panel
+
+Source: Atlas Product — Document Review's `ai-col`: the AI Assistant
+sidebar, present alongside a document's viewer and extracted fields.
+
+## Overview
+
+The full AI Assistant experience — a header with a BETA tag, a message
+list (intro message plus any conversation), suggested-prompt chips, a
+composer, and a disclaimer. Composes AI Label, Suggested Prompt, and
+Prompt Input rather than reimplementing any of them.
+
+## Live Preview
+
+<Canvas of={AssistantPanelStories.Default} />
+
+## Usage
+
+Pass an initial assistant `messages` entry as the greeting, plus
+`suggestedPrompts` for the starting chips. Once a conversation begins,
+pass the growing `messages` array (alternating `assistant`/`user`
+roles) — Assistant Panel doesn't manage conversation state itself.
+
+## Variants
+
+<Canvas of={AssistantPanelStories.Conversation} />
+
+## Sizes
+
+Sized to fill its container — typically a ~300px sidebar column,
+matching the grounded Product layout.
+
+## States
+
+<Canvas of={AssistantPanelStories.NoBadge} />
+
+## Accessibility
+
+- The message list is plain, readable text in document order — no
+  ARIA live region, since the assistant's own scroll position and the
+  composer beneath it are more useful landmarks than an announcement
+  would be.
+- Suggested Prompt and Prompt Input each carry their own accessibility
+  behavior (see their docs) unchanged when composed here.
+
+## React Props
+
+<Controls of={AssistantPanelStories.Default} />
+
+<ArgTypes of={AssistantPanelStories} />
+
+## Examples
+
+```tsx
+import { useState } from 'react';
+import { AssistantPanel, type AssistantMessage } from '@/components/ai/AssistantPanel';
+
+function DocumentAssistant() {
+  const [messages, setMessages] = useState<AssistantMessage[]>([
+    { id: '1', role: 'assistant', content: 'Hi, how can I help?' },
+  ]);
+
+  const handleSubmit = (value: string) => {
+    setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'user', content: value }]);
+  };
+
+  return (
+    <AssistantPanel
+      messages={messages}
+      suggestedPrompts={['Summarize this document', 'Check for anomalies']}
+      onSuggestedPromptClick={handleSubmit}
+      onSubmit={handleSubmit}
+    />
+  );
+}
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Keep the disclaimer visible — it's a load-bearing trust signal for an AI feature, not boilerplate to remove.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Hide the suggested prompts once a conversation starts unless you have new, contextually relevant ones to show instead.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-suggested-prompt--docs">Suggested Prompt</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-prompt-input--docs">Prompt Input</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/ai-ai-assistant-state--docs">AI Assistant State</a>
+</div>

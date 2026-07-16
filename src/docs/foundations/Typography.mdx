@@ -1,0 +1,63 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { typeScale } from '@/tokens/typography';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+One family — Inter — carrying every weight and size Atlas needs.
+
+## Overview
+
+Eleven named styles cover the system end to end, from a 40px Display down
+to a 10.5px Caption. Pick the style that matches the *role* the text plays
+(a page title, a table header, a numeric metric), not the size that looks
+right in isolation.
+
+## Live Preview
+
+<div className="atlas-type-scale">
+  {Object.entries(typeScale).map(([name, style]) => (
+    <div key={name} className="atlas-type-row">
+      <div className="atlas-type-row__meta">
+        <span className="atlas-type-row__name">{name}</span>
+        <span className="atlas-type-row__spec">
+          {style.size}/{style.lineHeight} · {style.fontWeight}
+          {style.letterSpacing ? ` · ${style.letterSpacing}px` : ''}
+        </span>
+      </div>
+      <div
+        className="atlas-type-row__sample"
+        style={{
+          fontFamily: style.fontFamily,
+          fontSize: `${style.size}px`,
+          lineHeight: `${style.lineHeight}px`,
+          fontWeight: style.fontWeight,
+          letterSpacing: `${style.letterSpacing}px`,
+        }}
+      >
+        Approve &amp; Continue — 24,853 documents processed
+      </div>
+    </div>
+  ))}
+</div>
+
+## Usage
+
+- **Display** and **Page Title** are for editorial moments — a cover, a
+  page header. There's one of each per screen, never more.
+- **Section / Card Title** introduces a group of related content.
+- **Body**, **Body Large**, and **Body Small** cover ordinary UI copy;
+  reach for **Body** by default.
+- **Label** is for uppercase, letter-spaced eyebrows and form field labels —
+  never for sentences.
+- **Numeric Metric** exists specifically for KPI values. Note: the shipped
+  KPI Card component actually renders its metric at 26px, one size below
+  this token's documented 28px — a small, known drift between the named
+  token and its most visible usage (see KPI Card's docs page).
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-kpi-card--docs">KPI Card</a>
+</div>

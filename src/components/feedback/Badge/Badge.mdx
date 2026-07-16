@@ -1,0 +1,90 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+A small, pill-shaped label communicating status. Source: Atlas UI System,
+Feedback & Status → Feedback / Status Pill (9 tones).
+
+## Overview
+
+Nine tones cover every status Atlas Product currently shows — general
+states (neutral, info, success, warning, danger) and workflow-specific
+ones (processing, review, draft, ai) — in a single, non-interactive shape.
+
+## Live Preview
+
+<Canvas of={BadgeStories.Default} />
+
+## Usage
+
+Status is always communicated by the label's **text** and its **color**
+together — never color alone. Don't ship a Badge with an ambiguous or
+empty label just to show a color. Pick the tone that matches the status's
+real meaning (`danger` for a failure, not just because red looks urgent).
+
+`processing` and `review` intentionally share visual treatment with `info`
+and `warning` respectively — they exist as distinct tone names because the
+*meaning* differs even when the color doesn't, which matters for anyone
+reading the component's usage in code.
+
+## Variants
+
+<Canvas of={BadgeStories.AllTones} />
+
+## Sizes
+
+One size. Atlas Product doesn't show a Badge at more than one size, so
+this library doesn't invent one.
+
+## States
+
+Badge is a static, non-interactive label — it has no hover, focus, or
+disabled state.
+
+## Accessibility
+
+- Renders as a `<span>` with the tone communicated through both text and
+  color, so the status is available to screen readers and to anyone with
+  color-vision deficiency.
+- Not focusable and not a control — if a badge needs to be clickable
+  (e.g. to filter by status), wrap it in a real interactive element
+  rather than adding click handling to the Badge itself.
+
+## React Props
+
+<Controls of={BadgeStories.Default} />
+
+<ArgTypes of={BadgeStories} />
+
+## Examples
+
+```tsx
+import { Badge } from '@/components/feedback/Badge';
+
+<Badge tone="success">Active</Badge>
+<Badge tone="danger">Failed</Badge>
+<Badge tone="ai">AI</Badge>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Pick the tone whose <em>meaning</em> matches the status, even when two tones share a color (`processing`/`info`, `review`/`warning`).</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Ship a Badge with a vague or empty label just to show a color — text and color always carry the status together.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-kpi-card--docs">KPI Card</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/data-display-avatar--docs">Avatar</a>
+</div>

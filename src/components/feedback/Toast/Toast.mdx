@@ -1,0 +1,99 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ToastStories from './Toast.stories';
+
+<Meta of={ToastStories} />
+
+# Toast
+
+A transient, corner-anchored notification. Source: no dedicated Product
+frame — toasts are transient by nature and don't sit in a static mockup
+— built on Radix's Toast primitive, which owns auto-dismiss timing,
+swipe-to-dismiss, and pause-on-hover/focus. Styled with the same
+surface-elevated + elevation-high recipe already used for Line Chart's
+tooltip, and shares its tone icon with Inline Alert and Banner.
+
+## Overview
+
+An icon, a title, an optional description, and a close button, rendered
+into a fixed viewport stack.
+
+## Live Preview
+
+<Canvas of={ToastStories.Success} />
+
+## Usage
+
+Render `ToastProvider` once near your app root, and `ToastViewport` once
+where you want the stack to anchor (bottom-right by default). Render a
+`Toast` for each notification your app queues — Atlas doesn't ship a
+global toast-queue store, so the calling app manages which toasts are
+currently mounted (an array in state is the common pattern), the same
+way it would with the raw Radix primitive.
+
+## Variants
+
+<Canvas of={ToastStories.Info} />
+<Canvas of={ToastStories.Warning} />
+<Canvas of={ToastStories.Danger} />
+
+## Sizes
+
+One size — the viewport caps toasts at a max width (384px) so they never
+grow to fill an entire wide screen.
+
+## States
+
+<Canvas of={ToastStories.WithoutDescription} />
+
+## Accessibility
+
+- Radix's Toast primitive announces its content via an `aria-live`
+  region, handles focus so a toast never steals it from what the user
+  was doing, and supports Escape-to-dismiss and swipe gestures.
+- The close button is a real, labeled `IconButton` ("Dismiss
+  notification").
+
+## React Props
+
+<Controls of={ToastStories.Success} />
+
+<ArgTypes of={ToastStories} />
+
+## Examples
+
+```tsx
+import { Toast, ToastProvider, ToastViewport } from '@/components/feedback/Toast';
+
+function App() {
+  const [toasts, setToasts] = useState<{ id: string; title: string }[]>([]);
+  return (
+    <ToastProvider>
+      {/* ...app... */}
+      {toasts.map((t) => (
+        <Toast key={t.id} tone="success" title={t.title} onOpenChange={(open) => !open && dismiss(t.id)} />
+      ))}
+      <ToastViewport />
+    </ToastProvider>
+  );
+}
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Reserve Toast for confirmations of an action the user just took ("Workflow published") — not for information they need to keep referencing.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Toast for a message that requires a decision — use a Confirmation Dialog instead, since a toast can auto-dismiss before it's read.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-inline-alert--docs">Inline Alert</a>
+  <a className="atlas-doc-related__link" href="?path=/docs/feedback-banner--docs">Banner</a>
+</div>

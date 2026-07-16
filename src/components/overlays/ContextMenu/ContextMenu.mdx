@@ -1,0 +1,95 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ContextMenuStories from './ContextMenu.stories';
+
+<Meta of={ContextMenuStories} />
+
+# Context Menu
+
+A right-click menu. Shares Dropdown Menu's exact panel styling — same
+`menuStyles` helpers — but triggered by a `contextmenu` event over an
+area rather than a click on a visible trigger. Built on Radix's Context
+Menu primitive.
+
+## Overview
+
+`ContextMenu` (root), `ContextMenuTrigger` (the right-clickable area),
+`ContextMenuContent`, and `ContextMenuItem`/`ContextMenuSeparator`/
+`ContextMenuLabel`.
+
+## Live Preview
+
+<Canvas of={ContextMenuStories.Default} />
+
+## Usage
+
+Wrap the area that should respond to a right-click in
+`ContextMenuTrigger` — a table row, a file card, a canvas region — and
+list `ContextMenuItem`s inside `ContextMenuContent`, exactly like
+Dropdown Menu.
+
+## Variants
+
+Context Menu shares every item variant (icon, shortcut, destructive,
+disabled, label) with Dropdown Menu — see its documentation for
+examples.
+
+## Sizes
+
+One size — the menu's width is determined by its content.
+
+## States
+
+Hover/keyboard-highlighted, disabled, and destructive item states match
+Dropdown Menu exactly, since they share the same styling helpers.
+
+## Accessibility
+
+- Radix wires full `menu`/`menuitem` ARIA roles and keyboard navigation,
+  the same as Dropdown Menu.
+- Also opens via the keyboard context-menu key (Shift+F10 on Windows),
+  not just an actual right-click, so keyboard-only users aren't excluded.
+
+## React Props
+
+<ArgTypes of={ContextMenuStories} />
+
+## Examples
+
+```tsx
+import { Pencil, Trash2 } from 'lucide-react';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/components/overlays/ContextMenu';
+
+<ContextMenu>
+  <ContextMenuTrigger className="rounded-md border border-default p-4">
+    Right-click this card
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem icon={<Pencil size={14} />}>Rename</ContextMenuItem>
+    <ContextMenuItem icon={<Trash2 size={14} />} destructive>Delete</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Only put actions relevant to the right-clicked item in the menu — a context menu with unrelated global actions is confusing.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Make a Context Menu the only way to reach an action — always provide a visible, discoverable alternative (a button, a Dropdown Menu) too.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/overlays-dropdown-menu--docs">Dropdown Menu</a>
+</div>

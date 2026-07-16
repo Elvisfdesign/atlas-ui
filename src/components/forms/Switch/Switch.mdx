@@ -1,0 +1,88 @@
+import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as SwitchStories from './Switch.stories';
+
+<Meta of={SwitchStories} />
+
+# Switch
+
+An on/off setting that takes effect immediately.
+
+## Overview
+
+Not yet its own componentized node in the Atlas UI System (see the React
+Readiness matrix) — built from Atlas's motion and accent tokens (a
+`duration-fast` slide, the same accent Checkbox and Radio use when
+checked) as the immediate-effect sibling of Checkbox.
+
+## Live Preview
+
+<Canvas of={SwitchStories.Default} />
+
+## Usage
+
+Use Switch when toggling has an immediate, visible effect (auto-approve
+is on right now) — not as part of a form that's submitted later, where
+Checkbox is the right control.
+
+## Variants
+
+One visual treatment — Switch doesn't have a `variant` prop.
+
+## Sizes
+
+One size (20×36px).
+
+## States
+
+<Canvas>
+  <Story of={SwitchStories.Checked} />
+  <Story of={SwitchStories.Disabled} />
+  <Story of={SwitchStories.DisabledChecked} />
+</Canvas>
+
+## Accessibility
+
+- Rendered with `role="switch"` on a real `<input type="checkbox">`, so
+  screen readers announce it as a toggle with an on/off state, not a
+  generic checkbox.
+- The label is a real `<label htmlFor>`.
+- Fully keyboard operable: Tab to focus, Space to toggle.
+- The thumb's slide respects `prefers-reduced-motion` globally, same as
+  every other Atlas transition.
+
+## React Props
+
+<Controls of={SwitchStories.Default} />
+
+<ArgTypes of={SwitchStories} />
+
+## Examples
+
+```tsx
+import { Switch } from '@/components/forms/Switch';
+
+<Switch
+  label="Auto-approve high-confidence documents"
+  checked={autoApprove}
+  onChange={(e) => setAutoApprove(e.target.checked)}
+/>
+```
+
+## Best Practices
+
+<div className="atlas-doc-dodont">
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
+    <span className="atlas-doc-dodont__label">Do</span>
+    <p>Use Switch for settings that apply the moment they're toggled.</p>
+  </div>
+  <div className="atlas-doc-dodont__card atlas-doc-dodont__card--dont">
+    <span className="atlas-doc-dodont__label">Don't</span>
+    <p>Use Switch inside a form that requires a separate "Save" action — that's what Checkbox communicates.</p>
+  </div>
+</div>
+
+## Related Components
+
+<div className="atlas-doc-related">
+  <a className="atlas-doc-related__link" href="?path=/docs/forms-checkbox--docs">Checkbox</a>
+</div>

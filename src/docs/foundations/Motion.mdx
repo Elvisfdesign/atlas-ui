@@ -1,0 +1,82 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { duration, easing } from '@/tokens/motion';
+
+<Meta title="Foundations/Motion" />
+
+# Motion
+
+Four durations, each tied to a specific kind of interaction.
+
+## Overview
+
+Not a general "fast/slow" scale to pick from by feel — each token is
+named for the interaction it belongs to (hover, press, open/close,
+generation), so choosing one is a lookup, not a judgment call.
+
+## Live Preview
+
+Hover each row — the indicator moves using that token's real duration and
+easing, so the difference between `instant` and `slow` is something you
+can feel, not just read as a number.
+
+<div className="atlas-motion-grid">
+  {([
+    { key: 'instant', use: 'hover, focus ring', ease: easing.linear },
+    { key: 'fast', use: 'press, toggle', ease: easing.easeOut },
+    { key: 'normal', use: 'menu, drawer, modal', ease: easing.easeInOut },
+    { key: 'slow', use: 'AI generation, loading', ease: easing.easeInOut },
+  ]).map(({ key, use, ease }) => (
+    <div key={key} className="atlas-motion-row">
+      <div className="atlas-motion-row__meta">
+        <span className="atlas-motion-row__name">duration-{key}</span>
+        <span className="atlas-motion-row__spec">{duration[key]} · {use}</span>
+      </div>
+      <div
+        className="atlas-motion-track"
+        style={{
+          position: 'relative',
+          height: '32px',
+          width: '100%',
+          maxWidth: '320px',
+          borderRadius: 'var(--radius-full)',
+          backgroundColor: 'var(--color-background-surface-subtle)',
+        }}
+        onMouseEnter={(e) => {
+          const dot = e.currentTarget.querySelector('[data-dot]');
+          if (dot) dot.style.transform = 'translateX(calc(100% - 28px))';
+        }}
+        onMouseLeave={(e) => {
+          const dot = e.currentTarget.querySelector('[data-dot]');
+          if (dot) dot.style.transform = 'translateX(0)';
+        }}
+      >
+        <div
+          data-dot
+          style={{
+            position: 'absolute',
+            top: '2px',
+            left: '2px',
+            width: '28px',
+            height: '28px',
+            borderRadius: 'var(--radius-full)',
+            backgroundColor: 'var(--color-border-focus)',
+            transition: `transform ${duration[key]} ${ease}`,
+          }}
+        />
+      </div>
+    </div>
+  ))}
+</div>
+
+## Principle
+
+Reach for `duration-instant`/`fast` for anything that responds directly to
+a pointer (hover, press) — it should feel immediate. Reach for `normal` for
+things that open or close (a menu, a drawer). Reserve `slow` for content
+that's genuinely being generated or loaded, where a longer, calmer motion
+signals "this is doing real work," not "this is sluggish."
+
+Respect `prefers-reduced-motion`: this library's `globals.css` already
+disables all animation/transition duration globally when that preference is
+set — individual components, and the live demo above, don't need to handle
+it themselves.
