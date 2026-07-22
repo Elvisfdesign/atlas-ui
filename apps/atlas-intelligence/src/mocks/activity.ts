@@ -17,3 +17,14 @@ export const recentActivity: ActivityFeedItem[] = [
   { id: 'a3', fileName: 'Contract_v3.docx', type: 'Contract', status: 'Review', time: '1h ago' },
   { id: 'a4', fileName: 'Receipt_1298.jpg', type: 'Receipt', status: 'Completed', time: '2h ago' },
 ];
+
+/** Analytics' own Recent Activity example — a distinct, wider slice than
+ * Dashboard's (5 rows vs. 4, and a Failed row) per the Figma source, which
+ * authors each screen's sample content independently. */
+export const analyticsActivity: ActivityFeedItem[] = [
+  { id: 'aa1', fileName: 'Invoice_9821.pdf', type: 'Invoice', status: 'Completed', time: '2m ago' },
+  { id: 'aa2', fileName: 'PO_2314.csv', type: 'Purchase Order', status: 'Completed', time: '15m ago' },
+  { id: 'aa3', fileName: 'Contract_v3.docx', type: 'Contract', status: 'Review', time: '1h ago' },
+  { id: 'aa4', fileName: 'Receipt_1298.jpg', type: 'Receipt', status: 'Failed', time: '2h ago' },
+  { id: 'aa5', fileName: 'Invoice_9819.pdf', type: 'Invoice', status: 'Completed', time: '2h ago' },
+];
