@@ -47,6 +47,12 @@ The active tab gets `text-primary`, a bold weight, and a 2px accent
 underline; inactive tabs are `text-tertiary`, going to `text-primary` on
 hover.
 
+## Responsive behavior
+
+`TabsList` scrolls horizontally (`overflow-x-auto`) rather than wrapping
+or shrinking its triggers — with enough tabs, this is what keeps a narrow
+viewport from forcing the whole page wider than the screen.
+
 ## Accessibility
 
 - Renders proper `role="tablist"`/`role="tab"`/`role="tabpanel"` with

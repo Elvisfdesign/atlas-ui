@@ -71,7 +71,12 @@ export function DonutChart({
     <div className={cn('flex items-center gap-6', className)}>
       <div className="relative shrink-0" style={{ width: size, height: size }}>
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
+          {/* accessibilityLayer={false} — Recharts' default keyboard layer
+              makes the root SVG a `tabIndex=0` `role="application"` region,
+              which would land keyboard users on a redundant, disruptive tab
+              stop: the legend beside the chart (real text, not aria-hidden)
+              already carries every value this pie shows. */}
+          <PieChart accessibilityLayer={false}>
             <Pie
               data={slices}
               dataKey="value"

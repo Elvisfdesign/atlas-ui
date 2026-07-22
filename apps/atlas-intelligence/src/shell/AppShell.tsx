@@ -72,7 +72,7 @@ export function AppShell() {
 
       <div className="flex min-w-0 flex-1 flex-col">
         <AppTopbar onMenuClick={isMobile ? () => setMobileNavOpen(true) : undefined} />
-        <main ref={mainRef} tabIndex={-1} className="flex-1 overflow-y-auto outline-none">
+        <main ref={mainRef} tabIndex={-1} className="flex-1 overflow-x-hidden overflow-y-auto outline-none">
           <div key={location.pathname} className="animate-route-in motion-reduce:animate-none">
             <Outlet />
           </div>

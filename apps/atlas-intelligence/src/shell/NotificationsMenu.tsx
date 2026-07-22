@@ -1,14 +1,9 @@
-import { useState } from 'react';
 import { NotificationPanel } from 'atlas-ui';
-import { notifications as initialNotifications } from '@/mocks/notifications';
+import { useReviewStore } from '@/store/useReviewStore';
 
 export function NotificationsMenu() {
-  const [items, setItems] = useState(initialNotifications);
-  const hasUnread = items.some((item) => !item.read);
+  const { notifications, markNotificationRead } = useReviewStore();
+  const hasUnread = notifications.some((item) => !item.read);
 
-  function handleItemClick(id: string) {
-    setItems((prev) => prev.map((item) => (item.id === id ? { ...item, read: true } : item)));
-  }
-
-  return <NotificationPanel items={items} hasUnread={hasUnread} onItemClick={handleItemClick} />;
+  return <NotificationPanel items={notifications} hasUnread={hasUnread} onItemClick={markNotificationRead} />;
 }

@@ -42,13 +42,13 @@ export function Workflows() {
             Manage and automate your business processes.
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
           <SearchInput
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search workflows…"
             aria-label="Search workflows"
-            className="w-56"
+            className="w-full sm:w-56"
           />
           <Button icon={<Plus size={15} />} onClick={notWired}>
             Create Workflow

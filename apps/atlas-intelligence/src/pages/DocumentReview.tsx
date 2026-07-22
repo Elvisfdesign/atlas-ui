@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import {
   AISuggestionCard,
@@ -193,9 +193,24 @@ function DocumentReviewView({
   const activityEntries = doc.activity;
   const historyEntries = doc.activity.filter((entry) => RESOLUTION_MESSAGES.includes(entry.message));
 
+  // A believable beat before the real state change — an instant approval
+  // reads as fake for what's the single most consequential action on this
+  // screen; a real backend call would take at least this long anyway.
+  // The pending timer is cleared on unmount so navigating away mid-delay
+  // (e.g. via the pager) doesn't fire a resolve + redirect for a document
+  // the reviewer already left.
+  const [isResolving, setIsResolving] = useState(false);
+  const resolveTimerRef = useRef<number | undefined>(undefined);
+  useEffect(() => {
+    return () => window.clearTimeout(resolveTimerRef.current);
+  }, []);
+
   function handleResolve(action: 'Approved' | 'Rejected' | 'Changes Requested') {
-    resolveDocument(doc.id, action);
-    onNavigate('/review-queue');
+    setIsResolving(true);
+    resolveTimerRef.current = window.setTimeout(() => {
+      resolveDocument(doc.id, action);
+      onNavigate('/review-queue');
+    }, 500);
   }
 
   return (
@@ -259,7 +274,7 @@ function DocumentReviewView({
         <TabPanel value="Extracted Data">
           {isLoading ? (
             <div
-              className="grid grid-cols-1 gap-5 pt-5 lg:grid-cols-[1.1fr_1fr_1fr]"
+              className="grid grid-cols-1 gap-5 pt-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)]"
               role="status"
               aria-label={`Loading ${doc.name}`}
             >
@@ -283,13 +298,13 @@ function DocumentReviewView({
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-5 pt-5 lg:grid-cols-[1.1fr_1fr_1fr]">
+            <div className="grid grid-cols-1 gap-5 pt-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)]">
               <div className="flex flex-col gap-3 rounded-xl border border-border-default bg-surface-subtle p-5">
                 <div
                   className="mx-auto flex max-w-xs flex-col gap-4 rounded-lg border border-border-default bg-surface p-5 transition-transform duration-normal"
                   style={{ transform: `scale(${zoom / 100})` }}
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="truncate font-sans text-[13px] font-semibold text-primary">ACME CORPORATION</p>
                       <p className="truncate font-sans text-[10.5px] text-tertiary">123 Market Street, San Francisco, CA</p>
@@ -436,6 +451,7 @@ function DocumentReviewView({
         ) : (
           <ApprovalPanel
             summary={`${doc.fields.filter((f) => f.confidence >= LOW_CONFIDENCE_THRESHOLD || f.edited).length} of ${doc.fields.length} fields verified · ${doc.confidence}% avg. confidence`}
+            loading={isResolving}
             onReject={() => handleResolve('Rejected')}
             onRequestChanges={() => handleResolve('Changes Requested')}
             onApprove={() => handleResolve('Approved')}

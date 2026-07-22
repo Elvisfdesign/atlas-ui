@@ -56,7 +56,7 @@ export function Dashboard() {
 
   return (
     <div className="flex flex-col gap-8 px-8 py-7">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-col gap-1">
           <h1 className="font-sans text-2xl font-semibold text-primary">Good morning, Elvis</h1>
           <p className="font-sans text-[13px] text-secondary">Here&rsquo;s what&rsquo;s happening with your operations today.</p>
@@ -72,10 +72,11 @@ export function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="flex gap-4 overflow-x-auto pb-1">
         {kpisWithLiveValues.map((kpi) => (
           <KPICard
             key={kpi.label}
+            className="shrink-0"
             label={kpi.label}
             value={kpi.value}
             trend={kpi.trend}
@@ -85,7 +86,7 @@ export function Dashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.75fr_1fr]">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)]">
         <ChartCard
           title="Activity Overview"
           action={
@@ -114,7 +115,7 @@ export function Dashboard() {
         <ActivityFeed items={activityItems} onViewAll={() => navigate('/review-queue')} />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.75fr_1fr]">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)]">
         <ChartCard title="Recent Workflows" action={<a href="/workflows" className="font-sans text-[12.5px] font-medium text-interactive-accent hover:text-interactive-accent-hover">View all</a>}>
           <Table>
             <TableHeader>

@@ -15,9 +15,8 @@ import {
 import { ChevronDown, ChevronsLeft, ChevronsRight, LogOut, Settings as SettingsIcon, User } from 'lucide-react';
 import { primaryNavItems, secondaryNavItems } from '@/nav/navigation';
 import { useReviewStore } from '@/store/useReviewStore';
+import { currentUser } from '@/mocks/user';
 import type { NavItem } from '@/types';
-
-const CURRENT_USER = { name: 'Elvis Meraz', meta: 'Admin' };
 
 function isActive(pathname: string, path: string): boolean {
   if (path === '/') return pathname === '/';
@@ -115,20 +114,20 @@ export function AppSidebar({ collapsed, onCollapsedChange, inDrawer = false, onN
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              aria-label={`Account menu for ${CURRENT_USER.name}`}
+              aria-label={`Account menu for ${currentUser.name}`}
               className={cn(
                 'flex w-full items-center gap-2 rounded-md p-2 outline-none transition-colors hover:bg-hover-surface focus-visible:outline-2 focus-visible:outline-border-focus focus-visible:outline-offset-2',
                 isCollapsed && 'w-auto justify-center p-0'
               )}
             >
-              <Avatar name={CURRENT_USER.name} color="inverse" size="small" />
+              <Avatar name={currentUser.name} color="inverse" size="small" />
               {!isCollapsed && (
                 <>
                   <span className="flex min-w-0 flex-1 flex-col text-left leading-tight">
                     <span className="truncate font-sans text-[13px] font-medium text-primary">
-                      {CURRENT_USER.name}
+                      {currentUser.name}
                     </span>
-                    <span className="truncate font-sans text-[11.5px] text-tertiary">{CURRENT_USER.meta}</span>
+                    <span className="truncate font-sans text-[11.5px] text-tertiary">{currentUser.meta}</span>
                   </span>
                   <ChevronDown size={14} aria-hidden="true" className="shrink-0 text-tertiary" />
                 </>

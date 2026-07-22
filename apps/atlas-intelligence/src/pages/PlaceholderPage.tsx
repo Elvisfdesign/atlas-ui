@@ -21,8 +21,8 @@ export function PlaceholderPage({ title, description, icon: Icon }: PlaceholderP
       <div className="rounded-xl border border-border-default bg-surface">
         <EmptyState
           icon={<Icon size={20} />}
-          title="Not designed yet"
-          description="This nav destination doesn't have a screen in the Atlas Product Figma file yet."
+          title="Coming soon"
+          description="We're still building out this part of the workspace. Check back soon."
         />
       </div>
     </div>

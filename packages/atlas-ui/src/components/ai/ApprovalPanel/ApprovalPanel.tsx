@@ -31,8 +31,8 @@ export function ApprovalPanel({
   className,
 }: ApprovalPanelProps) {
   return (
-    <div className={cn('flex items-center gap-3 border-t border-border-subtle py-4', className)}>
-      <p className="flex-1 font-sans text-[12.5px] text-tertiary">{summary}</p>
+    <div className={cn('flex flex-wrap items-center gap-3 border-t border-border-subtle py-4', className)}>
+      <p className="min-w-[12rem] flex-1 font-sans text-[12.5px] text-tertiary">{summary}</p>
       {onReject && (
         <Button
           variant="ghost"

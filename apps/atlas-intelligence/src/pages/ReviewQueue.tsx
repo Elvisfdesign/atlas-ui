@@ -153,12 +153,12 @@ export function ReviewQueue() {
             Review and validate extracted document data.
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
           <SearchInput
             value={search}
             onChange={(e) => changeSearch(e.target.value)}
             placeholder="Search documents…"
-            className="w-64"
+            className="w-full sm:w-64"
             aria-label="Search documents"
           />
           <Button variant="ghost" icon={<Download size={15} />}>

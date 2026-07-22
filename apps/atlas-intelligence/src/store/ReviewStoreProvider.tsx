@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, type ReactNode } from 'react';
 import { reviewQueue as seedDocuments } from '@/mocks/reviewQueue';
+import { notifications as seedNotifications } from '@/mocks/notifications';
+import { currentUser } from '@/mocks/user';
 import { craftAssistantAnswer } from './assistant';
 import { ReviewStoreContext, type ReviewStoreValue, type ResolutionAction } from './reviewStoreContext';
 import type {
@@ -7,11 +9,10 @@ import type {
   AssistantMessage,
   DocumentStatus,
   ExtractedField,
+  NotificationItem,
   ReviewDocument,
   ToastMessage,
 } from '@/types';
-
-const CURRENT_USER = 'Elvis Meraz';
 
 let uid = 0;
 const makeId = (prefix: string) => `${prefix}-${Date.now().toString(36)}-${(uid++).toString(36)}`;
@@ -19,6 +20,7 @@ const makeId = (prefix: string) => `${prefix}-${Date.now().toString(36)}-${(uid+
 interface State {
   documents: ReviewDocument[];
   toasts: ToastMessage[];
+  notifications: NotificationItem[];
   /** Documents approved this session — the live delta layered onto the Dashboard's baseline KPI. */
   approvedThisSession: number;
 }
@@ -30,7 +32,9 @@ type Action =
   | { type: 'ADD_MESSAGE'; docId: string; message: AssistantMessage }
   | { type: 'UPDATE_MESSAGE'; docId: string; messageId: string; patch: Partial<AssistantMessage> }
   | { type: 'TOAST_SHOW'; toast: ToastMessage }
-  | { type: 'TOAST_DISMISS'; id: string };
+  | { type: 'TOAST_DISMISS'; id: string }
+  | { type: 'ADD_NOTIFICATION'; notification: NotificationItem }
+  | { type: 'MARK_NOTIFICATION_READ'; id: string };
 
 function recomputeConfidence(fields: ExtractedField[]): number {
   if (fields.length === 0) return 0;
@@ -53,7 +57,7 @@ function reducer(state: State, action: Action): State {
       const status: DocumentStatus = action.action;
       const documents = state.documents.map((doc) =>
         doc.id === action.docId
-          ? { ...doc, status, resolution: { action: action.action, by: CURRENT_USER, time: action.time } }
+          ? { ...doc, status, resolution: { action: action.action, by: currentUser.name, time: action.time } }
           : doc
       );
       return {
@@ -92,6 +96,13 @@ function reducer(state: State, action: Action): State {
       return { ...state, toasts: [...state.toasts, action.toast] };
     case 'TOAST_DISMISS':
       return { ...state, toasts: state.toasts.filter((t) => t.id !== action.id) };
+    case 'ADD_NOTIFICATION':
+      return { ...state, notifications: [action.notification, ...state.notifications] };
+    case 'MARK_NOTIFICATION_READ':
+      return {
+        ...state,
+        notifications: state.notifications.map((n) => (n.id === action.id ? { ...n, read: true } : n)),
+      };
     default:
       return state;
   }
@@ -110,6 +121,7 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, undefined, () => ({
     documents: seedDocuments,
     toasts: [],
+    notifications: seedNotifications,
     approvedThisSession: 0,
   }));
 
@@ -131,6 +143,10 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'TOAST_DISMISS', id });
   }, []);
 
+  const markNotificationRead = useCallback((id: string) => {
+    dispatch({ type: 'MARK_NOTIFICATION_READ', id });
+  }, []);
+
   const updateField = useCallback((docId: string, fieldId: string, value: string) => {
     const doc = stateRef.current.documents.find((d) => d.id === docId);
     const field = doc?.fields.find((f) => f.id === fieldId);
@@ -139,7 +155,7 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
       dispatch({
         type: 'ADD_ACTIVITY',
         docId,
-        entry: { id: makeId('a'), message: `${field.label} corrected to "${value}"`, actor: CURRENT_USER, time: 'Just now' },
+        entry: { id: makeId('a'), message: `${field.label} corrected to "${value}"`, actor: currentUser.name, time: 'Just now' },
       });
     }
   }, []);
@@ -152,14 +168,29 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
       dispatch({
         type: 'ADD_ACTIVITY',
         docId,
-        entry: { id: makeId('a'), message: action, actor: CURRENT_USER, time: 'Just now' },
+        entry: { id: makeId('a'), message: action, actor: currentUser.name, time: 'Just now' },
       });
       const titleByAction: Record<ResolutionAction, string> = {
         Approved: `${doc.name} approved`,
         Rejected: `${doc.name} rejected`,
         'Changes Requested': `Changes requested on ${doc.name}`,
       };
+      const descriptionByAction: Record<ResolutionAction, string> = {
+        Approved: 'Moved out of your review queue',
+        Rejected: 'Removed from the active queue',
+        'Changes Requested': 'Waiting on the assignee to update it',
+      };
       showToast({ tone: TOAST_TONE[action], title: titleByAction[action] });
+      dispatch({
+        type: 'ADD_NOTIFICATION',
+        notification: {
+          id: makeId('n'),
+          title: titleByAction[action],
+          description: descriptionByAction[action],
+          time: 'Just now',
+          read: false,
+        },
+      });
     },
     [showToast]
   );
@@ -172,7 +203,7 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
         dispatch({
           type: 'ADD_ACTIVITY',
           docId,
-          entry: { id: makeId('a'), message: action, actor: CURRENT_USER, time: 'Just now' },
+          entry: { id: makeId('a'), message: action, actor: currentUser.name, time: 'Just now' },
         });
       }
       const label = docIds.length === 1 ? '1 document' : `${docIds.length} documents`;
@@ -182,6 +213,15 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
         'Changes Requested': `Changes requested on ${label}`,
       };
       showToast({ tone: TOAST_TONE[action], title: titleByAction[action] });
+      dispatch({
+        type: 'ADD_NOTIFICATION',
+        notification: {
+          id: makeId('n'),
+          title: titleByAction[action],
+          time: 'Just now',
+          read: false,
+        },
+      });
     },
     [showToast]
   );
@@ -242,6 +282,7 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
     () => ({
       documents: state.documents,
       toasts: state.toasts,
+      notifications: state.notifications,
       approvedThisSession: state.approvedThisSession,
       getDocument,
       updateField,
@@ -251,6 +292,7 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
       retryAssistantMessage,
       showToast,
       dismissToast,
+      markNotificationRead,
     }),
     [
       state,
@@ -262,6 +304,7 @@ export function ReviewStoreProvider({ children }: { children: ReactNode }) {
       retryAssistantMessage,
       showToast,
       dismissToast,
+      markNotificationRead,
     ]
   );
 

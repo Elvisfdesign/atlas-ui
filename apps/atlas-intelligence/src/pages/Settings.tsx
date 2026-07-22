@@ -13,11 +13,10 @@ import {
   useTheme,
 } from 'atlas-ui';
 import { Camera, Settings as SettingsIcon } from 'lucide-react';
+import { currentUser } from '@/mocks/user';
 
 const SUB_TABS = ['General', 'Team', 'Security', 'Integrations', 'Billing', 'Advanced'] as const;
 type SubTab = (typeof SUB_TABS)[number];
-
-const CURRENT_USER = { name: 'Elvis Meraz', email: 'elvisfdesign@gmail.com', role: 'Admin' };
 
 interface PreferenceToggle {
   key: string;
@@ -60,13 +59,13 @@ export function Settings() {
 
         <TabPanel value="General">
           <div className="flex flex-col gap-4 pt-5">
-            <div className="flex items-center justify-between gap-4 rounded-xl border border-border-default bg-surface p-5">
+            <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-border-default bg-surface p-5">
               <div className="flex items-center gap-3">
-                <Avatar name={CURRENT_USER.name} size="medium" />
+                <Avatar name={currentUser.name} size="medium" />
                 <div className="flex flex-col">
-                  <span className="font-sans text-[14.5px] font-semibold text-primary">{CURRENT_USER.name}</span>
+                  <span className="font-sans text-[14.5px] font-semibold text-primary">{currentUser.name}</span>
                   <span className="font-sans text-[12.5px] text-tertiary">
-                    {CURRENT_USER.email} · {CURRENT_USER.role}
+                    {currentUser.email} · {currentUser.role}
                   </span>
                 </div>
               </div>
@@ -75,7 +74,7 @@ export function Settings() {
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.6fr_1fr]">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
               <div className="flex flex-col gap-5 rounded-xl border border-border-default bg-surface p-5">
                 <div className="flex flex-col gap-0.5">
                   <h2 className="font-sans text-[14.5px] font-semibold text-primary">Workspace</h2>

@@ -28,7 +28,7 @@ export const ModalContent = forwardRef<HTMLDivElement, ModalContentProps>(
       <RadixDialog.Content
         ref={ref}
         className={cn(
-          'fixed left-1/2 top-1/2 z-modal w-full max-w-md -translate-x-1/2 -translate-y-1/2',
+          'atlas-modal-transition fixed left-1/2 top-1/2 z-modal w-full max-w-md -translate-x-1/2 -translate-y-1/2',
           'flex flex-col rounded-lg border border-border-default bg-surface-elevated shadow-elevation-high',
           'outline-none',
           className

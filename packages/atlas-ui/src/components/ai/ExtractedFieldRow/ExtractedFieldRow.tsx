@@ -27,6 +27,8 @@ export interface ExtractedFieldRowProps {
   onSave?: (value: string) => void;
 }
 
+const SAVE_FLASH_MS = 1200;
+
 export function ExtractedFieldRow({
   label,
   value,
@@ -37,12 +39,19 @@ export function ExtractedFieldRow({
 }: ExtractedFieldRowProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState(value);
+  const [justSaved, setJustSaved] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
 
   useEffect(() => {
     if (isEditing) inputRef.current?.focus();
   }, [isEditing]);
+
+  useEffect(() => {
+    if (!justSaved) return;
+    const timer = window.setTimeout(() => setJustSaved(false), SAVE_FLASH_MS);
+    return () => window.clearTimeout(timer);
+  }, [justSaved]);
 
   function startEditing() {
     setDraft(value);
@@ -52,7 +61,10 @@ export function ExtractedFieldRow({
   function commit() {
     const trimmed = draft.trim();
     setIsEditing(false);
-    if (trimmed && trimmed !== value) onSave?.(trimmed);
+    if (trimmed && trimmed !== value) {
+      onSave?.(trimmed);
+      setJustSaved(true);
+    }
   }
 
   function cancel() {
@@ -94,12 +106,23 @@ export function ExtractedFieldRow({
   }
 
   return (
-    <div className={cn('group flex items-center gap-2 py-2.5', className)}>
+    <div
+      className={cn(
+        'group flex items-center gap-2 rounded-sm py-2.5 px-1 -mx-1',
+        justSaved && 'atlas-save-flash',
+        className
+      )}
+    >
       <div className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span className="truncate font-sans text-[11px] text-tertiary">{label}</span>
         <span className="truncate font-sans text-[13px] font-medium text-primary">{value}</span>
       </div>
       <ConfidenceBadge value={confidence} className="shrink-0" />
+      {justSaved && (
+        <span role="status" className="sr-only">
+          {label} updated to {value}
+        </span>
+      )}
       {editable && (
         <button
           type="button"

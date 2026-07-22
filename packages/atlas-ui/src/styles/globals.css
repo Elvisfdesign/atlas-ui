@@ -36,15 +36,70 @@
 }
 
 @layer components {
-  /* Radix Tooltip/Popover/DropdownMenu content enter/exit animation, keyed
-     off Radix's own `data-state` attribute. Kept hand-written and tiny on
-     purpose rather than pulling in a whole animation plugin for one effect. */
+  /* Radix Tooltip/Popover/DropdownMenu/ContextMenu content enter/exit
+     animation, keyed off Radix's own `data-state` attribute. Kept
+     hand-written and tiny on purpose rather than pulling in a whole
+     animation plugin for one effect.
+
+     Tooltip alone uses 'delayed-open'/'instant-open' as its open state
+     name; every other popper-positioned overlay (Popover, DropdownMenu,
+     ContextMenu, Select) uses the plain 'open'/'closed' Radix convention —
+     both are matched here so the animation actually reaches all of them,
+     not just Tooltip. */
   [data-radix-popper-content-wrapper] [data-state='delayed-open'],
-  [data-radix-popper-content-wrapper] [data-state='instant-open'] {
+  [data-radix-popper-content-wrapper] [data-state='instant-open'],
+  [data-radix-popper-content-wrapper] [data-state='open'] {
     animation: atlas-content-in var(--duration-fast) var(--easing-easeOut);
   }
   [data-radix-popper-content-wrapper] [data-state='closed'] {
     animation: atlas-content-out var(--duration-instant) var(--easing-linear);
+  }
+
+  /* Same treatment for Dialog-based overlays (Modal, Drawer, Command Menu)
+     — these render centered/edge-anchored via Radix Dialog rather than the
+     popper positioner, so they carry `data-state` directly rather than via
+     a wrapper. Three variants because each has a different base transform
+     the keyframe has to preserve rather than clobber:
+       - Modal centers with `translate(-50%, -50%)`
+       - Command Menu centers horizontally only, `translateX(-50%)`
+       - Drawer is edge-anchored (`inset-y-0` + `left-0`/`right-0`), no
+         base transform, so it only needs a plain fade — a scale/zoom on a
+         panel pinned to a screen edge would look like it's popping out of
+         the wrong point. */
+  .atlas-modal-transition[data-state='open'] {
+    animation: atlas-modal-in var(--duration-fast) var(--easing-easeOut);
+  }
+  .atlas-modal-transition[data-state='closed'] {
+    animation: atlas-modal-out var(--duration-instant) var(--easing-linear);
+  }
+
+  .atlas-command-transition[data-state='open'] {
+    animation: atlas-command-in var(--duration-fast) var(--easing-easeOut);
+  }
+  .atlas-command-transition[data-state='closed'] {
+    animation: atlas-command-out var(--duration-instant) var(--easing-linear);
+  }
+
+  .atlas-fade-transition[data-state='open'] {
+    animation: atlas-fade-in var(--duration-fast) var(--easing-easeOut);
+  }
+  .atlas-fade-transition[data-state='closed'] {
+    animation: atlas-fade-out var(--duration-instant) var(--easing-linear);
+  }
+
+  /* Drawer slides in from whichever edge it's anchored to — the
+     idiomatic motion for an edge-anchored panel, not just a fade. */
+  .atlas-drawer-right-transition[data-state='open'] {
+    animation: atlas-drawer-right-in var(--duration-fast) var(--easing-easeOut);
+  }
+  .atlas-drawer-right-transition[data-state='closed'] {
+    animation: atlas-drawer-right-out var(--duration-instant) var(--easing-linear);
+  }
+  .atlas-drawer-left-transition[data-state='open'] {
+    animation: atlas-drawer-left-in var(--duration-fast) var(--easing-easeOut);
+  }
+  .atlas-drawer-left-transition[data-state='closed'] {
+    animation: atlas-drawer-left-out var(--duration-instant) var(--easing-linear);
   }
 
   @keyframes atlas-content-in {
@@ -64,6 +119,129 @@
     }
     to {
       opacity: 0;
+    }
+  }
+
+  @keyframes atlas-modal-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes atlas-modal-out {
+    from {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.98);
+    }
+  }
+
+  @keyframes atlas-command-in {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
+  @keyframes atlas-command-out {
+    from {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.98);
+    }
+  }
+
+  @keyframes atlas-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes atlas-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes atlas-drawer-right-in {
+    from {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes atlas-drawer-right-out {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+  }
+
+  @keyframes atlas-drawer-left-in {
+    from {
+      opacity: 0;
+      transform: translateX(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes atlas-drawer-left-out {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-16px);
+    }
+  }
+
+  /* Brief confirmation flash after an inline edit commits (e.g. Extracted
+     Field Row) — a success-tinted background that fades back to
+     transparent, so "saved" is felt without a persistent badge or toast
+     for every single field. */
+  .atlas-save-flash {
+    animation: atlas-save-flash 1200ms var(--easing-easeOut);
+  }
+
+  @keyframes atlas-save-flash {
+    0% {
+      background-color: var(--color-success-bg);
+    }
+    100% {
+      background-color: transparent;
     }
   }
 }

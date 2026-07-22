@@ -38,4 +38,10 @@ describe('LineChart', () => {
     const { container } = render(<LineChart data={DATA} xKey="date" series={SERIES} />);
     expect(container.querySelector('.recharts-responsive-container')).toBeInTheDocument();
   });
+
+  it('renders a screen-reader-only text summary of the trend', () => {
+    render(<LineChart data={DATA} xKey="date" series={SERIES} />);
+    expect(screen.getByText(/Processed: 100 to 120/)).toBeInTheDocument();
+    expect(screen.getByText(/Failed: 4 to 2/)).toBeInTheDocument();
+  });
 });

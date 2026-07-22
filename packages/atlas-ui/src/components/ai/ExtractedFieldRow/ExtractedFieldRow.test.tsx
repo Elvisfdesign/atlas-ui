@@ -61,6 +61,20 @@ describe('ExtractedFieldRow', () => {
     expect(screen.getByText('Acme Corporation')).toBeInTheDocument();
   });
 
+  it('shows a brief save-confirmation flash after committing a change', async () => {
+    const user = userEvent.setup();
+    render(
+      <ExtractedFieldRow label="Vendor Name" value="Acme Corporation" confidence={98} editable onSave={vi.fn()} />
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Edit Vendor Name' }));
+    const input = screen.getByRole('textbox', { name: 'Vendor Name' });
+    await user.clear(input);
+    await user.type(input, 'Acme Corp{Enter}');
+
+    expect(screen.getByText('Vendor Name').closest('div')?.parentElement).toHaveClass('atlas-save-flash');
+  });
+
   it('does not call onSave when the value is unchanged', async () => {
     const user = userEvent.setup();
     const onSave = vi.fn();

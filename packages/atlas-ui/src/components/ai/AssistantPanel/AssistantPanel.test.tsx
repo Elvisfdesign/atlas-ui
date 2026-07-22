@@ -50,6 +50,13 @@ describe('AssistantPanel', () => {
     expect(input).toHaveValue('');
   });
 
+  it('announces new messages via an ARIA live log region', () => {
+    render(<AssistantPanel messages={[{ id: '1', role: 'assistant', content: 'Hi there' }]} />);
+    const log = screen.getByRole('log', { name: 'Conversation' });
+    expect(log).toHaveAttribute('aria-live', 'polite');
+    expect(log).toHaveAttribute('aria-relevant', 'additions');
+  });
+
   it('renders the disclaimer', () => {
     render(<AssistantPanel messages={[]} />);
     expect(screen.getByText('AI responses may be inaccurate.')).toBeInTheDocument();

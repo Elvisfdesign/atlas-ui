@@ -24,7 +24,7 @@ export function Analytics() {
           <h1 className="font-sans text-2xl font-semibold text-primary">Analytics</h1>
           <p className="font-sans text-[13px] text-secondary">Track performance and discover insights.</p>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Button variant="secondary" icon={<Calendar size={15} />} onClick={notWired}>
             May 12 – May 18, 2025
           </Button>
@@ -45,10 +45,11 @@ export function Analytics() {
 
         <TabPanel value="Overview">
           <div className="flex flex-col gap-6 pt-5">
-            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <div className="flex gap-4 overflow-x-auto pb-1">
               {analyticsKpis.map((kpi) => (
                 <KPICard
                   key={kpi.label}
+                  className="shrink-0"
                   label={kpi.label}
                   value={kpi.value}
                   trend={kpi.trend}
@@ -58,7 +59,7 @@ export function Analytics() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.6fr_1fr]">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
               <ChartCard
                 title="Processing Over Time"
                 action={

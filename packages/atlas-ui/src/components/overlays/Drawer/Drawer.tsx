@@ -28,7 +28,9 @@ export const DrawerContent = forwardRef<HTMLDivElement, DrawerContentProps>(
         ref={ref}
         className={cn(
           'fixed inset-y-0 z-modal flex w-full max-w-sm flex-col bg-surface-elevated shadow-elevation-high outline-none',
-          side === 'right' ? 'right-0 border-l border-border-default' : 'left-0 border-r border-border-default',
+          side === 'right'
+            ? 'atlas-drawer-right-transition right-0 border-l border-border-default'
+            : 'atlas-drawer-left-transition left-0 border-r border-border-default',
           className
         )}
         {...props}

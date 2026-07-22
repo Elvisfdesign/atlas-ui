@@ -20,7 +20,7 @@ export function CommandMenu({ className, overlayClassName, contentClassName, lab
       label={label}
       overlayClassName={cn('fixed inset-0 z-overlay bg-overlay-scrim/60', overlayClassName)}
       contentClassName={cn(
-        'fixed left-1/2 top-24 z-modal w-full max-w-lg -translate-x-1/2',
+        'atlas-command-transition fixed left-1/2 top-24 z-modal w-full max-w-lg -translate-x-1/2',
         'overflow-hidden rounded-lg border border-border-default bg-surface-elevated shadow-elevation-high outline-none',
         contentClassName
       )}

@@ -59,7 +59,13 @@ export function AssistantPanel({
         <h3 className="font-sans text-[14.5px] font-semibold text-primary">{title}</h3>
         {badge && <AILabel>{badge}</AILabel>}
       </div>
-      <div className="flex flex-1 flex-col gap-3.5 overflow-y-auto">
+      <div
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions"
+        aria-label="Conversation"
+        className="flex flex-1 flex-col gap-3.5 overflow-y-auto"
+      >
         {messages.map((message) => (
           <div
             key={message.id}

@@ -65,30 +65,36 @@ export function ActivityFeed({
       {items.length === 0 ? (
         <p className="py-8 text-center font-sans text-[12.5px] text-tertiary">{emptyMessage}</p>
       ) : (
-        <div className="flex flex-col">
-          <div className="flex items-start gap-3 pb-2 font-sans text-[10.5px] font-medium uppercase tracking-[0.3px] text-tertiary">
-            <span className="min-w-0 flex-1">Document</span>
-            <span className="w-28 shrink-0">Type</span>
-            <span className="w-24 shrink-0">Status</span>
-            <span className="w-16 shrink-0 text-right">Time</span>
-          </div>
-          {items.map((item, index) => (
-            <div
-              key={item.id}
-              className={cn('flex items-center gap-3 py-3', index > 0 && 'border-t border-border-default')}
-            >
-              <div className="min-w-0 flex-1">
-                <FileRow fileName={item.fileName} icon={item.icon} />
-              </div>
-              <span className="w-28 shrink-0 truncate font-sans text-[13px] text-primary">{item.type}</span>
-              <span className="w-24 shrink-0">
-                <Badge tone={item.statusTone ?? defaultToneFor(item.status)}>{item.status}</Badge>
-              </span>
-              <span className="w-16 shrink-0 text-right font-sans text-[12.5px] text-tertiary">
-                {item.time}
-              </span>
+        // Fixed-width Type/Status/Time columns don't shrink below their own
+        // content — same reasoning as Table's overflow-x-auto wrapper, so a
+        // narrow container (a squeezed grid column, a phone) scrolls this
+        // block horizontally instead of it overflowing the card.
+        <div className="overflow-x-auto">
+          <div className="flex min-w-fit flex-col">
+            <div className="flex items-start gap-3 pb-2 font-sans text-[10.5px] font-medium uppercase tracking-[0.3px] text-tertiary">
+              <span className="min-w-0 flex-1">Document</span>
+              <span className="w-28 shrink-0">Type</span>
+              <span className="w-24 shrink-0">Status</span>
+              <span className="w-16 shrink-0 text-right">Time</span>
             </div>
-          ))}
+            {items.map((item, index) => (
+              <div
+                key={item.id}
+                className={cn('flex items-center gap-3 py-3', index > 0 && 'border-t border-border-default')}
+              >
+                <div className="min-w-0 flex-1">
+                  <FileRow fileName={item.fileName} icon={item.icon} />
+                </div>
+                <span className="w-28 shrink-0 truncate font-sans text-[13px] text-primary">{item.type}</span>
+                <span className="w-24 shrink-0">
+                  <Badge tone={item.statusTone ?? defaultToneFor(item.status)}>{item.status}</Badge>
+                </span>
+                <span className="w-16 shrink-0 text-right font-sans text-[12.5px] text-tertiary">
+                  {item.time}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </ChartCard>

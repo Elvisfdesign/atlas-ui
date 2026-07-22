@@ -97,11 +97,38 @@ export function LineChart({
     );
   }
 
+  const summary = series
+    .map((s) => {
+      const values = data.map((row) => row[s.key]).filter((v): v is number => typeof v === 'number');
+      if (values.length === 0) return `${s.label}: no data`;
+      return `${s.label}: ${values[0]} to ${values[values.length - 1]}`;
+    })
+    .join('. ');
+  const firstX = data[0]?.[xKey];
+  const lastX = data[data.length - 1]?.[xKey];
+
   return (
     <div className={cn('w-full', className)} style={{ height }}>
+      {/* Recharts renders an inert SVG with no text alternative for the
+          actual trend — this gives screen reader users the same "what
+          happened" a sighted user gets from glancing at the line, without
+          requiring them to parse individual data points. */}
+      <p className="sr-only">
+        {series.length > 1 ? 'Line chart' : 'Chart'} from {firstX} to {lastX}. {summary}.
+      </p>
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-          <CartesianGrid vertical={false} stroke="var(--color-border-border-subtle)" />
+        {/* `accessibilityLayer={false}` — Recharts' default keyboard/ARIA
+            layer leaves its root SVG focusable (`tabIndex=0`) while also
+            hiding it (`aria-hidden`), which is a real bug: a focusable
+            element removed from the accessibility tree, landing keyboard
+            users on a dead stop with nothing announced. The sr-only
+            summary above is this chart's actual accessible content. */}
+        <AreaChart
+          data={data}
+          margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
+          accessibilityLayer={false}
+        >
+          <CartesianGrid vertical={false} stroke="var(--color-border-subtle)" />
           <XAxis
             dataKey={xKey}
             axisLine={false}
@@ -116,7 +143,7 @@ export function LineChart({
             tickFormatter={formatYAxisTick}
             width={36}
           />
-          <Tooltip content={<ChartTooltip />} cursor={{ stroke: 'var(--color-border-border-strong)' }} />
+          <Tooltip content={<ChartTooltip />} cursor={{ stroke: 'var(--color-border-strong)' }} />
           {series.map((s) => (
             <Area
               key={s.key}

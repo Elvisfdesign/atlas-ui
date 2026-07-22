@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router';
 import { UserMenu, DropdownMenuItem, DropdownMenuSeparator } from 'atlas-ui';
 import { LogOut, Settings as SettingsIcon, User } from 'lucide-react';
-
-const CURRENT_USER = { name: 'Elvis Meraz', meta: 'Admin' };
+import { currentUser } from '@/mocks/user';
 
 /** Topbar avatar-chip profile menu — matches Atlas Product's topbar user
  * chip exactly, so it uses `UserMenu` as-is (avatar-only trigger). The
@@ -11,7 +10,7 @@ export function ProfileMenu() {
   const navigate = useNavigate();
 
   return (
-    <UserMenu name={CURRENT_USER.name} meta={CURRENT_USER.meta}>
+    <UserMenu name={currentUser.name} meta={currentUser.meta}>
       <DropdownMenuItem icon={<User size={14} />} onSelect={() => navigate('/settings')}>
         Profile
       </DropdownMenuItem>

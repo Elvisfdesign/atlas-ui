@@ -40,6 +40,12 @@ turns the value into an inline text field — Enter or blur commits via
 means (re-running confidence, persisting it, etc.) — that's the
 consuming screen's job via `onSave`.
 
+On a successful commit, the row briefly flashes a success-tinted
+background (respecting `prefers-reduced-motion`, like every other Atlas
+transition) and announces the update to assistive tech via a visually
+hidden status message — a save that only changes pixels a sighted user
+happens to be looking at isn't confirmed for everyone.
+
 <Canvas of={ExtractedFieldRowStories.Editable} />
 
 ## Accessibility

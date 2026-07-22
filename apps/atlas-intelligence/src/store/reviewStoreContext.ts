@@ -1,11 +1,12 @@
 import { createContext } from 'react';
-import type { ReviewDocument, ToastMessage } from '@/types';
+import type { NotificationItem, ReviewDocument, ToastMessage } from '@/types';
 
 export type ResolutionAction = 'Approved' | 'Rejected' | 'Changes Requested';
 
 export interface ReviewStoreValue {
   documents: ReviewDocument[];
   toasts: ToastMessage[];
+  notifications: NotificationItem[];
   approvedThisSession: number;
   getDocument: (id: string) => ReviewDocument | undefined;
   updateField: (docId: string, fieldId: string, value: string) => void;
@@ -15,6 +16,7 @@ export interface ReviewStoreValue {
   retryAssistantMessage: (docId: string, messageId: string) => void;
   showToast: (toast: Omit<ToastMessage, 'id'>) => void;
   dismissToast: (id: string) => void;
+  markNotificationRead: (id: string) => void;
 }
 
 export const ReviewStoreContext = createContext<ReviewStoreValue | null>(null);

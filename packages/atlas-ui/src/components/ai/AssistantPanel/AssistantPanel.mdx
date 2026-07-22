@@ -41,10 +41,12 @@ matching the grounded Product layout.
 
 ## Accessibility
 
-- The message list is plain, readable text in document order — no
-  ARIA live region, since the assistant's own scroll position and the
-  composer beneath it are more useful landmarks than an announcement
-  would be.
+- The message list is `role="log"` with `aria-live="polite"` and
+  `aria-relevant="additions"` — a reply that arrives after a typing
+  delay (the real, asynchronous pattern this panel is built for) is
+  announced to screen reader users the same way a sighted user notices
+  it appear, without re-announcing the whole transcript on every
+  re-render.
 - Suggested Prompt and Prompt Input each carry their own accessibility
   behavior (see their docs) unchanged when composed here.
 
