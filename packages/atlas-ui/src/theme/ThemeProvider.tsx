@@ -9,7 +9,7 @@ import { createContext, useCallback, useEffect, useMemo, useState, type ReactNod
 export type AtlasTheme = 'light' | 'dark' | 'system';
 type ResolvedTheme = 'light' | 'dark';
 
-interface ThemeContextValue {
+export interface ThemeContextValue {
   /** The user's preference: 'light' | 'dark' | 'system'. */
   theme: AtlasTheme;
   /** What's actually applied right now ('system' is resolved to light/dark). */
