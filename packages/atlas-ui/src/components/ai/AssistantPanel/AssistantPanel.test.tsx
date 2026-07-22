@@ -41,6 +41,15 @@ describe('AssistantPanel', () => {
     expect(onSubmit).toHaveBeenCalledWith('Check for anomalies');
   });
 
+  it('clears the composer after a submitted prompt', async () => {
+    const user = userEvent.setup();
+    render(<AssistantPanel messages={[]} onSubmit={vi.fn()} />);
+    const input = screen.getByRole('textbox');
+    await user.type(input, 'Check for anomalies');
+    await user.click(screen.getByRole('button', { name: 'Send' }));
+    expect(input).toHaveValue('');
+  });
+
   it('renders the disclaimer', () => {
     render(<AssistantPanel messages={[]} />);
     expect(screen.getByText('AI responses may be inaccurate.')).toBeInTheDocument();

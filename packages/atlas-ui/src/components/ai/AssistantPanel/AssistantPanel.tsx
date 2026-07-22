@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Sparkles } from 'lucide-react';
 import { AILabel } from '@/components/ai/AILabel';
 import { PromptInput } from '@/components/ai/PromptInput';
@@ -41,6 +41,13 @@ export function AssistantPanel({
   disclaimer = 'AI responses may be inaccurate.',
   className,
 }: AssistantPanelProps) {
+  // Owns the composer's value so it can clear itself on submit — Prompt
+  // Input intentionally leaves that to the caller (see its own docs), and
+  // Assistant Panel is that caller for every consumer, so it's the right
+  // place to make "send" feel complete rather than pushing this onto every
+  // screen that uses Assistant Panel.
+  const [draft, setDraft] = useState('');
+
   return (
     <div
       className={cn(
@@ -86,7 +93,14 @@ export function AssistantPanel({
         )}
       </div>
       <div className="flex shrink-0 flex-col gap-2">
-        <PromptInput onSubmit={onSubmit} />
+        <PromptInput
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onSubmit={(value) => {
+            onSubmit?.(value);
+            setDraft('');
+          }}
+        />
         {disclaimer && <p className="font-sans text-[10px] text-disabled">{disclaimer}</p>}
       </div>
     </div>

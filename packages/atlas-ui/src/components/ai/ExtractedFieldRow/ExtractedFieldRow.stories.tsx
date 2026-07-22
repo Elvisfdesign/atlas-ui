@@ -33,3 +33,16 @@ export const FieldList: Story = {
     </div>
   ),
 };
+
+export const Editable: Story = {
+  args: {
+    editable: true,
+    onSave: (value) => console.log('saved', value),
+  },
+  render: (args) => (
+    <div className="w-80 divide-y divide-border-default">
+      <ExtractedFieldRow {...args} />
+      <ExtractedFieldRow label="Status" value="Pending" confidence={68} editable onSave={args.onSave} />
+    </div>
+  ),
+};

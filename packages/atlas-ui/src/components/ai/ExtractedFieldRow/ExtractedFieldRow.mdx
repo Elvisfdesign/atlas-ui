@@ -34,8 +34,13 @@ One size, sized for a ~300px-wide fields sidebar.
 
 ## States
 
-Static; row-level interactivity (editing a value) is left to the
-consuming screen.
+Static by default. Pass `editable` to add a Pencil affordance that
+turns the value into an inline text field — Enter or blur commits via
+`onSave`, Escape reverts. The row doesn't decide what a correction
+means (re-running confidence, persisting it, etc.) — that's the
+consuming screen's job via `onSave`.
+
+<Canvas of={ExtractedFieldRowStories.Editable} />
 
 ## Accessibility
 
@@ -43,6 +48,11 @@ consuming screen.
   document order.
 - Confidence Badge carries its own `aria-label` with the full
   confidence sentence.
+- The edit button has an explicit `aria-label` ("Edit {label}") since
+  a bare Pencil icon has no accessible name on its own; the inline
+  input is associated with the label via a real `<label htmlFor>`.
+- The edit affordance is hover-revealed but never `display:none` — it
+  reaches full opacity on keyboard focus, so Tab still finds it.
 
 ## React Props
 

@@ -1,33 +1,63 @@
-import { Button, KPICard, useTheme } from 'atlas-ui';
+import { Routes, Route } from 'react-router';
+import { Database, Plug, Sparkles, Users } from 'lucide-react';
+import { AppShell } from '@/shell/AppShell';
+import { Dashboard } from '@/pages/Dashboard';
+import { ReviewQueue } from '@/pages/ReviewQueue';
+import { DocumentReview } from '@/pages/DocumentReview';
+import { Workflows } from '@/pages/Workflows';
+import { Analytics } from '@/pages/Analytics';
+import { Settings } from '@/pages/Settings';
+import { PlaceholderPage } from '@/pages/PlaceholderPage';
+import { NotFound } from '@/pages/NotFound';
 
-/**
- * Phase 0 proof-of-integration screen only — not the Atlas Intelligence
- * product shell. Confirms this app consumes Atlas UI purely through its
- * public package export surface (no deep imports, no copied components).
- */
 export function App() {
-  const { resolvedTheme, toggleTheme } = useTheme();
-
   return (
-    <div style={{ minHeight: '100vh' }} className="bg-canvas p-12">
-      <div style={{ maxWidth: 640, margin: '0 auto' }} className="flex flex-col gap-8">
-        <div className="flex items-center justify-between">
-          <h1 className="font-sans text-2xl font-semibold text-primary">Atlas Intelligence</h1>
-          <Button variant="secondary" size="small" onClick={toggleTheme}>
-            {resolvedTheme === 'dark' ? 'Switch to light' : 'Switch to dark'}
-          </Button>
-        </div>
-
-        <KPICard
-          label="ATLAS UI INTEGRATION"
-          value="Connected"
-          trend="positive"
-          trendValue="workspace:*"
-          subtext="atlas-intelligence is consuming atlas-ui via its package export surface"
+    <Routes>
+      <Route element={<AppShell />}>
+        <Route index element={<Dashboard />} />
+        <Route path="review-queue" element={<ReviewQueue />} />
+        <Route path="review-queue/:documentId" element={<DocumentReview />} />
+        <Route path="workflows" element={<Workflows />} />
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="settings" element={<Settings />} />
+        <Route
+          path="data-explorer"
+          element={
+            <PlaceholderPage
+              title="Data Explorer"
+              description="Query and explore extracted document data."
+              icon={Database}
+            />
+          }
         />
-
-        <Button>Approve</Button>
-      </div>
-    </div>
+        <Route
+          path="ai-assistant"
+          element={
+            <PlaceholderPage
+              title="AI Assistant"
+              description="A dedicated assistant workspace, beyond the per-document panel."
+              icon={Sparkles}
+            />
+          }
+        />
+        <Route
+          path="integrations"
+          element={
+            <PlaceholderPage
+              title="Integrations"
+              description="Connect Atlas Intelligence to other systems."
+              icon={Plug}
+            />
+          }
+        />
+        <Route
+          path="teams"
+          element={
+            <PlaceholderPage title="Teams" description="Manage teams and permissions." icon={Users} />
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
