@@ -40,8 +40,8 @@ Never bind a component to one of these directly — they exist so semantic
 tokens have something to alias.
 
 {Object.entries(primitiveColors).map(([family, shades]) => (
-  <div key={family} style={{ marginBottom: '24px' }}>
-    <p style={{ fontFamily: 'Inter', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.3px', margin: '0 0 8px' }}>
+  <div key={family} style={{ marginBottom: 'var(--spacing-32)' }}>
+    <p style={{ fontFamily: 'Inter', fontSize: 12, fontWeight: 600, color: 'var(--color-text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.3px', margin: '0 0 var(--spacing-16)' }}>
       {family}
     </p>
     <div className="atlas-token-grid">
