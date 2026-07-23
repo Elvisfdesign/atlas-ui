@@ -1,47 +1,65 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as SearchInputStories from './SearchInput.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={SearchInputStories} />
 
-# Search Input
 
+<DocsLayout>
+
+<DocsTitle>Search Input</DocsTitle>
+
+<DocsIntro>
 The global search field in Atlas Product's topbar. Source: Atlas
 Product — the Review Queue topbar (320×36, leading Search icon,
 "Search anything..." placeholder, trailing ⌘K shortcut chip).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A distinct component from Input rather than an `icon` prop on it —
 Search Input carries `type="search"` semantics and an optional shortcut
 chip that a generic text field shouldn't.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={SearchInputStories.WithShortcut} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Search Input for the one global, app-wide search field in the topbar.
 For search *within* a specific view (filtering a table, say), the same
 component works without the `shortcut` prop — the chip is specifically
 for a search that has a real keyboard shortcut bound to it.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={SearchInputStories.Default} />
 
 Without `shortcut`, Search Input is a plain icon + placeholder field —
 appropriate for any in-page search that isn't bound to a global hotkey.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (36px), matching the Atlas Product topbar exactly.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={SearchInputStories.Disabled} />
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Rendered with `role="searchbox"` and `type="search"`, so assistive
   technology announces it as a search field, not a generic text box.
@@ -49,13 +67,17 @@ One size (36px), matching the Atlas Product topbar exactly.
   accessible name comes from an explicit `aria-label` you provide (it has
   no visible `<label>` by design, matching the topbar's compact layout).
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={SearchInputStories.Default} />
 
 <ArgTypes of={SearchInputStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { SearchInput } from '@/components/forms/SearchInput';
@@ -63,7 +85,9 @@ import { SearchInput } from '@/components/forms/SearchInput';
 <SearchInput aria-label="Search" shortcut="⌘K" onChange={handleSearch} />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -76,8 +100,14 @@ import { SearchInput } from '@/components/forms/SearchInput';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/forms-input--docs">Input</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

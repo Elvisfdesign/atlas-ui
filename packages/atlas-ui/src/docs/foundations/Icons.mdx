@@ -8,14 +8,19 @@ import {
   Sparkles, Wand2, Bot,
 } from 'lucide-react';
 import { sizing } from '@/tokens/sizing';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../components/DocsLayout';
 
 <Meta title="Foundations/Icons" />
 
-# Icons
+<DocsLayout>
 
+<DocsTitle>Icons</DocsTitle>
+
+<DocsIntro>
 A single, consistent stroke-based icon set — not a custom-drawn library.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Atlas uses [Lucide](https://lucide.dev) directly. There is no Atlas-specific
 `<Icon>` wrapper component: components accept a Lucide element as a prop
@@ -24,12 +29,14 @@ Lucide's 1000+ icons work without Atlas needing to re-export or re-draw
 them one at a time. What follows is a representative sample grouped by the
 role icons play in the product — not a catalog of every icon in the set.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 Three sizes, matching the Atlas Dimensions scale exactly — never an
 arbitrary icon size.
 
-<div style={{ display: 'flex', alignItems: 'flex-end', gap: 'var(--atlas-doc-grid-gap)', margin: 'var(--spacing-32) 0 var(--spacing-48)' }}>
+<div style={{ display: 'flex', alignItems: 'flex-end', gap: 'var(--atlas-doc-grid-gap)', marginTop: 'var(--spacing-32)', marginBottom: 'var(--spacing-48)' }}>
   {[
     { label: 'sm', px: sizing.iconSm },
     { label: 'md', px: sizing.iconMd },
@@ -47,7 +54,9 @@ arbitrary icon size.
 - **md (16px)** — Medium-size Button/Icon Button, the default everywhere else.
 - **lg (20px)** — standalone icons, empty-state illustrations.
 
-## A Representative Set
+</DocsSection>
+
+<DocsSection title="A Representative Set">
 
 <div className="atlas-icon-category">
   <div className="atlas-icon-category__label">Navigation</div>
@@ -147,7 +156,9 @@ arbitrary icon size.
   </div>
 </div>
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - **Decorative icons** (an icon next to a label that already says the same
   thing — e.g. a bell icon beside no text at all in a notifications
@@ -161,9 +172,15 @@ arbitrary icon size.
   component documents otherwise. Don't mix stroke weights within the same
   view.
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/actions-button--docs">Button</a>
   <a className="atlas-doc-related__link" href="?path=/docs/actions-icon-button--docs">Icon Button</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

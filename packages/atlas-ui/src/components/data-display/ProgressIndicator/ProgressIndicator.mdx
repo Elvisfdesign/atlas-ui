@@ -1,26 +1,36 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ProgressIndicatorStories from './ProgressIndicator.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ProgressIndicatorStories} />
 
-# Progress Indicator
 
+<DocsLayout>
+
+<DocsTitle>Progress Indicator</DocsTitle>
+
+<DocsIntro>
 A neutral, general-purpose progress bar. Source: Atlas Product's Review
 Queue confidence bar (36×5px, rounded-full track, proportionally filled),
 generalized here as the base primitive that Confidence Indicator
 composes and adds confidence-specific coloring and a percentage label on
 top of.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A single filled track representing a 0–100 value, with a required
 accessible label since the bar alone conveys no text.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ProgressIndicatorStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Progress Indicator directly for general progress (an upload, a
 multi-step process). For document/extraction confidence specifically,
@@ -28,21 +38,27 @@ use `ConfidenceIndicator` instead — it composes this component and adds
 the percentage text and threshold-based tone that confidence display
 requires.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ProgressIndicatorStories.Tones} />
 
 `tone` selects the fill color — `accent` (default) for general progress,
 `success`/`warning`/`danger` for status-linked progress.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 <Canvas of={ProgressIndicatorStories.Small} />
 
 `sm` (5px track) matches the Review Queue confidence bar; `md` (8px,
 default) reads better as a larger, standalone progress bar.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={ProgressIndicatorStories.Empty} />
 
@@ -52,7 +68,9 @@ Values are clamped to the 0–100 range, so an out-of-range value (e.g. a
 miscalculated percentage) can't render a bar wider than its track or a
 negative-width fill.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders `role="progressbar"` with `aria-valuenow`/`aria-valuemin`/
   `aria-valuemax`, so assistive technology can announce the current
@@ -61,13 +79,17 @@ negative-width fill.
   of its own, so it depends entirely on the accessible name to be
   meaningful to screen reader users.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ProgressIndicatorStories.Default} />
 
 <ArgTypes of={ProgressIndicatorStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { ProgressIndicator } from '@/components/data-display/ProgressIndicator';
@@ -76,7 +98,9 @@ import { ProgressIndicator } from '@/components/data-display/ProgressIndicator';
 <ProgressIndicator value={40} tone="danger" label="Storage used" size="sm" />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -89,9 +113,15 @@ import { ProgressIndicator } from '@/components/data-display/ProgressIndicator';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-confidence-indicator--docs">Confidence Indicator</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

@@ -1,47 +1,65 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as HumanReviewBannerStories from './HumanReviewBanner.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={HumanReviewBannerStories} />
 
-# Human Review Banner
 
+<DocsLayout>
+
+<DocsTitle>Human Review Banner</DocsTitle>
+
+<DocsIntro>
 Not a direct 1:1 Figma frame — synthesized from a real, recurring signal:
 both Review Queue and Document Review mark documents with a "Review"
 status whenever the AI's extraction needs a human to confirm it. Human
 Review Banner gives that event a page-level, explanatory surface.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 An ai-tinted banner — icon, message, and an optional action — for
 surfacing that the AI has flagged something specific for a human to
 confirm, distinct from a generic warning banner.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={HumanReviewBannerStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Human Review Banner when the message is specifically attributed to
 the AI's own assessment ("I'm not confident here"), not a generic system
 warning — for those, use Feedback's Banner with a `warning` tone
 instead.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={HumanReviewBannerStories.WithAction} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — a full-width banner meant to sit at the top of a document or
 section.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Static; Human Review Banner has no interactive states beyond its
 optional action button.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - `role="status"` announces the banner to assistive tech without
   interrupting, since it's informational rather than a page-blocking
@@ -49,13 +67,17 @@ optional action button.
 - The icon is decorative (`aria-hidden`) — the message text alone
   carries the meaning.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={HumanReviewBannerStories.Default} />
 
 <ArgTypes of={HumanReviewBannerStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { HumanReviewBanner } from '@/components/ai/HumanReviewBanner';
@@ -67,7 +89,9 @@ import { HumanReviewBanner } from '@/components/ai/HumanReviewBanner';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -80,9 +104,15 @@ import { HumanReviewBanner } from '@/components/ai/HumanReviewBanner';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-banner--docs">Banner</a>
   <a className="atlas-doc-related__link" href="?path=/docs/ai-approval-panel--docs">Approval Panel</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

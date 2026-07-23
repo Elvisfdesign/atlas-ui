@@ -1,25 +1,35 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as CheckboxStories from './Checkbox.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={CheckboxStories} />
 
-# Checkbox
 
+<DocsLayout>
+
+<DocsTitle>Checkbox</DocsTitle>
+
+<DocsIntro>
 An on/off selection, usually as part of a group. Source: Atlas Product —
 the Review Queue table's row-selection checkbox (17×17px, checked state
 fills with the accent color and shows a white check).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Built on a real native `<input type="checkbox">` (visually restyled)
 rather than a custom button-based widget, so checked/indeterminate state,
 labeling, and keyboard behavior all come from the browser.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={CheckboxStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Checkbox for row selection in tables (its confirmed Product use), for
 independent on/off options in a form, and for a "select all" control
@@ -27,15 +37,21 @@ paired with `indeterminate` when only some rows are selected. For a
 setting that takes effect immediately rather than being part of a form
 submission, use Switch instead.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 One visual treatment — Checkbox doesn't have a `variant` prop.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (17px), matching the Review Queue table checkbox exactly.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas>
   <Story of={CheckboxStories.Checked} />
@@ -44,7 +60,9 @@ One size (17px), matching the Review Queue table checkbox exactly.
   <Story of={CheckboxStories.DisabledChecked} />
 </Canvas>
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The label is a real `<label htmlFor>` — clicking anywhere on the label
   text toggles the checkbox, not just the box itself.
@@ -54,13 +72,17 @@ One size (17px), matching the Review Queue table checkbox exactly.
 - Fully keyboard operable: Tab to focus, Space to toggle, exactly like a
   native checkbox, because it is one.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={CheckboxStories.Default} />
 
 <ArgTypes of={CheckboxStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Checkbox } from '@/components/forms/Checkbox';
@@ -73,7 +95,9 @@ import { Checkbox } from '@/components/forms/Checkbox';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -86,9 +110,15 @@ import { Checkbox } from '@/components/forms/Checkbox';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/forms-radio--docs">Radio</a>
   <a className="atlas-doc-related__link" href="?path=/docs/forms-switch--docs">Switch</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

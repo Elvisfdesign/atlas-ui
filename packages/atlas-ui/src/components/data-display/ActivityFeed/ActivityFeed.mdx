@@ -1,33 +1,45 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ActivityFeedStories from './ActivityFeed.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ActivityFeedStories} />
 
-# Activity Feed
 
+<DocsLayout>
+
+<DocsTitle>Activity Feed</DocsTitle>
+
+<DocsIntro>
 A recent-activity list of processed documents. Source: Atlas Product's
 Analytics "Recent Activity" card — a header with a "View all" link,
 column headers (DOCUMENT/TYPE/STATUS/TIME), and rows composing a
 document icon + name, a type label, a status Badge, and a relative time.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Composes `ChartCard` for its title/action header, `FileRow` for the
 document cell, and `Badge` for status — rather than reimplementing any
 of their layout.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ActivityFeedStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Pass `items` (each with a `fileName`, `type`, `status`, and `time`).
 `statusTone` defaults from the status text itself ("Completed" →
 success, "Failed" → danger, "Review" → warning, "Processing" →
 processing) — override it only for a status outside that set.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ActivityFeedStories.WithViewAll} />
 
@@ -35,17 +47,23 @@ Pass `onViewAll` to show the "View all" link in the header, matching the
 Analytics card exactly; omit it for a feed with no link to a fuller
 list.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — the feed fills its container's width; row height and column
 widths (Type/Status/Time are fixed-width, Document flexes) are fixed to
 match the Analytics pattern.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={ActivityFeedStories.Empty} />
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The "View all" affordance renders as a real `<button>` with visible
   focus styling, not a styled `<span>` with a click handler.
@@ -55,13 +73,17 @@ match the Analytics pattern.
   header cells, for a consistent "this is a header row" signal across
   Atlas even outside a literal `<table>`.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ActivityFeedStories.Default} />
 
 <ArgTypes of={ActivityFeedStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { ActivityFeed } from '@/components/data-display/ActivityFeed';
@@ -75,7 +97,9 @@ import { ActivityFeed } from '@/components/data-display/ActivityFeed';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -88,7 +112,9 @@ import { ActivityFeed } from '@/components/data-display/ActivityFeed';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-chart-card--docs">Chart Card</a>
@@ -96,3 +122,7 @@ import { ActivityFeed } from '@/components/data-display/ActivityFeed';
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-badge--docs">Badge</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

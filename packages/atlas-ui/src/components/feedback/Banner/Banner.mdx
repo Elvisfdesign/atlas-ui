@@ -1,39 +1,55 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as BannerStories from './Banner.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={BannerStories} />
 
-# Banner
 
+<DocsLayout>
+
+<DocsTitle>Banner</DocsTitle>
+
+<DocsIntro>
 A full-width, tone-tinted notice bar for a page or section. The
 full-width counterpart to Inline Alert, sharing the same tone→color/icon
 mapping.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 An icon, a message, and optional action and dismiss controls, spanning
 the full width of its container.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={BannerStories.Info} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Place a Banner at the top of a page or a major section for a notice that
 applies broadly (maintenance windows, billing issues, account-wide
 notices) — use Inline Alert instead for something scoped to one form or
 card.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={BannerStories.Danger} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — Banner always spans its container's full width.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={BannerStories.WithAction} />
 <Canvas of={BannerStories.Dismissible} />
@@ -42,20 +58,26 @@ Pass `action` for a response control (e.g. "Upgrade"), and `onDismiss`
 to show a close button — both are optional and independent of each
 other.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Same role logic as Inline Alert: `warning`/`danger` use
   `role="alert"`, `info`/`success` use `role="status"`.
 - The dismiss control is a real, labeled `IconButton` ("Dismiss"), not a
   bare icon with a click handler.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={BannerStories.Info} />
 
 <ArgTypes of={BannerStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Banner } from '@/components/feedback/Banner';
@@ -70,7 +92,9 @@ import { Button } from '@/components/actions/Button';
 </Banner>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -83,9 +107,15 @@ import { Button } from '@/components/actions/Button';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-inline-alert--docs">Inline Alert</a>
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-toast--docs">Toast</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

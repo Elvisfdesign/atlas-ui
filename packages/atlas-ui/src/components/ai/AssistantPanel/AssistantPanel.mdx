@@ -1,45 +1,63 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as AssistantPanelStories from './AssistantPanel.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={AssistantPanelStories} />
 
-# Assistant Panel
 
+<DocsLayout>
+
+<DocsTitle>Assistant Panel</DocsTitle>
+
+<DocsIntro>
 Source: Atlas Product — Document Review's `ai-col`: the AI Assistant
 sidebar, present alongside a document's viewer and extracted fields.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 The full AI Assistant experience — a header with a BETA tag, a message
 list (intro message plus any conversation), suggested-prompt chips, a
 composer, and a disclaimer. Composes AI Label, Suggested Prompt, and
 Prompt Input rather than reimplementing any of them.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={AssistantPanelStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Pass an initial assistant `messages` entry as the greeting, plus
 `suggestedPrompts` for the starting chips. Once a conversation begins,
 pass the growing `messages` array (alternating `assistant`/`user`
 roles) — Assistant Panel doesn't manage conversation state itself.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={AssistantPanelStories.Conversation} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 Sized to fill its container — typically a ~300px sidebar column,
 matching the grounded Product layout.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={AssistantPanelStories.NoBadge} />
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The message list is `role="log"` with `aria-live="polite"` and
   `aria-relevant="additions"` — a reply that arrives after a typing
@@ -50,13 +68,17 @@ matching the grounded Product layout.
 - Suggested Prompt and Prompt Input each carry their own accessibility
   behavior (see their docs) unchanged when composed here.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={AssistantPanelStories.Default} />
 
 <ArgTypes of={AssistantPanelStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { useState } from 'react';
@@ -82,7 +104,9 @@ function DocumentAssistant() {
 }
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -95,10 +119,16 @@ function DocumentAssistant() {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/ai-suggested-prompt--docs">Suggested Prompt</a>
   <a className="atlas-doc-related__link" href="?path=/docs/ai-prompt-input--docs">Prompt Input</a>
   <a className="atlas-doc-related__link" href="?path=/docs/ai-ai-assistant-state--docs">AI Assistant State</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

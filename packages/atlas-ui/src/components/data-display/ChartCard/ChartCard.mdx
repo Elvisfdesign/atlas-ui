@@ -1,26 +1,36 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ChartCardStories from './ChartCard.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ChartCardStories} />
 
-# Chart Card
 
+<DocsLayout>
+
+<DocsTitle>Chart Card</DocsTitle>
+
+<DocsIntro>
 The card shell every Atlas chart lives in. Source: Atlas Product's
 Analytics screen — the "Processing Over Time" and "Document Types" card
 containers (20px padding, 14.5px semibold title, an optional header-right
 slot for a legend or a "View all" link).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A title and an optional header-right action, above whatever content is
 passed as children — a `LineChart`, a `DonutChart`, an `ActivityFeed`
 column list, or any other card body.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ChartCardStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Wrap `LineChart` or `DonutChart` in a `ChartCard` to get the title and
 consistent card chrome; pass a `ChartLegend` as `action` for chart
@@ -28,7 +38,9 @@ legends, or a plain link/button for a "View all" affordance.
 `ActivityFeed` already composes `ChartCard` internally, so it doesn't
 need to be wrapped again.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ChartCardStories.WithLegend} />
 
@@ -36,19 +48,25 @@ need to be wrapped again.
 `CHART_SERIES_COLORS` palette so a chart's legend and its actual series
 colors can never drift apart.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 <Canvas of={ChartCardStories.WithViewAllLink} />
 
 Chart Card has no size variant — it fills its container's width, and its
 height is determined by its content.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Chart Card is a static container — states (loading, empty) belong to the
 chart or list rendered inside it, not to the card itself.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders the title as a real heading (`<h3>`), so charts are
   discoverable in a page's heading outline.
@@ -56,13 +74,17 @@ chart or list rendered inside it, not to the card itself.
   `<button>` or `<a>` (as in the "View all" example) rather than a
   non-interactive element with a click handler.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ChartCardStories.Default} />
 
 <ArgTypes of={ChartCardStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { ChartCard, ChartLegend } from '@/components/data-display/ChartCard';
@@ -76,7 +98,9 @@ import { LineChart } from '@/components/data-display/LineChart';
 </ChartCard>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -89,10 +113,16 @@ import { LineChart } from '@/components/data-display/LineChart';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-line-chart--docs">Line Chart</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-donut-chart--docs">Donut Chart</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-activity-feed--docs">Activity Feed</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

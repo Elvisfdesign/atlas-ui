@@ -1,29 +1,39 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as DropdownMenuStories from './DropdownMenu.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={DropdownMenuStories} />
 
-# Dropdown Menu
 
+<DocsLayout>
+
+<DocsTitle>Dropdown Menu</DocsTitle>
+
+<DocsIntro>
 The floating panel Atlas's overflow ("more options") affordances open
 into. Source: no single dedicated Product frame — this is the panel
 behind existing overflow triggers like KPI Card's `showMenu` and any
 `MoreHorizontal` Icon Button. Built on Radix's Dropdown Menu primitive,
 which owns keyboard navigation (arrow keys, type-ahead), Escape-to-
 close, and focus return to the trigger.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 `DropdownMenu` (the root), `DropdownMenuTrigger`, `DropdownMenuContent`,
 and `DropdownMenuItem`/`DropdownMenuSeparator`/`DropdownMenuLabel` —
 composable primitives matching plain HTML menu structure, sharing their
 panel styling with Context Menu, User Menu, and Command Menu.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={DropdownMenuStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Wrap any trigger element in `DropdownMenuTrigger asChild` (an `IconButton`
 with a `MoreHorizontal` icon is the most common case), and list
@@ -32,7 +42,9 @@ with a `MoreHorizontal` icon is the most common case), and list
 hint; pass `destructive` to color an item (like "Delete") with the
 danger tone.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={DropdownMenuStories.WithLabelAndDisabledItem} />
 
@@ -40,17 +52,23 @@ danger tone.
 group of items; pass `disabled` on any item to make it inert without
 removing it from the list.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — the menu's width is determined by its content (with a
 180px minimum), not a fixed scale.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Hover/keyboard-highlighted, disabled, and destructive states are shown
 in the Live Preview and Variants above.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Radix wires full `menu`/`menuitem` ARIA roles, roving-tabindex arrow-
   key navigation, type-ahead, and Escape-to-close automatically.
@@ -59,11 +77,15 @@ in the Live Preview and Variants above.
 - A disabled item is excluded from keyboard navigation and marked
   `data-disabled`, not just visually dimmed.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <ArgTypes of={DropdownMenuStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Pencil, Trash2 } from 'lucide-react';
@@ -88,7 +110,9 @@ import {
 </DropdownMenu>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -101,10 +125,16 @@ import {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-context-menu--docs">Context Menu</a>
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-user-menu--docs">User Menu</a>
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-command-menu--docs">Command Menu</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

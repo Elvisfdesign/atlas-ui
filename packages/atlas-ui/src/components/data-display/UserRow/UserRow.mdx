@@ -1,49 +1,67 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as UserRowStories from './UserRow.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={UserRowStories} />
 
-# User Row
 
+<DocsLayout>
+
+<DocsTitle>User Row</DocsTitle>
+
+<DocsIntro>
 A person's avatar, name, and an optional secondary line. Source: Atlas
 Product — the Review Queue table's assignee cell.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Composes the `Avatar` primitive directly (24px `small` by default,
 matching the assignee chip) rather than reimplementing photo/initials/
 fallback logic, paired with the person's name and an optional meta line.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={UserRowStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use in a table cell or list wherever a row needs to identify a specific
 person — an assignee, a reviewer, an author. Pass `avatarSrc` for a
 photo; it falls back to initials automatically (inherited from Avatar)
 if the image fails to load.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={UserRowStories.List} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 <Canvas of={UserRowStories.Medium} />
 
 `small` (default, 24px avatar) matches the Review Queue assignee cell;
 `medium` (34px avatar) reads better in a more spacious context.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={UserRowStories.WithMeta} />
 
 User Row is a static display component — it has no interactive states of
 its own. Long names truncate with an ellipsis.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The underlying `Avatar` sets `role="img"` with an accessible name
   equal to the person's name, so the visual chip and the visible name
@@ -51,13 +69,17 @@ its own. Long names truncate with an ellipsis.
   conflicting.
 - Name and meta render as plain text in reading order.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={UserRowStories.Default} />
 
 <ArgTypes of={UserRowStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { UserRow } from '@/components/data-display/UserRow';
@@ -65,7 +87,9 @@ import { UserRow } from '@/components/data-display/UserRow';
 <UserRow name="Sophia Carter" meta="Assigned 2 hours ago" />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -78,10 +102,16 @@ import { UserRow } from '@/components/data-display/UserRow';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-avatar--docs">Avatar</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-file-row--docs">File Row</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

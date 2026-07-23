@@ -1,51 +1,69 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as CommandMenuStories from './CommandMenu.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={CommandMenuStories} />
 
-# Command Menu
 
+<DocsLayout>
+
+<DocsTitle>Command Menu</DocsTitle>
+
+<DocsIntro>
 A searchable Cmd+K command palette. Source: Atlas Product — every
 screen's topbar search input shows a "⌘K" chip, the real, recurring
 trigger for exactly this kind of overlay. Built on `cmdk` (the standard
 companion to Radix for this pattern; it wraps Radix's Dialog internally,
 so Escape-to-close, focus trapping, and portaling are already handled),
 styled to match Atlas's other floating panels.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 `CommandMenu` (the dialog + search engine), `CommandMenuInput`,
 `CommandMenuList`, `CommandMenuEmpty`, `CommandMenuGroup`,
 `CommandMenuItem`, and `CommandMenuSeparator`.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={CommandMenuStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Bind `CommandMenu` to a global keyboard shortcut (⌘K/Ctrl+K) in your
 app shell, controlling `open`/`onOpenChange` from that state. Group
 related items with `CommandMenuGroup`'s `heading`, and always include a
 `CommandMenuEmpty` so a no-results search state isn't a blank panel.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 Command Menu has one visual treatment — grouping and separators are
 optional based on how many commands you're listing.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (max-width 512px), with the results list capped at a scrollable
 320px so a long list of matches never grows unbounded.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Typing in the input live-filters the list (shown in the Live Preview);
 the `CommandMenuEmpty` message appears automatically when nothing
 matches.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Inherits Radix Dialog's focus trap, Escape-to-close, and portal
   behavior via `cmdk`'s built-in wrapper.
@@ -55,11 +73,15 @@ matches.
 - Full keyboard navigation (arrow keys, Enter to select) is built in,
   including optional vim-style bindings.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <ArgTypes of={CommandMenuStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { useState, useEffect } from 'react';
@@ -107,7 +129,9 @@ function AppCommandMenu() {
 }
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -120,9 +144,15 @@ function AppCommandMenu() {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-dropdown-menu--docs">Dropdown Menu</a>
   <a className="atlas-doc-related__link" href="?path=/docs/forms-search-input--docs">Search Input</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

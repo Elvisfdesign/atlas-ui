@@ -1,38 +1,54 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as SwitchStories from './Switch.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={SwitchStories} />
 
-# Switch
 
+<DocsLayout>
+
+<DocsTitle>Switch</DocsTitle>
+
+<DocsIntro>
 An on/off setting that takes effect immediately.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Not yet its own componentized node in the Atlas UI System (see the React
 Readiness matrix) — built from Atlas's motion and accent tokens (a
 `duration-fast` slide, the same accent Checkbox and Radio use when
 checked) as the immediate-effect sibling of Checkbox.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={SwitchStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Switch when toggling has an immediate, visible effect (auto-approve
 is on right now) — not as part of a form that's submitted later, where
 Checkbox is the right control.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 One visual treatment — Switch doesn't have a `variant` prop.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (20×36px).
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas>
   <Story of={SwitchStories.Checked} />
@@ -40,7 +56,9 @@ One size (20×36px).
   <Story of={SwitchStories.DisabledChecked} />
 </Canvas>
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Rendered with `role="switch"` on a real `<input type="checkbox">`, so
   screen readers announce it as a toggle with an on/off state, not a
@@ -50,13 +68,17 @@ One size (20×36px).
 - The thumb's slide respects `prefers-reduced-motion` globally, same as
   every other Atlas transition.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={SwitchStories.Default} />
 
 <ArgTypes of={SwitchStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Switch } from '@/components/forms/Switch';
@@ -68,7 +90,9 @@ import { Switch } from '@/components/forms/Switch';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -81,8 +105,14 @@ import { Switch } from '@/components/forms/Switch';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/forms-checkbox--docs">Checkbox</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

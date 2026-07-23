@@ -1,6 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
+import { DocsLayout, DocsIntro, DocsSection } from './components/DocsLayout';
 
 <Meta title="Introduction" />
+
+<DocsLayout>
 
 <div className="atlas-doc-hero">
   <span className="atlas-doc-hero__eyebrow">Atlas Design System</span>
@@ -10,12 +13,14 @@ import { Meta } from '@storybook/addon-docs/blocks';
   </p>
 </div>
 
+<DocsIntro>
 Atlas UI is the official React implementation of Atlas — not a prototype, not a
 one-off set of components, but the library meant to power Atlas Dashboard,
 Atlas Admin, Atlas AI, and whatever comes after them. Every token, variant,
 and state here is transcribed from the Atlas Figma files, not reinvented. If
 it looks different from Atlas, that's a bug in this library, not a design
 decision made here.
+</DocsIntro>
 
 <div className="atlas-doc-links">
   <a className="atlas-doc-link" href="?path=/docs/foundations-colors--docs">
@@ -28,7 +33,7 @@ decision made here.
   </a>
 </div>
 
-## Principles
+<DocsSection title="Principles">
 
 Five things this library optimizes for, in order:
 
@@ -56,13 +61,17 @@ possible situation.
 tokens, so Light and Dark are the same component rendering from different
 CSS variables — never a duplicated implementation.
 
-## Stack
+</DocsSection>
+
+<DocsSection title="Stack">
 
 React · TypeScript · Vite · Tailwind CSS v4 · Storybook · Vitest ·
 React Testing Library · Lucide React · Radix Primitives (for Tooltip, and
 future Modal/Drawer/Dialog-family components).
 
-## How Atlas UI is organized
+</DocsSection>
+
+<DocsSection title="How Atlas UI is organized">
 
 <div className="atlas-doc-table">
   <div className="atlas-doc-table__row atlas-doc-table__row--head">
@@ -108,3 +117,7 @@ Six components are implemented today: **Button**, **Icon Button**, **Badge**,
 is labeled with its real status — currently under implementation, or
 planned for an upcoming milestone — so the navigation shows Atlas UI's
 full intended shape without claiming anything exists before it does.
+
+</DocsSection>
+
+</DocsLayout>

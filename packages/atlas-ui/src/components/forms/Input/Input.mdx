@@ -1,26 +1,36 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as InputStories from './Input.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={InputStories} />
 
-# Input
 
+<DocsLayout>
+
+<DocsTitle>Input</DocsTitle>
+
+<DocsIntro>
 The default single-line text field in Atlas. Source: Atlas UI System,
 Forms → Form / Text Input (a 6-state variant set: default, hover, focus,
 filled, disabled, error).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Input covers every plain text-entry need — names, IDs, single-line
 values. It isn't a `state` prop with six options: hover and focus come
 from the browser for free, and `filled` is just what the field looks like
 once it has a value. Only `error` and `disabled` are things a caller sets.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={InputStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Always pass a `label` rather than relying on `placeholder` alone —
 placeholder text disappears the moment someone starts typing, so it can't
@@ -28,7 +38,9 @@ carry the field's identity by itself. Use `helperText` for guidance that
 should always be visible, and `error` only once a real validation problem
 exists.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={InputStories.WithLeadingIcon} />
 
@@ -36,7 +48,9 @@ A leading icon is the one supported visual variant — for a unit, a
 currency symbol, or context like a mail icon on an email field. It's
 `aria-hidden`, same as everywhere else in Atlas.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 <Canvas of={InputStories.Small} />
 
@@ -44,7 +58,9 @@ currency symbol, or context like a mail icon on an email field. It's
 and a Button sit flush in the same row. **small** (29px) is for dense
 layouts — filter bars, inline table editing.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas>
   <Story of={InputStories.WithHelperText} />
@@ -52,7 +68,9 @@ layouts — filter bars, inline table editing.
   <Story of={InputStories.Disabled} />
 </Canvas>
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The label is a real `<label htmlFor>`, not a placeholder or a floating
   span — clicking it focuses the input, and screen readers always
@@ -63,13 +81,17 @@ layouts — filter bars, inline table editing.
 - Focus is always visible: a 2px accent ring, matching every other Atlas
   interactive element.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={InputStories.Default} />
 
 <ArgTypes of={InputStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Input } from '@/components/forms/Input';
@@ -82,7 +104,9 @@ import { Input } from '@/components/forms/Input';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -95,10 +119,16 @@ import { Input } from '@/components/forms/Input';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/forms-search-input--docs">Search Input</a>
   <a className="atlas-doc-related__link" href="?path=/docs/forms-textarea--docs">Textarea</a>
   <a className="atlas-doc-related__link" href="?path=/docs/forms-select--docs">Select</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

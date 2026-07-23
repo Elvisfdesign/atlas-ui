@@ -1,13 +1,20 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { spacing } from '@/tokens/spacing';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../components/DocsLayout';
 
 <Meta title="Foundations/Spacing" />
 
-# Spacing
+<DocsLayout>
 
+<DocsTitle>Spacing</DocsTitle>
+
+<DocsIntro>
 A 4pt rhythm. Every gap and padding value in Atlas maps to this scale —
 there is no such thing as a one-off `13px` margin in a component built
 correctly.
+</DocsIntro>
+
+<DocsSection title="Live Preview">
 
 <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'var(--spacing-16)', marginTop: 'var(--spacing-32)', marginBottom: 'var(--spacing-48)' }}>
   {Object.entries(spacing).map(([key, value]) => (
@@ -18,7 +25,9 @@ correctly.
   ))}
 </div>
 
-## Where each tier is used
+</DocsSection>
+
+<DocsSection title="Where each tier is used">
 
 <div className="atlas-doc-table">
   <div className="atlas-doc-table__row atlas-doc-table__row--head">
@@ -27,17 +36,22 @@ correctly.
   </div>
   <div className="atlas-doc-table__row"><span>spacing-4 / spacing-8</span><span>Icon-to-label gaps, tight inline groups</span></div>
   <div className="atlas-doc-table__row"><span>spacing-12 / spacing-16</span><span>Row and cell padding — the Button and Table row padding both live here</span></div>
-  <div className="atlas-doc-table__row"><span>spacing-20 / spacing-24</span><span>Card padding, specimen gaps (KPI Card uses spacing-20)</span></div>
-  <div className="atlas-doc-table__row"><span>spacing-28</span><span>Documentation heading rhythm — the gap from a section divider down to its heading text</span></div>
-  <div className="atlas-doc-table__row"><span>spacing-32 / spacing-40</span><span>Page padding, heading-to-content gaps</span></div>
-  <div className="atlas-doc-table__row"><span>spacing-48</span><span>Documentation "Cards" rhythm — the breathing room after a card/preview/token-grid block, before the next heading</span></div>
-  <div className="atlas-doc-table__row"><span>spacing-56</span><span>Reserved step between 48 and 64, not yet assigned to a specific role</span></div>
-  <div className="atlas-doc-table__row"><span>spacing-64</span><span>Documentation section rhythm — the gap between two major "## Section" headings on a doc page</span></div>
+  <div className="atlas-doc-table__row"><span>spacing-20 / spacing-24</span><span>Card padding, specimen gaps; also the documentation "heading → body" gap (DocsSection's h2 to its first paragraph)</span></div>
+  <div className="atlas-doc-table__row"><span>spacing-32 / spacing-40</span><span>Page padding, heading-to-content gaps; also documentation "paragraph → card/table/code" (32) and "divider → heading" (40)</span></div>
+  <div className="atlas-doc-table__row"><span>spacing-48</span><span>Documentation "Cards" rhythm — the breathing room below a card/table/preview block, before more prose in the same section</span></div>
+  <div className="atlas-doc-table__row"><span>spacing-56</span><span>Documentation section rhythm — the fixed gap DocsSection's divider carries before every section, so a new section is never less than 56px from whatever came before it</span></div>
+  <div className="atlas-doc-table__row"><span>spacing-64 / spacing-28</span><span>Reserved — not currently assigned to a specific role</span></div>
   <div className="atlas-doc-table__row"><span>spacing-80+</span><span>Page-level outer margins</span></div>
 </div>
 
-## Principle
+</DocsSection>
+
+<DocsSection title="Principle">
 
 Use an existing spacing variable whenever one fits. Only introduce a new
 value when a genuine, repeatable gap has been found across multiple
 places — never to make one component look slightly better in isolation.
+
+</DocsSection>
+
+</DocsLayout>

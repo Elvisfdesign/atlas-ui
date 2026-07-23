@@ -1,46 +1,64 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as BreadcrumbStories from './Breadcrumb.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={BreadcrumbStories} />
 
-# Breadcrumb
 
+<DocsLayout>
+
+<DocsTitle>Breadcrumb</DocsTitle>
+
+<DocsIntro>
 Shows where the current page sits in Atlas's navigation hierarchy.
 Source: Atlas Product — the Review Queue page's "Home / Review Queue"
 crumb (12.5px text, `/` separator, current page not a link).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 `Breadcrumb` inserts the `/` separator between items automatically —
 callers just list `BreadcrumbItem`s in order, they never place a
 separator by hand.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={BreadcrumbStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Give every item except the last one an `href`. Mark the last item
 `current` — it renders as plain text, not a link, since a page never
 needs to link to itself.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={BreadcrumbStories.ThreeLevels} />
 
 Breadcrumb scales to any number of levels — three here, for a document
 open inside the Review Queue.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (12.5px, Atlas's `body-small` type style).
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Stateless beyond each item's own link hover state.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders as `<nav aria-label="Breadcrumb">` with an ordered list (`<ol>`)
   of items — the standard breadcrumb landmark pattern.
@@ -48,13 +66,17 @@ Stateless beyond each item's own link hover state.
 - The `/` separators are `aria-hidden` — they're visual punctuation, not
   content a screen reader needs to announce.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={BreadcrumbStories.Default} />
 
 <ArgTypes of={BreadcrumbStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Breadcrumb, BreadcrumbItem } from '@/components/navigation/Breadcrumb';
@@ -66,8 +88,14 @@ import { Breadcrumb, BreadcrumbItem } from '@/components/navigation/Breadcrumb';
 </Breadcrumb>
 ```
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/navigation-sidebar--docs">Sidebar</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

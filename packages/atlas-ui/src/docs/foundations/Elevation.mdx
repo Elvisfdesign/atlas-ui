@@ -1,13 +1,20 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { elevation } from '@/tokens/elevation';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../components/DocsLayout';
 
 <Meta title="Foundations/Elevation" />
 
-# Elevation
+<DocsLayout>
 
+<DocsTitle>Elevation</DocsTitle>
+
+<DocsIntro>
 Atlas uses shadow sparingly — most surfaces are flat, distinguished by a
 hairline border and a subtle background-surface change, not a shadow. Only
 things that visually float above the page get one.
+</DocsIntro>
+
+<DocsSection title="Live Preview">
 
 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--atlas-doc-grid-gap)', marginTop: 'var(--spacing-32)', marginBottom: 'var(--spacing-48)' }}>
   {Object.entries(elevation).map(([key, value]) => (
@@ -30,7 +37,9 @@ things that visually float above the page get one.
   ))}
 </div>
 
-## Where each is used
+</DocsSection>
+
+<DocsSection title="Where each is used">
 
 - **none** — cards, panels, table rows. The default for almost everything.
 - **low** — dropdowns, menus.
@@ -40,3 +49,7 @@ things that visually float above the page get one.
 There's a fifth concept, **overlay**, that isn't a shadow at all — it's the
 dark scrim shown behind a modal or drawer (`overlay-scrim`, a semantic
 color token, not part of this elevation scale).
+
+</DocsSection>
+
+</DocsLayout>

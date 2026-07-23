@@ -1,28 +1,38 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as TooltipStories from './Tooltip.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={TooltipStories} />
 
-# Tooltip
 
+<DocsLayout>
+
+<DocsTitle>Tooltip</DocsTitle>
+
+<DocsIntro>
 A short, transient label describing an element, shown on hover or
 keyboard focus. Source: Atlas UI System, Overlays → Overlay / Tooltip.
 Built on [Radix's Tooltip primitive](https://www.radix-ui.com/primitives/docs/components/tooltip)
 rather than hand-rolled, so hover-intent timing, `Escape`-to-dismiss, and
 `aria-describedby` wiring are solved once, correctly, instead of
 per-component.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A short label that appears on hover or keyboard focus, built on Radix
 rather than hand-rolled, so timing, dismissal, and ARIA wiring are solved
 once instead of per-component.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={TooltipStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use a Tooltip to add supplementary information to an already-usable
 control — extra context on an icon button, a confidence score, a
@@ -30,19 +40,25 @@ truncated value. Never put information in a Tooltip that's required to
 use the control; anything essential needs to be visible without a hover,
 since tooltips don't work on touch devices and are easy to miss.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={TooltipStories.Sides} />
 
 `side` controls which edge the tooltip opens from — Radix automatically
 flips it if the preferred side would clip against the viewport.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — Tooltip's dimensions are content-driven (hug width, fixed
 padding), not something you configure.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={TooltipStories.OnButton} />
 
@@ -50,7 +66,9 @@ Tooltip has two states worth knowing about: closed (default) and open,
 triggered by hover after `delayDuration` (80ms by default, matching
 Atlas's `duration-instant` token) or immediately on keyboard focus.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Appears on keyboard focus, not just mouse hover — a keyboard-only user
   gets the same information a mouse user does.
@@ -62,13 +80,17 @@ Atlas's `duration-instant` token) or immediately on keyboard focus.
   behavior to whatever you pass as `children` (a Button, an Icon Button, a
   plain span) without wrapping it in an extra DOM node.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={TooltipStories.Default} />
 
 <ArgTypes of={TooltipStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Tooltip } from '@/components/overlays/Tooltip';
@@ -80,7 +102,9 @@ import { Info } from 'lucide-react';
 </Tooltip>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -93,9 +117,15 @@ import { Info } from 'lucide-react';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/actions-icon-button--docs">Icon Button</a>
   <a className="atlas-doc-related__link" href="?path=/docs/actions-button--docs">Button</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

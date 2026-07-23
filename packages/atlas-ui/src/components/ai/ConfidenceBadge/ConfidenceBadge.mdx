@@ -1,45 +1,63 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ConfidenceBadgeStories from './ConfidenceBadge.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ConfidenceBadgeStories} />
 
-# Confidence Badge
 
+<DocsLayout>
+
+<DocsTitle>Confidence Badge</DocsTitle>
+
+<DocsIntro>
 Source: Atlas Product — Document Review's Extracted Fields list
 (`field-row` → `fright`): a percentage beside a small tone-colored
 circular icon chip.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 The compact form of a confidence readout — a percentage and a small
 tone-colored icon chip, used beside a single value in a card or list row
 where a full bar (Data Display's Confidence Indicator) would be visually
 heavier than the context needs.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ConfidenceBadgeStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Pass the raw 0–100 `value` — Confidence Badge rounds it and picks a tone
 automatically using the same thresholds as Confidence Indicator (≥90
 success, ≥70 warning, below danger).
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ConfidenceBadgeStories.Warning} />
 <Canvas of={ConfidenceBadgeStories.Danger} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size, sized to sit inline with a 13px value in Extracted Field Row.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Static; Confidence Badge has no interactive states.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Confidence is conveyed by the percentage text, the icon, and the tone
   color together — never color alone (WCAG 1.4.1).
@@ -47,13 +65,17 @@ Static; Confidence Badge has no interactive states.
   sentence ("92% confidence") for assistive tech, since the chip alone
   is otherwise just a decorative icon.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ConfidenceBadgeStories.Default} />
 
 <ArgTypes of={ConfidenceBadgeStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { ConfidenceBadge } from '@/components/ai/ConfidenceBadge';
@@ -61,7 +83,9 @@ import { ConfidenceBadge } from '@/components/ai/ConfidenceBadge';
 <ConfidenceBadge value={98} />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -74,10 +98,16 @@ import { ConfidenceBadge } from '@/components/ai/ConfidenceBadge';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-confidence-indicator--docs">Confidence Indicator</a>
   <a className="atlas-doc-related__link" href="?path=/docs/ai-confidence-meter--docs">Confidence Meter</a>
   <a className="atlas-doc-related__link" href="?path=/docs/ai-extracted-field-row--docs">Extracted Field Row</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

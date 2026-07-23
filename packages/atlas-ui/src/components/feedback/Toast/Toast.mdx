@@ -1,27 +1,37 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ToastStories from './Toast.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ToastStories} />
 
-# Toast
 
+<DocsLayout>
+
+<DocsTitle>Toast</DocsTitle>
+
+<DocsIntro>
 A transient, corner-anchored notification. Source: no dedicated Product
 frame — toasts are transient by nature and don't sit in a static mockup
 — built on Radix's Toast primitive, which owns auto-dismiss timing,
 swipe-to-dismiss, and pause-on-hover/focus. Styled with the same
 surface-elevated + elevation-high recipe already used for Line Chart's
 tooltip, and shares its tone icon with Inline Alert and Banner.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 An icon, a title, an optional description, and a close button, rendered
 into a fixed viewport stack.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ToastStories.Success} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Render `ToastProvider` once near your app root, and `ToastViewport` once
 where you want the stack to anchor (bottom-right by default). Render a
@@ -30,22 +40,30 @@ global toast-queue store, so the calling app manages which toasts are
 currently mounted (an array in state is the common pattern), the same
 way it would with the raw Radix primitive.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ToastStories.Info} />
 <Canvas of={ToastStories.Warning} />
 <Canvas of={ToastStories.Danger} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — the viewport caps toasts at a max width (384px) so they never
 grow to fill an entire wide screen.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={ToastStories.WithoutDescription} />
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Radix's Toast primitive announces its content via an `aria-live`
   region, handles focus so a toast never steals it from what the user
@@ -53,13 +71,17 @@ grow to fill an entire wide screen.
 - The close button is a real, labeled `IconButton` ("Dismiss
   notification").
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ToastStories.Success} />
 
 <ArgTypes of={ToastStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Toast, ToastProvider, ToastViewport } from '@/components/feedback/Toast';
@@ -78,7 +100,9 @@ function App() {
 }
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -91,9 +115,15 @@ function App() {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-inline-alert--docs">Inline Alert</a>
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-banner--docs">Banner</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

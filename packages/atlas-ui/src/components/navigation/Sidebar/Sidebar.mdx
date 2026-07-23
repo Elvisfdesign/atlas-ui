@@ -1,17 +1,23 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as SidebarStories from './Sidebar.stories';
 import * as SidebarItemStories from './SidebarItem.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={SidebarStories} />
 
-# Sidebar
 
+<DocsLayout>
+
+<DocsTitle>Sidebar</DocsTitle>
+
+<DocsIntro>
 The app shell's primary left-hand navigation. Source: Atlas Product — the
 Review Queue's sidebar (240px fixed width, icon + label nav rows, a
 divider between the primary and secondary nav group, a profile card
 pinned to the bottom).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 `Sidebar` is a structural shell — it owns the 240px width, the right-hand
 divider, and vertical layout. `SidebarSection` groups a set of
@@ -19,18 +25,24 @@ divider, and vertical layout. `SidebarSection` groups a set of
 bottom profile card are page-specific content, so they're composed as
 plain children rather than baked-in props.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={SidebarStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Compose a `Sidebar` from one or more `SidebarSection`s, each holding
 `SidebarItem`s. Use `withDivider` on a section that should visually
 separate from the one above it (Product uses this once, between the main
 nav group and Teams/Settings).
 
-## Anatomy
+</DocsSection>
+
+<DocsSection title="Anatomy">
 
 <Canvas>
   <Story of={SidebarItemStories.ItemDefault} />
@@ -39,7 +51,9 @@ nav group and Teams/Settings).
 
 A `SidebarItem` is an icon, a label, and an optional trailing count chip.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 `SidebarItem` renders as a `<button>` by default, or a real `<a href>`
 when you pass `href` — use the link form whenever the item is real
@@ -47,32 +61,42 @@ in-app navigation, so it behaves like a link (open in new tab, etc.).
 
 <Canvas of={SidebarItemStories.ItemAsLink} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — Sidebar's width (240px) and item height (35px) are fixed,
 matching Atlas Product exactly.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 `active` marks the current section: `interactive-selected` background,
 accent text — the same soft-indigo token the Data Table uses for a
 selected row, so "this is the current one" reads consistently everywhere
 in Atlas.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - `Sidebar` renders as `<nav aria-label="Primary">`, distinguishing it
   from the page's other navigation landmarks (Breadcrumb, Tabs).
 - The active item gets `aria-current="page"`.
 - Both the button and link forms are fully keyboard operable natively.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={SidebarStories.Default} />
 
 <ArgTypes of={SidebarItemStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Sidebar, SidebarSection, SidebarItem } from '@/components/navigation/Sidebar';
@@ -91,9 +115,15 @@ import { Home, Inbox, Settings } from 'lucide-react';
 </Sidebar>
 ```
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/navigation-top-navigation--docs">Top Navigation</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-avatar--docs">Avatar</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

@@ -1,50 +1,68 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as UserMenuStories from './UserMenu.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={UserMenuStories} />
 
-# User Menu
 
+<DocsLayout>
+
+<DocsTitle>User Menu</DocsTitle>
+
+<DocsIntro>
 The account menu behind Atlas's avatar chip. Source: Atlas Product's
 sidebar profile card and topbar avatar chip (both a 32–34px Avatar +
 name + role), present on every screen. Composes Avatar and Dropdown
 Menu rather than reimplementing either.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A trigger button (an `Avatar`) that opens a Dropdown Menu showing the
 person's name and meta line, followed by whatever menu items you pass
 as children.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={UserMenuStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Pass `name` and an optional `meta` (role, email, or both), and list
 `DropdownMenuItem`/`DropdownMenuSeparator` children exactly as you would
 for a plain Dropdown Menu — User Menu only adds the name/meta header
 above them.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={UserMenuStories.InverseAvatar} />
 
 `avatarColor="inverse"` matches the monochrome treatment Atlas uses for
 the current signed-in user in the app's topbar chrome.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — the trigger uses Avatar's `small` size to match the sidebar
 and topbar chips it's grounded in.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Hover/keyboard-highlighted and destructive item states are inherited
 from Dropdown Menu, shown in the "Log out" item above.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The trigger has an explicit `aria-label` ("Account menu for {name}"),
   so it's identifiable even though its only visible content is an
@@ -52,11 +70,15 @@ from Dropdown Menu, shown in the "Log out" item above.
 - Everything else — menu roles, keyboard navigation, focus return — is
   inherited from Dropdown Menu.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <ArgTypes of={UserMenuStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { HelpCircle, LogOut, Settings, User } from 'lucide-react';
@@ -72,7 +94,9 @@ import { UserMenu } from '@/components/overlays/UserMenu';
 </UserMenu>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -85,9 +109,15 @@ import { UserMenu } from '@/components/overlays/UserMenu';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-dropdown-menu--docs">Dropdown Menu</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-avatar--docs">Avatar</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

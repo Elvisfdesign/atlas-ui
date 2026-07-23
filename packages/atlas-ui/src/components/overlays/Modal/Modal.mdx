@@ -1,26 +1,36 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ModalStories from './Modal.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ModalStories} />
 
-# Modal
 
+<DocsLayout>
+
+<DocsTitle>Modal</DocsTitle>
+
+<DocsIntro>
 A centered, modal overlay dialog. Source: no single dedicated Product
 frame — a modal is a transient overlay state, not a static mockup —
 built on Radix's Dialog primitive, which owns focus trapping, focus
 return to the trigger, Escape-to-close, and background scroll locking.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 `Modal` (root), `ModalTrigger`, `ModalContent` (with a built-in close
 button), and `ModalTitle`/`ModalDescription`/`ModalHeader`/`ModalBody`/
 `ModalFooter` slot components.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ModalStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Compose `ModalHeader` (title + description), `ModalBody` (the form or
 content), and `ModalFooter` (action buttons, right-aligned) inside
@@ -28,7 +38,9 @@ content), and `ModalFooter` (action buttons, right-aligned) inside
 `ConfirmationDialog` instead of assembling Modal by hand — it's the same
 component, pre-composed.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ModalStories.Closed} />
 
@@ -36,18 +48,24 @@ component, pre-composed.
 control for a modal that must be resolved through its footer actions
 only.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (max-width 448px / `max-w-md`) — Atlas doesn't have a
 documented larger Modal variant; use Drawer for content that needs more
 room.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Open/closed is the only state — shown via the trigger interaction in
 the Live Preview.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Radix traps focus inside the dialog while open, returns it to the
   trigger on close, and closes on Escape.
@@ -56,11 +74,15 @@ the Live Preview.
 - The overlay is `aria-hidden` to background content and blocks
   interaction with it.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <ArgTypes of={ModalStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Button } from '@/components/actions/Button';
@@ -93,7 +115,9 @@ import {
 </Modal>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -106,9 +130,15 @@ import {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-confirmation-dialog--docs">Confirmation Dialog</a>
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-drawer--docs">Drawer</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

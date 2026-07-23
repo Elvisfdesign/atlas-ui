@@ -1,46 +1,64 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as AIAssistantStateStories from './AIAssistantState.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={AIAssistantStateStories} />
 
-# AI Assistant State
 
+<DocsLayout>
+
+<DocsTitle>AI Assistant State</DocsTitle>
+
+<DocsIntro>
 Consolidates "AI Processing / Error / Empty State" — named as one item
 in the component brief — into a single component with a `status` prop,
 the same pattern Feedback's Empty State uses for Empty/Success/Error.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 An icon-chip + title + description block for Assistant Panel's message
 area: shown while a response is generating, when a request fails, or
 before the first message is sent.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={AIAssistantStateStories.Processing} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Swap `status` between `processing`, `error`, and `empty` rather than
 building three separate components — each gets its own icon and tone,
 sharing one layout.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={AIAssistantStateStories.ErrorState} />
 <Canvas of={AIAssistantStateStories.Empty} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — a centered block meant to fill Assistant Panel's message
 area.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 `processing`, `error`, and `empty` are shown above; each accepts an
 optional `action` (e.g. a "Try again" button for `error`).
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - `processing` carries `role="status"` so assistive tech is told work
   is ongoing, matching Feedback's Loading State.
@@ -49,13 +67,17 @@ optional `action` (e.g. a "Try again" button for `error`).
 - The icon is always decorative (`aria-hidden`); the title and
   description carry the meaning.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={AIAssistantStateStories.Processing} />
 
 <ArgTypes of={AIAssistantStateStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { AIAssistantState } from '@/components/ai/AIAssistantState';
@@ -67,7 +89,9 @@ import { AIAssistantState } from '@/components/ai/AIAssistantState';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -80,10 +104,16 @@ import { AIAssistantState } from '@/components/ai/AIAssistantState';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-empty-state--docs">Empty State</a>
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-loading-state--docs">Loading State</a>
   <a className="atlas-doc-related__link" href="?path=/docs/ai-assistant-panel--docs">Assistant Panel</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

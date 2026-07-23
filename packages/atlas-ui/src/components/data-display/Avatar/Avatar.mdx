@@ -1,25 +1,35 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as AvatarStories from './Avatar.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={AvatarStories} />
 
-# Avatar
 
+<DocsLayout>
+
+<DocsTitle>Avatar</DocsTitle>
+
+<DocsIntro>
 A circular identity marker — a person's photo or initials. **Not yet a
 componentized Figma node** (see the Atlas UI System's React Readiness
 matrix) — built directly from the two real patterns Atlas Product uses:
 the current-user chip in the app topbar, and assignee-list chips in tables.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A photo when one exists, deterministic initials when it doesn't — Avatar
 never renders a broken image or an empty circle.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={AvatarStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use `color="inverse"` for the signed-in user's own avatar in app chrome
 (topbar, account menu) — that's the monochrome treatment Product uses
@@ -32,12 +42,16 @@ Pass `src` for a real photo; Avatar falls back to initials automatically if
 the image fails to load, so you never need to handle that case at the
 call site.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={AvatarStories.CurrentUser} />
 <Canvas of={AvatarStories.AssigneeList} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 <Canvas of={AvatarStories.Small} />
 
@@ -45,27 +59,35 @@ call site.
 matches the assignee-list chip size. Both are measured, not estimated,
 from real Product screens.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={AvatarStories.PhotoWithFallback} />
 
 Avatar has one behavioral "state" worth documenting: a broken `src` falls
 back to initials automatically, rather than showing a broken-image icon.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Rendered with `role="img"` and `aria-label` set to the full name, so
   screen readers announce the person's name — not "SC" or a filename.
 - The initials text and the photo `<img>` are both `aria-hidden`, so the
   name is announced exactly once, from the wrapping element's label.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={AvatarStories.Default} />
 
 <ArgTypes of={AvatarStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Avatar } from '@/components/data-display/Avatar';
@@ -83,7 +105,9 @@ import { Avatar } from '@/components/data-display/Avatar';
 <Avatar name="Sophia Carter" src={user.photoUrl} />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -96,8 +120,14 @@ import { Avatar } from '@/components/data-display/Avatar';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

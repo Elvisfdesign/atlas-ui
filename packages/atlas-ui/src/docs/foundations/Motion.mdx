@@ -1,19 +1,26 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { duration, easing } from '@/tokens/motion';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../components/DocsLayout';
 
 <Meta title="Foundations/Motion" />
 
-# Motion
+<DocsLayout>
 
+<DocsTitle>Motion</DocsTitle>
+
+<DocsIntro>
 Four durations, each tied to a specific kind of interaction.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Not a general "fast/slow" scale to pick from by feel — each token is
 named for the interaction it belongs to (hover, press, open/close,
 generation), so choosing one is a lookup, not a judgment call.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 Hover each row — the indicator moves using that token's real duration and
 easing, so the difference between `instant` and `slow` is something you
@@ -68,7 +75,9 @@ can feel, not just read as a number.
   ))}
 </div>
 
-## Principle
+</DocsSection>
+
+<DocsSection title="Principle">
 
 Reach for `duration-instant`/`fast` for anything that responds directly to
 a pointer (hover, press) — it should feel immediate. Reach for `normal` for
@@ -80,3 +89,7 @@ Respect `prefers-reduced-motion`: this library's `globals.css` already
 disables all animation/transition duration globally when that preference is
 set — individual components, and the live demo above, don't need to handle
 it themselves.
+
+</DocsSection>
+
+</DocsLayout>

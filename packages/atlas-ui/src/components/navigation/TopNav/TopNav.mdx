@@ -1,58 +1,80 @@
 import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
 import * as TopNavStories from './TopNav.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={TopNavStories} />
 
-# Top Navigation
 
+<DocsLayout>
+
+<DocsTitle>Top Navigation</DocsTitle>
+
+<DocsIntro>
 The app shell's top bar. Source: Atlas Product — the Review Queue topbar
 (128px content row + a 1px bottom divider, 32px horizontal padding,
 global search on the left, notifications and the user menu on the
 right).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A structural shell only. Every piece Atlas Product places inside it —
 the search field, the notification trigger, the user avatar — is already
 its own component (Search Input, Icon Button, Avatar). `TopNav` lays
 them out; it doesn't reimplement any of them.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={TopNavStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Compose `TopNav` with a `SearchInput` on the left and whatever page-level
 actions (notifications, user menu) belong on the right, using ordinary
 flex children — `TopNav` doesn't take a fixed set of slot props, since
 what belongs in the topbar varies by page.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 One visual treatment — `TopNav` doesn't have a `variant` prop.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (128px content height + 1px divider), matching Atlas Product
 exactly.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Stateless — `TopNav` is a layout container. Its children (Search Input,
 Icon Button, Avatar) carry their own states.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 Renders as a `<header>` — the page's banner landmark, standard for a
 top-level application bar. Its children remain independently keyboard
 operable through their own implementations.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={TopNavStories.Default} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { TopNav } from '@/components/navigation/TopNav';
@@ -70,9 +92,15 @@ import { Bell } from 'lucide-react';
 </TopNav>
 ```
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/navigation-sidebar--docs">Sidebar</a>
   <a className="atlas-doc-related__link" href="?path=/docs/forms-search-input--docs">Search Input</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

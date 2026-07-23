@@ -2,12 +2,16 @@
  * Atlas spacing scale — a 4pt rhythm. Every gap and padding value in Atlas
  * maps to this scale. Source: Atlas UI System, 03 — Foundations, Spacing.
  *
- * `28`, `48`, `56`, and `64` are documentation-page rhythm tiers (see
- * src/docs/docs.css) — not used by product components, only by the
- * Storybook docs layout. `64` is the gap between major sections, `48` is
- * the breathing room around a card/preview block, `28` is the gap from a
- * section divider down to its heading, and `56` remains available for
- * anything that needs a step between 48 and 64.
+ * `48` and `56` are documentation-page rhythm tiers, consumed by the
+ * DocsLayout/DocsSection component system (see
+ * src/docs/components/DocsLayout.tsx and src/docs/docs.css) rather than by
+ * product components: `56` is the fixed gap DocsSection's divider carries
+ * before every "## Section" (the single "section rhythm" constant, chosen
+ * so it always wins under margin-collapsing regardless of what a section
+ * ends on), and `48` is the breathing room below a card/table block. `28`
+ * and `64` are not currently used by the docs layout — kept in the scale
+ * as steps between 24/32 and 56/80 for future use, not because a specific
+ * role has been assigned to them.
  */
 export const spacing = {
   0: '0px',

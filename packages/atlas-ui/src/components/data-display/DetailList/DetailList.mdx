@@ -1,27 +1,37 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as DetailListStories from './DetailList.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={DetailListStories} />
 
-# Detail List
 
+<DocsLayout>
+
+<DocsTitle>Detail List</DocsTitle>
+
+<DocsIntro>
 A plain label/value row list. Source: the label-above-value text stack
 used in every Document Review "Extracted Fields" row (12px tertiary
 label, 13px primary value), decomposed here into its own primitive
 without the confidence percentage and AI icon chip — those belong
 specifically to the (AI) Extracted Field Row, which composes this same
 text-stack pattern and adds a Confidence Indicator on top.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A vertical list of label/value pairs, each separated by a hairline
 divider, rendered as a semantic `<dl>`/`<dt>`/`<dd>` structure.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={DetailListStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use for any plain metadata display — document properties, account
 details, a settings summary — anywhere a value doesn't need a paired
@@ -29,36 +39,48 @@ confidence score. If a value does need one, use the (AI) Extracted
 Field Row instead, not this component with a confidence badge bolted on
 separately.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={DetailListStories.SingleItem} />
 
 `value` accepts any `ReactNode`, so a value can be plain text, a Badge,
 or any other inline content — not just a string.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — Detail List fills its container's width; row height is
 determined by its content.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Detail List is a static display component — it has no interactive or
 loading states of its own.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders as a real `<dl>`/`<dt>`/`<dd>` list, giving assistive
   technology explicit label/value semantics rather than plain, unrelated
   text nodes.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={DetailListStories.Default} />
 
 <ArgTypes of={DetailListStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { DetailList } from '@/components/data-display/DetailList';
@@ -72,7 +94,9 @@ import { DetailList } from '@/components/data-display/DetailList';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -85,8 +109,14 @@ import { DetailList } from '@/components/data-display/DetailList';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-confidence-indicator--docs">Confidence Indicator</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

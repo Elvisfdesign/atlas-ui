@@ -1,54 +1,76 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as PromptInputStories from './PromptInput.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={PromptInputStories} />
 
-# Prompt Input
 
+<DocsLayout>
+
+<DocsTitle>Prompt Input</DocsTitle>
+
+<DocsIntro>
 Source: Atlas Product — the AI Assistant panel's `ai-input` (Document
 Review): a single-line field with a trailing circular send button.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 The composer at the bottom of Assistant Panel — a text field and a
 send button, submitting on Enter or a click.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={PromptInputStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Prompt Input is uncontrolled by default — read the submitted value from
 `onSubmit` rather than tracking `value` yourself, unless you need to
 control it (e.g. to clear the field after sending).
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 Layout and styling are fixed to match the grounded Product pattern.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — a full-width single-line composer.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={PromptInputStories.Disabled} />
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The field is a real `<input>`; the send button has an explicit
   `aria-label="Send"` since it carries only an icon.
 - Submitting via Enter and via the send button both fire the same
   `onSubmit` handler (a native `<form>` under the hood).
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={PromptInputStories.Default} />
 
 <ArgTypes of={PromptInputStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { PromptInput } from '@/components/ai/PromptInput';
@@ -56,7 +78,9 @@ import { PromptInput } from '@/components/ai/PromptInput';
 <PromptInput onSubmit={(value) => sendPrompt(value)} />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -69,9 +93,15 @@ import { PromptInput } from '@/components/ai/PromptInput';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/ai-assistant-panel--docs">Assistant Panel</a>
   <a className="atlas-doc-related__link" href="?path=/docs/ai-suggested-prompt--docs">Suggested Prompt</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

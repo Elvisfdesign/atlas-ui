@@ -1,17 +1,23 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as TableStories from './Table.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection, DocsSubheading } from '../../../docs/components/DocsLayout';
 
 <Meta of={TableStories} />
 
-# Table
 
+<DocsLayout>
+
+<DocsTitle>Table</DocsTitle>
+
+<DocsIntro>
 The Atlas data table — header, rows, selection, sorting, and the
 loading/empty states around them. Source: Atlas Product's Review Queue
 table (45px header / 54px comfortable rows, sortable Document and
 Confidence columns, checkbox selection, a bulk action bar once rows are
 selected).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Table is a set of composable primitives — `Table`, `TableHeader`,
 `TableBody`, `TableRow`, `TableHeaderCell`, `TableCell` — rather than one
@@ -23,11 +29,15 @@ component (`table-header-background`, `table-row-hover`,
 exist specifically so the header surface and the first row never
 visually merge, without relying on a heavy border.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={TableStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Compose a `Table` from `TableHeader`/`TableBody` and `TableRow`/
 `TableHeaderCell`/`TableCell`, matching plain HTML `<table>` structure.
@@ -36,20 +46,26 @@ wrap the table with a `TableBulkActionBar` that renders once
 `selectedCount > 0`. Pass `sortDirection`/`onSort` to a `TableHeaderCell`
 to make a column sortable.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={TableStories.Dense} />
 
 `density="dense"` tightens cell padding for data-heavy views; the default
 `comfortable` density matches the Review Queue table's 54px rows.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 Table has no separate size variant — width is determined by its
 container, and it scrolls horizontally (`overflow-x-auto`) rather than
 compressing columns below a usable width.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={TableStories.Empty} />
 
@@ -59,7 +75,9 @@ compressing columns below a usable width.
 rows, so they sit inside `TableBody` alongside real data rows and share
 the same column grid.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders real `<table>`/`<thead>`/`<tbody>`/`<tr>`/`<th>`/`<td>`
   elements, so screen readers get native table semantics (row/column
@@ -80,17 +98,21 @@ the same column grid.
 - `TableLoadingRows` marks its placeholder rows `aria-hidden="true"`,
   since they carry no real data for assistive technology to announce.
 
-## React Props
+</DocsSection>
 
-### Table
+<DocsSection title="React Props">
+
+<DocsSubheading>Table</DocsSubheading>
 
 <Controls of={TableStories.Default} />
 
-### Full API
+<DocsSubheading>Full API</DocsSubheading>
 
 <ArgTypes of={TableStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import {
@@ -129,7 +151,9 @@ import {
 </>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -142,7 +166,9 @@ import {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-confidence-indicator--docs">Confidence Indicator</a>
@@ -151,3 +177,7 @@ import {
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-badge--docs">Badge</a>
   <a className="atlas-doc-related__link" href="?path=/docs/navigation-pagination--docs">Pagination</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

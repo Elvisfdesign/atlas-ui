@@ -1,51 +1,69 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as InlineAlertStories from './InlineAlert.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={InlineAlertStories} />
 
-# Inline Alert
 
+<DocsLayout>
+
+<DocsTitle>Inline Alert</DocsTitle>
+
+<DocsIntro>
 A tone-tinted message block for a form, card, or page section. Source:
 Atlas's existing status tone system (`info`/`success`/`warning`/`danger`
 background+text pairs, already used by Badge) applied to a larger,
 icon-led message block — the inline counterpart to Banner, which spans
 full page width instead.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 An icon, an optional bold title, and a description, on a tinted
 background matching the chosen tone.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={InlineAlertStories.Info} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Inline Alert for a message scoped to one section of a page — a form,
 a card, a panel — not a page-wide notice (use Banner for that). `title`
 is optional; omit it for a single short sentence that doesn't need a
 separate lead-in.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={InlineAlertStories.Success} />
 <Canvas of={InlineAlertStories.Warning} />
 <Canvas of={InlineAlertStories.Danger} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — Inline Alert fills its container's width; height is
 determined by its content.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={InlineAlertStories.WithoutTitle} />
 
 Inline Alert is a static display component — it has no interactive
 states of its own.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - `warning` and `danger` tones render `role="alert"` (assertive,
   interrupts) — `info` and `success` render `role="status"` (polite,
@@ -55,13 +73,17 @@ states of its own.
   communicated by the visible title/description text as well, never by
   color or icon shape alone.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={InlineAlertStories.Info} />
 
 <ArgTypes of={InlineAlertStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { InlineAlert } from '@/components/feedback/InlineAlert';
@@ -71,7 +93,9 @@ import { InlineAlert } from '@/components/feedback/InlineAlert';
 </InlineAlert>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -84,10 +108,16 @@ import { InlineAlert } from '@/components/feedback/InlineAlert';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-banner--docs">Banner</a>
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-toast--docs">Toast</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

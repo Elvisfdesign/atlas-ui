@@ -1,59 +1,81 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as AISuggestionCardStories from './AISuggestionCard.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={AISuggestionCardStories} />
 
-# AI Suggestion Card
 
+<DocsLayout>
+
+<DocsTitle>AI Suggestion Card</DocsTitle>
+
+<DocsIntro>
 Source: Atlas Product — Document Review's `suggest-card`: an ai-tinted
 card with a description, a suggested value, a confidence line, and
 Accept/Reject actions.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A standalone, actionable suggestion from the AI — distinct from
 Extracted Field Row (which shows a value the AI already extracted) in
 that this proposes something the user hasn't confirmed yet, with an
 explicit accept/reject decision point.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={AISuggestionCardStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use AI Suggestion Card for a single, specific proposal (a detected
 value, a suggested merge, a flagged pattern) that needs an explicit
 yes/no from the user — not for passive display of already-extracted
 data.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={AISuggestionCardStories.LowConfidence} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size, sized for a ~280px sidebar column, matching the grounded
 Product layout.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Static aside from its Accept/Reject buttons — no loading or disabled
 state is grounded in the source frame.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Accept and Reject are real `<button>` elements via Button, reachable
   and activatable by keyboard.
 - Confidence is conveyed as plain text, not color alone.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={AISuggestionCardStories.Default} />
 
 <ArgTypes of={AISuggestionCardStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { AISuggestionCard } from '@/components/ai/AISuggestionCard';
@@ -67,7 +89,9 @@ import { AISuggestionCard } from '@/components/ai/AISuggestionCard';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -80,9 +104,15 @@ import { AISuggestionCard } from '@/components/ai/AISuggestionCard';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/ai-extracted-field-row--docs">Extracted Field Row</a>
   <a className="atlas-doc-related__link" href="?path=/docs/ai-human-review-banner--docs">Human Review Banner</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

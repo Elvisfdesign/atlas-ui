@@ -1,38 +1,54 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ExtractedFieldRowStories from './ExtractedFieldRow.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ExtractedFieldRowStories} />
 
-# Extracted Field Row
 
+<DocsLayout>
+
+<DocsTitle>Extracted Field Row</DocsTitle>
+
+<DocsIntro>
 Source: Atlas Product — Document Review's Extracted Fields card
 (`field-row`): a label + value stack on the left, a Confidence Badge on
 the right.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 The single-row primitive Document Review's Extracted Fields card
 repeats for every extracted value. Composes Confidence Badge rather
 than reimplementing the percentage-and-chip treatment.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ExtractedFieldRowStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Stack multiple rows in a card, separated by a divider, to build the
 full Extracted Fields list.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ExtractedFieldRowStories.FieldList} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size, sized for a ~300px-wide fields sidebar.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Static by default. Pass `editable` to add a Pencil affordance that
 turns the value into an inline text field — Enter or blur commits via
@@ -48,7 +64,9 @@ happens to be looking at isn't confirmed for everyone.
 
 <Canvas of={ExtractedFieldRowStories.Editable} />
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Label and value are plain text, readable by assistive tech in
   document order.
@@ -60,13 +78,17 @@ happens to be looking at isn't confirmed for everyone.
 - The edit affordance is hover-revealed but never `display:none` — it
   reaches full opacity on keyboard focus, so Tab still finds it.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ExtractedFieldRowStories.Default} />
 
 <ArgTypes of={ExtractedFieldRowStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { ExtractedFieldRow } from '@/components/ai/ExtractedFieldRow';
@@ -74,7 +96,9 @@ import { ExtractedFieldRow } from '@/components/ai/ExtractedFieldRow';
 <ExtractedFieldRow label="Vendor Name" value="Acme Corporation" confidence={98} />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -87,9 +111,15 @@ import { ExtractedFieldRow } from '@/components/ai/ExtractedFieldRow';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/ai-confidence-badge--docs">Confidence Badge</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-detail-list--docs">Detail List</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

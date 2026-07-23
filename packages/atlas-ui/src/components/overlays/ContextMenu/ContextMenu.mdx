@@ -1,59 +1,81 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ContextMenuStories from './ContextMenu.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ContextMenuStories} />
 
-# Context Menu
 
+<DocsLayout>
+
+<DocsTitle>Context Menu</DocsTitle>
+
+<DocsIntro>
 A right-click menu. Shares Dropdown Menu's exact panel styling — same
 `menuStyles` helpers — but triggered by a `contextmenu` event over an
 area rather than a click on a visible trigger. Built on Radix's Context
 Menu primitive.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 `ContextMenu` (root), `ContextMenuTrigger` (the right-clickable area),
 `ContextMenuContent`, and `ContextMenuItem`/`ContextMenuSeparator`/
 `ContextMenuLabel`.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ContextMenuStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Wrap the area that should respond to a right-click in
 `ContextMenuTrigger` — a table row, a file card, a canvas region — and
 list `ContextMenuItem`s inside `ContextMenuContent`, exactly like
 Dropdown Menu.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 Context Menu shares every item variant (icon, shortcut, destructive,
 disabled, label) with Dropdown Menu — see its documentation for
 examples.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — the menu's width is determined by its content.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Hover/keyboard-highlighted, disabled, and destructive item states match
 Dropdown Menu exactly, since they share the same styling helpers.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Radix wires full `menu`/`menuitem` ARIA roles and keyboard navigation,
   the same as Dropdown Menu.
 - Also opens via the keyboard context-menu key (Shift+F10 on Windows),
   not just an actual right-click, so keyboard-only users aren't excluded.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <ArgTypes of={ContextMenuStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Pencil, Trash2 } from 'lucide-react';
@@ -75,7 +97,9 @@ import {
 </ContextMenu>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -88,8 +112,14 @@ import {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-dropdown-menu--docs">Dropdown Menu</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

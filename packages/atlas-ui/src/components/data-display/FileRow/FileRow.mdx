@@ -1,40 +1,56 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as FileRowStories from './FileRow.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={FileRowStories} />
 
-# File Row
 
+<DocsLayout>
+
+<DocsTitle>File Row</DocsTitle>
+
+<DocsIntro>
 A file's icon chip, name, and optional secondary line. Source: Atlas
 Product — the Review Queue table's document cell and the Analytics
 "Recent Activity" list's document cell.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A 28px icon chip on a subtle surface, the file name, and an optional
 secondary line (size, page count, or any other metadata) beneath it.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={FileRowStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use inside a table cell, an activity feed row, or anywhere a document
 needs to be identified by name with an icon. Pass a type-specific Lucide
 icon via the `icon` prop to distinguish file types at a glance; it
 defaults to a generic file icon when omitted.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={FileRowStories.CustomIcon} />
 <Canvas of={FileRowStories.List} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size. File Row doesn't have a size variant in Atlas Product.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={FileRowStories.WithMeta} />
 
@@ -42,20 +58,26 @@ File Row is a static display component — it has no interactive or
 disabled states of its own. Long file names truncate with an ellipsis
 rather than wrapping or overflowing their container.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The icon chip is `aria-hidden="true"`, since it's decorative — the
   file name text is the only information a screen reader needs.
 - Both the name and meta line render as plain text in reading order, so
   no information depends on icon shape or color alone.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={FileRowStories.Default} />
 
 <ArgTypes of={FileRowStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { FileText } from 'lucide-react';
@@ -64,7 +86,9 @@ import { FileRow } from '@/components/data-display/FileRow';
 <FileRow fileName="Invoice_2024_1847.pdf" icon={<FileText size={14} />} meta="2.4 MB · 4 pages" />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -77,9 +101,15 @@ import { FileRow } from '@/components/data-display/FileRow';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-user-row--docs">User Row</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

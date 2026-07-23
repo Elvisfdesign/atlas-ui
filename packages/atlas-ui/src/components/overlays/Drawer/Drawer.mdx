@@ -1,32 +1,44 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as DrawerStories from './Drawer.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={DrawerStories} />
 
-# Drawer
 
+<DocsLayout>
+
+<DocsTitle>Drawer</DocsTitle>
+
+<DocsIntro>
 An edge-anchored modal panel. Built on the same Radix Dialog primitive
 as Modal — full focus trapping and Escape-to-close — but anchored to a
 screen edge instead of centered, for content that needs more room than
 Modal's 448px (a document's full detail view, a multi-field editor).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 `Drawer` (root), `DrawerTrigger`, `DrawerContent` (with a `side` prop),
 and `DrawerTitle`/`DrawerDescription`/`DrawerHeader`/`DrawerBody`/
 `DrawerFooter` slot components — the same shape as Modal's.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={DrawerStories.Right} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Drawer instead of Modal when the content is naturally a detail view
 or a longer form — `DrawerBody` scrolls independently of the header/
 footer, so a tall Drawer never breaks its own layout.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={DrawerStories.Left} />
 
@@ -34,26 +46,36 @@ footer, so a tall Drawer never breaks its own layout.
 triggering context sits (e.g. a table row's detail view opens from the
 right).
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (max-width 384px / `max-w-sm`), full viewport height.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Open/closed is the only state, shown via the trigger interaction in the
 Live Preview.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Same accessibility guarantees as Modal: focus trap, focus return,
   Escape-to-close, background scroll lock.
 - `DrawerTitle` becomes the dialog's accessible name automatically.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <ArgTypes of={DrawerStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Button } from '@/components/actions/Button';
@@ -79,7 +101,9 @@ import {
 </Drawer>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -92,9 +116,15 @@ import {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-modal--docs">Modal</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-detail-list--docs">Detail List</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

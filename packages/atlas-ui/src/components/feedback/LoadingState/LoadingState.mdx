@@ -1,58 +1,80 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as LoadingStateStories from './LoadingState.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={LoadingStateStories} />
 
-# Loading State
 
+<DocsLayout>
+
+<DocsTitle>Loading State</DocsTitle>
+
+<DocsIntro>
 A centered spinner + label for a section or card body that's still
 loading. Distinct from Skeleton, which mimics the shape of the content
 that's coming rather than showing a spinner.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 An animated spinner icon and a text label, centered in their container.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={LoadingStateStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Loading State for a page section, card, or panel whose final layout
 isn't known yet, or where a shape-matching Skeleton isn't worth building.
 Prefer Skeleton when the eventual content's shape is well known (a
 table, a list, a card) — it reduces layout shift and feels faster.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={LoadingStateStories.CustomLabel} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 <Canvas of={LoadingStateStories.Small} />
 
 `sm` (20px spinner) suits a smaller card or inline section; `md` (28px,
 default) suits a full page-section placeholder.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Loading State has one state — it's already the loading state itself.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders `role="status"`, so assistive technology announces the label
   when the loading section mounts, without interrupting other content.
 - The spinner icon is decorative (`aria-hidden="true"`) — the label is
   the only thing that needs to be read.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={LoadingStateStories.Default} />
 
 <ArgTypes of={LoadingStateStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { LoadingState } from '@/components/feedback/LoadingState';
@@ -60,7 +82,9 @@ import { LoadingState } from '@/components/feedback/LoadingState';
 <LoadingState label="Processing document…" />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -73,9 +97,15 @@ import { LoadingState } from '@/components/feedback/LoadingState';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-skeleton--docs">Skeleton</a>
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-empty-state--docs">Empty State</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

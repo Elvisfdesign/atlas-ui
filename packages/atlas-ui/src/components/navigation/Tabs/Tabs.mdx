@@ -1,59 +1,81 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as TabsStories from './Tabs.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={TabsStories} />
 
-# Tabs
 
+<DocsLayout>
+
+<DocsTitle>Tabs</DocsTitle>
+
+<DocsIntro>
 Switches between views that share the same context. Source: Atlas
 Product — the Review Queue's filter tabs (All 12, Invoices 5, Contracts
 4, Receipts 3 — each a label + count, active tab underlined in accent).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Built on [Radix's Tabs primitive](https://www.radix-ui.com/primitives/docs/components/tabs)
 rather than hand-rolled, so roving-tabindex arrow-key navigation and
 `Home`/`End` support are solved once, correctly — the same rationale
 already used for Tooltip.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={TabsStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use Tabs to divide one dataset into overlapping subsets the person
 switches between without leaving the page (all documents vs. just
 invoices). Don't use Tabs for a multi-step sequence — that's Step
 Navigation's job, not this component's.
 
-## Anatomy
+</DocsSection>
+
+<DocsSection title="Anatomy">
 
 `Tabs` (root, holds selection state) → `TabsList` (the row, with the
 bottom divider) → `Tab` (one trigger, with an optional `count`) →
 `TabPanel` (the content shown for the selected tab).
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 One visual treatment — Tabs doesn't have a `variant` prop.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (34px tall triggers), matching Atlas Product exactly.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 The active tab gets `text-primary`, a bold weight, and a 2px accent
 underline; inactive tabs are `text-tertiary`, going to `text-primary` on
 hover.
 
-## Responsive behavior
+</DocsSection>
+
+<DocsSection title="Responsive behavior">
 
 `TabsList` scrolls horizontally (`overflow-x-auto`) rather than wrapping
 or shrinking its triggers — with enough tabs, this is what keeps a narrow
 viewport from forcing the whole page wider than the screen.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders proper `role="tablist"`/`role="tab"`/`role="tabpanel"` with
   `aria-selected` and `aria-controls`/`aria-labelledby` wiring, all from
@@ -62,13 +84,17 @@ viewport from forcing the whole page wider than the screen.
   tab is in the Tab order (roving tabindex) — matching the WAI-ARIA Tabs
   pattern rather than putting every tab in the Tab sequence.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={TabsStories.Default} />
 
 <ArgTypes of={TabsStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Tabs, TabsList, Tab, TabPanel } from '@/components/navigation/Tabs';
@@ -83,9 +109,15 @@ import { Tabs, TabsList, Tab, TabPanel } from '@/components/navigation/Tabs';
 </Tabs>
 ```
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/navigation-breadcrumb--docs">Breadcrumb</a>
   <a className="atlas-doc-related__link" href="?path=/docs/navigation-pagination--docs">Pagination</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

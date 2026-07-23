@@ -1,25 +1,34 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ButtonStories from './Button.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ButtonStories} />
 
-# Button
+<DocsLayout>
 
+<DocsTitle>Button</DocsTitle>
+
+<DocsIntro>
 The primary way a person triggers an action in Atlas. Source:
 Atlas UI System, Actions → Action / Button (Type × Size × State, 40 variants).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Four variants (primary, secondary, ghost, destructive) and two sizes cover
 every action-button need in Atlas Product today — there is no fifth
 variant or third size waiting to be discovered, so reach for one of these
 before inventing a one-off style.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ButtonStories.Primary} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use **primary** for the one main action in a view (Approve, Save, Continue)
 — there should only be one primary button visible at a time. Use
@@ -29,11 +38,15 @@ where a bordered button would add visual weight the context doesn't need.
 Use **destructive** only for actions that delete or irreversibly change
 data — never for anything else, so its color stays meaningful.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ButtonStories.AllVariants} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 Two sizes: **medium** (36px tall, the default) and **small** (29px, for
 dense contexts like table row actions or toolbars). There is no `large` —
@@ -41,7 +54,9 @@ Atlas Product doesn't use one, so this library doesn't invent one.
 
 <Canvas of={ButtonStories.Small} />
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas>
   <Story of={ButtonStories.Loading} />
@@ -54,7 +69,9 @@ here because a production button needs one, built entirely from existing
 tokens (the same spinner color as the label, no new color introduced).
 While `loading` is true, the button is disabled and marked `aria-busy`.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders a real `<button type="button">` — full keyboard operability
   (Tab to focus, Enter/Space to activate) comes from the browser, not
@@ -66,13 +83,17 @@ While `loading` is true, the button is disabled and marked `aria-busy`.
 - The spinner icon is `aria-hidden` — the button's accessible name stays
   its text content, not "loading spinner approve."
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ButtonStories.Primary} />
 
 <ArgTypes of={ButtonStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Button } from '@/components/actions/Button';
@@ -106,7 +127,9 @@ function ApproveButton({ onApprove }: { onApprove: () => Promise<void> }) {
 }
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -127,9 +150,15 @@ function ApproveButton({ onApprove }: { onApprove: () => Promise<void> }) {
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/actions-icon-button--docs">Icon Button</a>
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-tooltip--docs">Tooltip</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

@@ -1,20 +1,27 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import { radius } from '@/tokens/radius';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../components/DocsLayout';
 
 <Meta title="Foundations/Radius" />
 
-# Radius
+<DocsLayout>
 
+<DocsTitle>Radius</DocsTitle>
+
+<DocsIntro>
 Seven steps, from square corners to a full pill.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Most of the system lives in three of them — `md` for interactive
 elements, `lg` for containers, `full` for pills and circles. The rest
 exist for the smaller number of cases that need something sharper or
 rounder.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <div className="atlas-radius-grid">
   {Object.entries(radius).map(([key, value]) => (
@@ -28,7 +35,9 @@ rounder.
   ))}
 </div>
 
-## Where each is used
+</DocsSection>
+
+<DocsSection title="Where each is used">
 
 - **none** — table cells, dense list rows.
 - **xs (4px)** — small inline chips.
@@ -41,10 +50,16 @@ rounder.
 - **full (999px)** — Badge, Avatar — anything that should read as a pill
   or a circle regardless of its content's width.
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/actions-button--docs">Button</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-kpi-card--docs">KPI Card</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

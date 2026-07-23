@@ -9,22 +9,53 @@
  */
 
 /* -----------------------------------------------------------------------
-   Documentation rhythm system
+   Documentation spacing system
    -----------------------------------------------------------------------
-   One shared measure, spacing scale, and section-divider style for every
-   MDX page (Foundations, component docs, stubs). This is what makes
-   Overview/Usage/Variants/... feel like the same system from page to
-   page, instead of each file inventing its own spacing by hand.
+   Every Storybook doc page is built from the components in
+   src/docs/components/DocsLayout.tsx (DocsLayout, DocsTitle, DocsIntro,
+   DocsSection, DocsDivider, DocsSubheading) — never from raw "# " / "## "
+   markdown headings or one-off inline margins. The classes below style
+   *those components*, not markdown tag adjacency, which is what makes the
+   rhythm identical on every page regardless of what content a given page
+   happens to nest inside its section body (a plain paragraph, a Canvas
+   preview, a generated grid of swatches — doesn't matter, the section
+   shell around it is always the same).
 
-   `.sbdocs-content` is Storybook's own docs container class (confirmed
-   from @storybook/addon-docs's compiled source) — every MDX file's
-   top-level content renders as its direct children. Targeting only
-   *direct* children of `.sbdocs-content` is what lets prose (h1–h3, p,
-   ul/ol, blockquote, pre) get a comfortable reading measure while
-   full-width elements — Canvas previews, and this file's own hero/table/
-   token-grid/stub components, all plain <div>s — are left untouched and
-   keep the full column width automatically. No per-page "full width"
-   class is needed anywhere.
+   Rhythm (all margins are single-directional — every rule below sets only
+   margin-top or only margin-bottom, never both — so the gap at any two
+   adjacent elements is governed by exactly one declaration, or by normal
+   CSS margin-collapsing picking the larger of two neighboring values;
+   there is no possibility of two rules silently adding together):
+
+     DocsTitle (h1)
+     ↓ 32px   — spacing-32
+     DocsIntro (p)
+     ↓ 56px   — spacing-56 (DocsSection's divider carries this as its
+                 own margin-top, so it applies before every section,
+                 including the first)
+     divider                24px tall rule (border + line-height)
+     ↓ 40px   — spacing-40 (divider's own margin-bottom)
+     section heading (h2)
+     ↓ 24px   — spacing-24 (heading's own margin-bottom)
+     section body — prose, cards, tables, code, lists (see below)
+
+   Inside a section body:
+     plain paragraph          margin-bottom: 16   (spacing-16, reading rhythm)
+     → before a card/table/code/list, the block's own margin-top (32,
+       spacing-32) always wins over the paragraph's 16, so "paragraph →
+       interactive content" reads as 32px with zero special-casing.
+     card / preview block     32px above, 48px below (spacing-32 / 48)
+     table block               32px above, 48px below (spacing-32 / 48)
+     code block                 32px above, 40px below (spacing-32 / 40)
+     list                        40px after (spacing-40); 16px between
+                                   items (flex gap, not margin)
+
+   Because the *next* section's divider always carries margin-top: 56,
+   collapsing guarantees the gap into a new section is never less than
+   56px even when the previous section ends on a card (48) or a code
+   block (40) — while that same block's own 48/40 "below" value is what
+   applies when more prose follows *inside* the same section. One pair of
+   numbers, two contexts, no contradiction.
    ------------------------------------------------------------------- */
 
 :root {
@@ -54,61 +85,69 @@
   color: var(--color-text-primary);
 }
 
-.sbdocs-content > h1,
-.sbdocs-content > h2,
-.sbdocs-content > h3,
-.sbdocs-content > p,
-.sbdocs-content > ul,
-.sbdocs-content > ol,
-.sbdocs-content > blockquote,
-.sbdocs-content > pre,
-.sbdocs-content > hr {
+.docs-layout {
+  display: block;
+}
+
+.docs-title,
+.docs-intro,
+.docs-section__title,
+.docs-subheading,
+.docs-section__body > p,
+.docs-section__body > ul,
+.docs-section__body > ol,
+.docs-section__body > blockquote,
+.docs-section__body > pre {
   max-width: var(--atlas-doc-measure);
 }
 
-/* Title + description (every page: "# Name" followed by one lede
-   paragraph) — mapped to the `pageTitle` type-scale token, which exists
-   specifically for this role (distinct from the larger `display` token
-   used only by the Introduction hero). */
+/* Page title + lede — mapped to the `pageTitle` type-scale token, which
+   exists specifically for this role (distinct from the larger `display`
+   token used only by the Introduction hero). */
 
-.sbdocs-content > h1 {
+.docs-title {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-pageTitle);
   line-height: var(--line-height-pageTitle);
   font-weight: var(--font-weight-pageTitle);
   color: var(--color-text-primary);
-  margin: 0 0 var(--spacing-32);
+  margin: 0;
 }
 
-.sbdocs-content > h1 + p {
+.docs-intro {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-bodyLarge);
   line-height: var(--line-height-bodyLarge);
   color: var(--color-text-secondary);
-  margin: 0 0 var(--spacing-32);
+  margin: var(--spacing-32) 0 0;
 }
 
-/* Section rhythm — every "## Section" gets identical top spacing and a
-   hairline divider: `spacing-64` before the divider (the gap from
-   whatever came before — the library's single "section spacing" value),
-   `spacing-28` from the divider down to the heading text itself, and
-   `spacing-20` from the heading down to its first paragraph. Because
-   normal block-level margins collapse, `spacing-64` always wins over
-   whatever smaller bottom-margin the previous element carries, so every
-   "## Section" reads as the same 64px break no matter what precedes it. */
+/* Section divider — always rendered by DocsSection, never written by
+   hand. Its own margin-top (56) is the single "section rhythm" constant:
+   it is what guarantees 56px into every new section regardless of what
+   the previous section ended on (see the comment block above). */
 
-.sbdocs-content > h2 {
+.docs-divider {
+  height: 0;
+  margin: var(--spacing-56) 0 var(--spacing-40);
+  border: none;
+  border-top: var(--border-width-default) solid var(--color-border-subtle);
+}
+
+.docs-section {
+  display: block;
+}
+
+.docs-section__title {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-sectionTitle);
   line-height: var(--line-height-sectionTitle);
   font-weight: var(--font-weight-sectionTitle);
   color: var(--color-text-primary);
-  margin: var(--spacing-64) 0 var(--spacing-20);
-  padding-top: var(--spacing-28);
-  border-top: var(--border-width-default) solid var(--color-border-subtle);
+  margin: 0 0 var(--spacing-24);
 }
 
-.sbdocs-content > h3 {
+.docs-subheading {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body);
   font-weight: 600;
@@ -116,7 +155,7 @@
   margin: var(--spacing-32) 0 var(--spacing-12);
 }
 
-.sbdocs-content > p {
+.docs-section__body > p {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
@@ -125,29 +164,17 @@
   margin: 0 0 var(--spacing-16);
 }
 
-/* A paragraph immediately followed by a heading collapses its own 16px
-   bottom margin against that heading's top margin (32 for h3, 64 for
-   h2) — the heading's larger value always wins, so "paragraph → next
-   heading" reads as 32px (or more, for a new section) automatically. */
-
-.sbdocs-content > hr {
-  height: 0;
-  margin: var(--spacing-24) 0;
-  border: none;
-  border-top: var(--border-width-default) solid var(--color-border-subtle);
-}
-
-.sbdocs-content > ul,
-.sbdocs-content > ol {
+.docs-section__body > ul,
+.docs-section__body > ol {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
-  margin: 0 0 var(--spacing-32);
+  margin: var(--spacing-32) 0 var(--spacing-40);
   padding-left: 1.2em;
 }
 
-.sbdocs-content > ul li,
-.sbdocs-content > ol li {
+.docs-section__body > ul li,
+.docs-section__body > ol li {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
@@ -167,11 +194,11 @@
   padding: 2px 5px;
 }
 
-.sbdocs-content > pre {
-  margin: 0 0 var(--spacing-24);
+.docs-section__body > pre {
+  margin: var(--spacing-32) 0 var(--spacing-40);
 }
 
-.sbdocs-content > pre code {
+.docs-section__body > pre code {
   background-color: transparent;
   padding: 0;
 }
@@ -179,11 +206,11 @@
 /* Preview / example blocks — Canvas (class confirmed from
    @storybook/addon-docs's compiled source) is a <div>, not prose, so it
    already renders at the full column width. This is Atlas's "Cards"
-   rhythm: 32px between a heading and a card/preview block, 48px between
-   the block and whatever comes next — cards should never visually touch
-   a heading on either side. */
+   rhythm: 32px between a heading (or paragraph) and a card/preview
+   block, 48px between the block and whatever comes next — cards should
+   never visually touch a heading on either side. */
 
-.sbdocs-content .sbdocs-preview {
+.docs-section__body > .sbdocs-preview {
   margin: var(--spacing-32) 0 var(--spacing-48);
 }
 

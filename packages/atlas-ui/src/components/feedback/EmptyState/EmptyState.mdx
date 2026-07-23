@@ -1,15 +1,21 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as EmptyStateStories from './EmptyState.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={EmptyStateStories} />
 
-# Empty State
 
+<DocsLayout>
+
+<DocsTitle>Empty State</DocsTitle>
+
+<DocsIntro>
 A centered icon-chip + title + description block for "nothing here yet."
 Source: the same shape as Table's `TableEmptyState`, generalized into a
 standalone, block-level component for use outside a table.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 An icon in a circular chip, a title, an optional description, and an
 optional action — centered in its container. `tone` (`neutral` default,
@@ -17,28 +23,38 @@ optional action — centered in its container. `tone` (`neutral` default,
 state, rather than shipping three near-identical components for what is
 visually one pattern.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={EmptyStateStories.Empty} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use for an empty table, list, or search result (`tone="neutral"`, the
 default). Use `tone="success"` for a completed/all-clear message, and
 `tone="danger"` for a load/processing failure — override `icon` if the
 default per-tone icon (Inbox/Check/AlertCircle) doesn't fit.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={EmptyStateStories.Success} />
 <Canvas of={EmptyStateStories.Error_} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — Empty State fills its container's width and centers its
 content within it.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={EmptyStateStories.WithAction} />
 
@@ -46,20 +62,26 @@ content within it.
 ("Create workflow", "Try again"), omit it for a purely informational
 empty state.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The icon chip is decorative (`aria-hidden="true"`) — the title and
   description carry all the meaning.
 - Description text is capped at a readable width (`max-w-xs`) so it
   doesn't stretch into an unreadable single line in a wide container.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={EmptyStateStories.Empty} />
 
 <ArgTypes of={EmptyStateStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { EmptyState } from '@/components/feedback/EmptyState';
@@ -72,7 +94,9 @@ import { Button } from '@/components/actions/Button';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -85,9 +109,15 @@ import { Button } from '@/components/actions/Button';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-table--docs">Table</a>
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-loading-state--docs">Loading State</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

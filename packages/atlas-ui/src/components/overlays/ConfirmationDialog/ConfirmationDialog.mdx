@@ -1,45 +1,61 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ConfirmationDialogStories from './ConfirmationDialog.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ConfirmationDialogStories} />
 
-# Confirmation Dialog
 
+<DocsLayout>
+
+<DocsTitle>Confirmation Dialog</DocsTitle>
+
+<DocsIntro>
 The confirm/cancel pattern, pre-composed from Modal. Not a separate
 visual component — a specific, controlled way of assembling
 `ModalHeader`/`ModalTitle`/`ModalDescription`/`ModalFooter` so a
 destructive or consequential action can never accidentally drift from
 Modal's chrome.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A title, an optional description, and Cancel/Confirm buttons —
 `destructive` styles the confirm button for actions like deleting a
 workflow.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ConfirmationDialogStories.Destructive} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Fully controlled — pass `open`/`onOpenChange` from the calling
 component's own state, along with `onConfirm`. Reach for Confirmation
 Dialog specifically for a yes/no decision; for anything with real form
 fields, compose Modal's slots directly instead.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={ConfirmationDialogStories.NonDestructive} />
 
 `destructive` (default `false`) switches the confirm button between
 `primary` and `destructive` Button variants — nothing else changes.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size, inherited from Modal.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={ConfirmationDialogStories.Loading} />
 
@@ -47,19 +63,25 @@ One size, inherited from Modal.
 confirm label to "Please wait…" — use it while an async `onConfirm` is
 in flight so the dialog can't be dismissed or double-submitted.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Inherits Modal's focus trapping, focus return, and Escape-to-close.
 - Both buttons are disabled together during `loading`, so there's no way
   to trigger a second confirm or cancel mid-request.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ConfirmationDialogStories.Destructive} />
 
 <ArgTypes of={ConfirmationDialogStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { useState } from 'react';
@@ -81,7 +103,9 @@ const [open, setOpen] = useState(false);
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -94,8 +118,14 @@ const [open, setOpen] = useState(false);
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-modal--docs">Modal</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

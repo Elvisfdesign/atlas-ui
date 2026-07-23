@@ -1,24 +1,34 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as BadgeStories from './Badge.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={BadgeStories} />
 
-# Badge
 
+<DocsLayout>
+
+<DocsTitle>Badge</DocsTitle>
+
+<DocsIntro>
 A small, pill-shaped label communicating status. Source: Atlas UI System,
 Feedback & Status → Feedback / Status Pill (9 tones).
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Nine tones cover every status Atlas Product currently shows — general
 states (neutral, info, success, warning, danger) and workflow-specific
 ones (processing, review, draft, ai) — in a single, non-interactive shape.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={BadgeStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Status is always communicated by the label's **text** and its **color**
 together — never color alone. Don't ship a Badge with an ambiguous or
@@ -30,21 +40,29 @@ and `warning` respectively — they exist as distinct tone names because the
 *meaning* differs even when the color doesn't, which matters for anyone
 reading the component's usage in code.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={BadgeStories.AllTones} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size. Atlas Product doesn't show a Badge at more than one size, so
 this library doesn't invent one.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Badge is a static, non-interactive label — it has no hover, focus, or
 disabled state.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders as a `<span>` with the tone communicated through both text and
   color, so the status is available to screen readers and to anyone with
@@ -53,13 +71,17 @@ disabled state.
   (e.g. to filter by status), wrap it in a real interactive element
   rather than adding click handling to the Badge itself.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={BadgeStories.Default} />
 
 <ArgTypes of={BadgeStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { Badge } from '@/components/feedback/Badge';
@@ -69,7 +91,9 @@ import { Badge } from '@/components/feedback/Badge';
 <Badge tone="ai">AI</Badge>
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -82,9 +106,15 @@ import { Badge } from '@/components/feedback/Badge';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-kpi-card--docs">KPI Card</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-avatar--docs">Avatar</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

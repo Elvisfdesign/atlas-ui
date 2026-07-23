@@ -1,60 +1,82 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as StatusIndicatorStories from './StatusIndicator.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={StatusIndicatorStories} />
 
-# Status Indicator
 
+<DocsLayout>
+
+<DocsTitle>Status Indicator</DocsTitle>
+
+<DocsIntro>
 A dot + label pairing for a live/connection status. Distinct from Badge,
 which is for categorical or process-state pills (Completed, Draft,
 Review) rather than a live online/offline-style signal.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 A small colored dot beside a text label — status is always stated in
 words, never left to the dot's color alone.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={StatusIndicatorStories.Online} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Use for a person's presence (online/away/offline) or a connection's live
 health (connected/disconnected) — anywhere the underlying idea is "is
 this thing currently active." For a document or workflow's process
 state, use Badge instead.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={StatusIndicatorStories.Away} />
 <Canvas of={StatusIndicatorStories.Offline} />
 <Canvas of={StatusIndicatorStories.Disconnected} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 <Canvas of={StatusIndicatorStories.List} />
 
 `sm`/`md` scale both the dot and the label text together.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 Status Indicator is a static display component — it has no interactive
 states of its own.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - The dot is `aria-hidden="true"` — the adjacent label text is the sole
   source of the status's meaning, so it reads correctly to screen reader
   users regardless of color perception.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={StatusIndicatorStories.Online} />
 
 <ArgTypes of={StatusIndicatorStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { StatusIndicator } from '@/components/feedback/StatusIndicator';
@@ -62,7 +84,9 @@ import { StatusIndicator } from '@/components/feedback/StatusIndicator';
 <StatusIndicator label="Online" tone="success" />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -75,9 +99,15 @@ import { StatusIndicator } from '@/components/feedback/StatusIndicator';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-badge--docs">Badge</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-user-row--docs">User Row</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

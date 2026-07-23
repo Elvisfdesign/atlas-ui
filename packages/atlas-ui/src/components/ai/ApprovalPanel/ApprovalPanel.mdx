@@ -1,60 +1,82 @@
 import { Meta, Canvas, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as ApprovalPanelStories from './ApprovalPanel.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={ApprovalPanelStories} />
 
-# Approval Panel
 
+<DocsLayout>
+
+<DocsTitle>Approval Panel</DocsTitle>
+
+<DocsIntro>
 Source: Atlas Product — Document Review's `action-footer`: a summary
 line ("7 of 7 fields extracted · 96% avg. confidence") beside Reject /
 Request Changes / Approve & Continue actions.
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 The bottom action bar for human-in-the-loop approval — a summary of
 what was extracted, plus the three actions a reviewer can take.
 Composes Button for all three actions.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={ApprovalPanelStories.Default} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Reject and Request Changes are optional — omit `onReject` /
 `onRequestChanges` to show only the primary Approve action, for flows
 that don't offer those paths.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 Tone and layout are fixed to match the grounded Product pattern; the
 only variation is which actions are present.
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size — a full-width footer bar. Wraps (`flex-wrap`) rather than
 compressing its buttons on narrow viewports — the summary text takes its
 own line first (`min-w-[12rem]` keeps it from squeezing illegibly thin)
 before the actions do.
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={ApprovalPanelStories.Loading} />
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - All three actions are real `<button>` elements via Button, reachable
   and activatable by keyboard.
 - `loading` disables every action and shows a busy state on the primary
   button, preventing a double-submit.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={ApprovalPanelStories.Default} />
 
 <ArgTypes of={ApprovalPanelStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { ApprovalPanel } from '@/components/ai/ApprovalPanel';
@@ -67,7 +89,9 @@ import { ApprovalPanel } from '@/components/ai/ApprovalPanel';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -80,9 +104,15 @@ import { ApprovalPanel } from '@/components/ai/ApprovalPanel';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/ai-confidence-meter--docs">Confidence Meter</a>
   <a className="atlas-doc-related__link" href="?path=/docs/overlays-confirmation-dialog--docs">Confirmation Dialog</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>

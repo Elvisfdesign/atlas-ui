@@ -1,27 +1,37 @@
 import { Meta, Canvas, Story, Controls, ArgTypes } from '@storybook/addon-docs/blocks';
 import * as WorkflowCardStories from './WorkflowCard.stories';
+import { DocsLayout, DocsTitle, DocsIntro, DocsSection } from '../../../docs/components/DocsLayout';
 
 <Meta of={WorkflowCardStories} />
 
-# Workflow Card
 
+<DocsLayout>
+
+<DocsTitle>Workflow Card</DocsTitle>
+
+<DocsIntro>
 A single automated workflow's summary card. Source: Atlas Product's
 Workflow Builder pipeline cards — a title and status Badge, a one-line
 description, and a metrics row (a volume count and a success percentage
 separated by "·").
+</DocsIntro>
 
-## Overview
+<DocsSection title="Overview">
 
 Composes the existing `Badge` for status rather than reimplementing a
 status pill, and renders as a `<button>` when `onClick` is provided or a
 plain `<div>` otherwise — the same card used for a static summary list
 or a clickable workflow-selection grid.
 
-## Live Preview
+</DocsSection>
+
+<DocsSection title="Live Preview">
 
 <Canvas of={WorkflowCardStories.Active} />
 
-## Usage
+</DocsSection>
+
+<DocsSection title="Usage">
 
 Provide `title`, `description`, and `status`; `status` drives a
 reasonable default Badge tone ("Active" → success, "Draft" → draft,
@@ -29,18 +39,24 @@ reasonable default Badge tone ("Active" → success, "Draft" → draft,
 `statusTone`. Include `volume`/`successRate` for workflows with
 activity to report — omit both for a workflow that hasn't run yet.
 
-## Variants
+</DocsSection>
+
+<DocsSection title="Variants">
 
 <Canvas of={WorkflowCardStories.Draft} />
 <Canvas of={WorkflowCardStories.Scheduled} />
 <Canvas of={WorkflowCardStories.Archived} />
 
-## Sizes
+</DocsSection>
+
+<DocsSection title="Sizes">
 
 One size (280px in this preview, but the card fills its container width
 — lay multiple cards out in a responsive grid).
 
-## States
+</DocsSection>
+
+<DocsSection title="States">
 
 <Canvas of={WorkflowCardStories.Clickable} />
 
@@ -48,20 +64,26 @@ Passing `onClick` renders the card as a real `<button>` with a hover
 border change, for use in a selectable workflow grid; omitting it
 renders a plain, non-interactive `<div>` for a read-only summary list.
 
-## Accessibility
+</DocsSection>
+
+<DocsSection title="Accessibility">
 
 - Renders as a semantic `<button>` (not a `<div>` with a click handler)
   whenever it's interactive, so it's reachable and activatable by
   keyboard automatically.
 - Status is always shown as Badge text, never color alone.
 
-## React Props
+</DocsSection>
+
+<DocsSection title="React Props">
 
 <Controls of={WorkflowCardStories.Active} />
 
 <ArgTypes of={WorkflowCardStories} />
 
-## Examples
+</DocsSection>
+
+<DocsSection title="Examples">
 
 ```tsx
 import { WorkflowCard } from '@/components/data-display/WorkflowCard';
@@ -76,7 +98,9 @@ import { WorkflowCard } from '@/components/data-display/WorkflowCard';
 />
 ```
 
-## Best Practices
+</DocsSection>
+
+<DocsSection title="Best Practices">
 
 <div className="atlas-doc-dodont">
   <div className="atlas-doc-dodont__card atlas-doc-dodont__card--do">
@@ -89,9 +113,15 @@ import { WorkflowCard } from '@/components/data-display/WorkflowCard';
   </div>
 </div>
 
-## Related Components
+</DocsSection>
+
+<DocsSection title="Related Components">
 
 <div className="atlas-doc-related">
   <a className="atlas-doc-related__link" href="?path=/docs/feedback-badge--docs">Badge</a>
   <a className="atlas-doc-related__link" href="?path=/docs/data-display-kpi-card--docs">KPI Card</a>
 </div>
+
+</DocsSection>
+
+</DocsLayout>
